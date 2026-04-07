@@ -1,22 +1,21 @@
 /*
-  Huy's Blog - Global Styles
-  Optimized for Arial & Modern Sans-serif
+  Huy's Blog - Global Styles Master
+  Optimized for Arial & Liquid Glass Hover Effects
 */
 
 :root {
-    --accent: #0284c7; /* Đổi sang màu xanh dương hiện đại giống trang Home */
+    --accent: #0284c7;
     --accent-dark: #0369a1;
     --black: 15, 18, 25;
     --gray: 96, 115, 159;
     --gray-light: 229, 233, 240;
     --gray-dark: 34, 41, 57;
     --gray-gradient: rgba(var(--gray-light), 50%), #fff;
-    
-    /* Font family thống nhất toàn hệ thống */
     --font-main: 'Arial', 'Helvetica', 'Segoe UI', sans-serif;
+    
+    /* Đường cong mượt mà kiểu Apple (Easing) */
+    --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-
-/* XÓA BỎ @font-face Atkinson cũ để web tải nhanh hơn vì mình dùng Arial có sẵn */
 
 body {
     font-family: var(--font-main) !important;
@@ -28,11 +27,9 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
     color: rgb(var(--gray-dark));
-    
-    /* Hạ cỡ chữ tổng thể: 20px -> 18px */
     font-size: 18px; 
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased; /* Giúp chữ mịn hơn trên iPhone/Mac */
+    -webkit-font-smoothing: antialiased;
 }
 
 main {
@@ -42,92 +39,99 @@ main {
     padding: 3em 1em;
 }
 
-/* TỐI ƯU CÁC ĐẦU MỤC (H1-H6) - GIẢM SIZE */
+/* --- TYPOGRAPHY --- */
 h1, h2, h3, h4, h5, h6 {
     margin: 0 0 1rem 0;
     color: rgb(var(--black));
     line-height: 1.2;
     font-weight: 800;
-    letter-spacing: -0.5px; /* Cho chữ khít lại nhìn hiện đại hơn */
+    letter-spacing: -0.5px;
 }
 
-h1 { font-size: 2.2em; } /* Giảm từ 3.052em xuống 2.2em */
-h2 { font-size: 1.7em; } /* Giảm từ 2.441em xuống 1.7em */
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.7em; }
 h3 { font-size: 1.4em; }
-h4 { font-size: 1.2em; }
-h5 { font-size: 1.1em; }
-
-strong, b { font-weight: 700; }
 
 a {
     color: var(--accent);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: var(--transition-smooth);
 }
 
-a:hover {
-    color: var(--accent-dark);
-    text-decoration: underline;
-}
+/* --- HIỆU ỨNG HOVER TINH TẾ CHO BÀI VIẾT (POST CARD) --- */
 
-p { margin-bottom: 1.2em; }
-
-.prose p { margin-bottom: 1.5em; }
-
-/* Bảng kỹ năng xịn hơn */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1em 0;
-}
-
-th, td {
+/* Áp dụng cho các thẻ li hoặc bất kỳ card nào trong danh sách */
+ul li, .post-card {
+    list-style: none;
+    transition: var(--transition-smooth);
+    border-radius: 16px;
     padding: 12px;
-    border: 1px solid rgb(var(--gray-light));
-    text-align: left;
+    background: transparent;
+    cursor: pointer;
 }
 
-th { background: #f8fafc; }
+ul li:hover, .post-card:hover {
+    /* Nâng nhẹ và tạo độ bóng kính */
+    transform: translateY(-6px) scale(1.01);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+    
+    /* Đổ bóng mềm mại - Soft Glow */
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.05),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
 
+/* Hiệu ứng cho ảnh trong bài viết khi rà chuột */
+ul li:hover img, .post-card:hover img {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+}
+
+/* --- CÁC THÀNH PHẦN KHÁC --- */
 img {
     max-width: 100%;
     height: auto;
-    border-radius: 12px; /* Bo góc tròn xinh xinh giống trang Home */
+    border-radius: 12px;
+    transition: var(--transition-smooth);
+}
+
+blockquote {
+    border-left: 5px solid var(--accent);
+    padding: 15px 25px;
+    margin: 2em 0;
+    font-size: 1.1em;
+    font-style: italic;
+    background: rgba(var(--gray-light), 20%);
+    border-radius: 4px 16px 16px 4px;
+    backdrop-filter: blur(5px);
+}
+
+pre {
+    padding: 1.5em;
+    border-radius: 12px;
+    background-color: #1e293b !important;
+    overflow-x: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 code {
     padding: 2px 6px;
     background-color: #f1f5f9;
     border-radius: 4px;
-    font-family: monospace;
     font-size: 0.9em;
 }
 
-pre {
-    padding: 1.5em;
-    border-radius: 12px;
-    background-color: #1e293b !important; /* Màu nền code tối cho sang */
-    overflow-x: auto;
-}
-
-blockquote {
-    border-left: 5px solid var(--accent);
-    padding: 10px 20px;
-    margin: 1.5em 0;
-    font-size: 1.1em;
-    font-style: italic;
-    background: rgba(var(--gray-light), 20%);
-    border-radius: 0 8px 8px 0;
-}
-
-/* TỐI ƯU CHO MOBILE (IPHONE/IPAD) */
+/* --- TỐI ƯU MOBILE --- */
 @media (max-width: 720px) {
-    body {
-        font-size: 16px; /* iPhone dùng 16px là chuẩn nhất */
+    body { font-size: 16px; }
+    main { padding: 1.5em 1em; }
+    
+    /* Tắt hiệu ứng hover trên mobile để tránh bị lag */
+    ul li:hover, .post-card:hover {
+        transform: none;
+        background: transparent;
+        box-shadow: none;
     }
-    main {
-        padding: 1.5em 1em;
-    }
-    h1 { font-size: 1.8em; }
-    h2 { font-size: 1.4em; }
 }
