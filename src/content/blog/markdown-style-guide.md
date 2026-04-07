@@ -1,214 +1,51 @@
 ---
-title: 'Markdown Style Guide'
-description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Jun 19 2024'
-heroImage: '../../assets/blog-placeholder-1.jpg'
+title: 'Bí Kíp Nâng Tầm Cú Smash Cầu Lông Đúng Chuẩn'
+description: 'Chi tiết kỹ thuật đập cầu uy lực, cách sử dụng nhóm cơ và bộ pháp di chuyển chuyên nghiệp.'
+pubDate: '2026-04-07'
+heroImage: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea'
 ---
 
-Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
+Một cú đập cầu (Smash) đẹp mắt không chỉ nằm ở sức mạnh mà còn ở sự phối hợp nhịp nhàng giữa bộ pháp, kỹ thuật vung vợt và khả năng tận dụng cơ thể. Cùng mình điểm qua những yếu tố cốt lõi để cú smash của bạn trở nên "khét" hơn nhé!
 
-## Headings
+## 1. Kỹ Thuật Cầm Vợt (Grip)
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+Nền tảng của mọi cú đánh đẹp là cách cầm vợt đúng. Để đập cầu hiệu quả, bạn nên sử dụng **Forehand Grip**:
 
-# H1
+- Giữ vợt sao cho ngón cái và ngón trỏ tạo thành hình chữ V dọc theo cán vợt.
+- Không nên cầm quá chặt; sự linh hoạt của cổ tay chính là chìa khóa để tạo ra lực bộc phát.
 
-## H2
+## 2. Kỹ Thuật Đập Cầu (The Smash)
 
-### H3
+Để cú smash có uy lực và đi đúng quỹ đạo, hãy chú ý đến sự phối hợp của toàn bộ cơ thể thay vì chỉ dùng lực cánh tay:
 
-#### H4
+### Bước chuẩn bị và vung vợt
+- **Vị trí cầu:** Đứng ở vị trí sao cho cầu rơi ở phía trước mặt và ở điểm cao nhất có thể.
+- **Tư thế:** Vai mở rộng, tay không cầm vợt giơ lên để ước lượng tọa độ cầu và giữ thăng bằng.
 
-##### H5
+### Tận dụng sức mạnh cơ bắp
+Thay vì chỉ dùng bắp tay, bạn cần học cách "vắt" lực từ dưới lên trên:
+1. **Trọng tâm:** Dồn trọng tâm từ chân sau sang chân trước ngay khi tiếp xúc cầu.
+2. **Sử dụng cơ bụng:** Siết chặt cơ bụng khi vung vợt để tạo đà chuyển động cho toàn bộ thân trên.
+3. **Lực bộc phát cổ tay:** Ở giây cuối cùng, hãy xoay cổ tay thật nhanh để cầu đi cắm và khó đỡ hơn.
 
-###### H6
+> **Mẹo nhỏ:** Hãy tưởng tượng cánh tay bạn như một chiếc roi da, lực đi từ vai qua khuỷu tay rồi mới đến cổ tay.
 
-## Paragraph
+## 3. Bộ Pháp Di Chuyển (Footwork)
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
+Di chuyển đúng giúp bạn luôn ở tư thế chủ động và tạo ra những cú đánh "chuẩn form":
 
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+- **Di chuyển tiến/lùi:** Sử dụng các bước chạy nhỏ hoặc bước nhảy (chasse step) để giữ thăng bằng tốt nhất.
+- **Vị trí đứng:** Sau mỗi cú đánh, hãy nhanh chóng quay trở lại vị trí trung tâm sân để sẵn sàng cho tình huống tiếp theo.
 
-## Images
+| Kỹ thuật | Lưu ý quan trọng | Hiệu quả |
+| :--- | :--- | :--- |
+| **Smash** | Tiếp xúc cầu ở điểm cao nhất | Cầu đi cắm, tốc độ cao |
+| **Drop shot** | Giấu kín ý đồ đến phút cuối | Làm đối phương lỡ nhịp |
+| **Clear** | Đánh cầu sâu về cuối sân | Giãn đội hình đối phương |
 
-### Syntax
+## 4. Lời Kết
 
-```markdown
-![Alt text](./full/or/relative/path/of/image)
-```
+Luyện tập cầu lông cũng giống như việc tối ưu hóa một hệ thống: cần sự kiên trì và chỉnh sửa từng chi tiết nhỏ. Hy vọng những chia sẻ này sẽ giúp các bạn có những trận cầu thật rực rỡ!
 
-### Output
-
-![blog placeholder](../../assets/blog-placeholder-about.jpg)
-
-## Blockquotes
-
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
-
-### Blockquote without attribution
-
-#### Syntax
-
-```markdown
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Note** that you can use _Markdown syntax_ within a blockquote.
-```
-
-#### Output
-
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Note** that you can use _Markdown syntax_ within a blockquote.
-
-### Blockquote with attribution
-
-#### Syntax
-
-```markdown
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
-```
-
-#### Output
-
-> Don't communicate by sharing memory, share memory by communicating.<br>
-> — <cite>Rob Pike[^1]</cite>
-
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
-
-## Tables
-
-### Syntax
-
-```markdown
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
-```
-
-### Output
-
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
-
-## Code Blocks
-
-### Syntax
-
-we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
-
-````markdown
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
-````
-
-### Output
-
-```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
-  </head>
-  <body>
-    <p>Test</p>
-  </body>
-</html>
-```
-
-## List Types
-
-### Ordered List
-
-#### Syntax
-
-```markdown
-1. First item
-2. Second item
-3. Third item
-```
-
-#### Output
-
-1. First item
-2. Second item
-3. Third item
-
-### Unordered List
-
-#### Syntax
-
-```markdown
-- List item
-- Another item
-- And another item
-```
-
-#### Output
-
-- List item
-- Another item
-- And another item
-
-### Nested list
-
-#### Syntax
-
-```markdown
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
-```
-
-#### Output
-
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
-
-## Other Elements — abbr, sub, sup, kbd, mark
-
-### Syntax
-
-```markdown
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
-
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
-```
-
-### Output
-
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
-
-H<sub>2</sub>O
-
-X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+---
+*Cảm ơn các bạn đã đọc blog của Huy. Hẹn gặp lại trên sân cầu nhé!* 🏸

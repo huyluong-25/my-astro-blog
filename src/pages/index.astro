@@ -1,8 +1,8 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
@@ -13,37 +13,241 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero-section">
+				<div class="cute-card">
+					<div class="card-content">
+						<h1>Hi, I'm <span id="typed"></span></h1>
+						<p class="subtitle">Chào mừng bạn đến với không gian sáng tạo của Huy!</p>
+						
+						<div class="animation-zone">
+							<div class="cloud cloud-1"></div>
+							<div class="cloud cloud-2"></div>
+							<div class="character-wrapper">
+								<span id="main-icon" class="floating-icon">🏸</span>
+							</div>
+						</div>
+
+						<div class="dot-container">
+							<span class="dot"></span>
+							<span class="dot"></span>
+							<span class="dot"></span>
+							<span class="dot"></span>
+						</div>
+					</div>
+				</div>
+
+				<article class="intro-text">
+					<p>
+						Nơi mình lưu giữ những khoảnh khắc đẹp của <strong>Cầu lông</strong>, 
+						những khám phá thú vị trong <strong>Công nghệ</strong> và hành trình phát triển bản thân.
+					</p>
+					<a href="/blog" class="cta-button">Khám phá Blog nè →</a>
+				</article>
+			</section>
 		</main>
 		<Footer />
+
+		<script>
+			// 1. Chức năng chữ chạy (Typed.js) - GIỮ NGUYÊN
+			import Typed from 'typed.js';
+			new Typed('#typed', {
+				strings: ['Huy.', 'a Dreamer.', 'a Tech Lover.'],
+				typeSpeed: 70,
+				backSpeed: 50,
+				loop: true,
+				cursorChar: '_'
+			});
+
+			// 2. Chức năng tự đổi Icon theo nhịp Chấm Vàng (NEW)
+			// Danh sách các icon bạn muốn hiện (Xinh xắn, đa năng)
+			// [🏸 Cầu lông, 💻 Code/Công nghệ, 📸 Chụp ảnh/Blog, ☕ Thư giãn/Nghĩ ngợi]
+			const icons = ['🏸', '💻', '📸', '☕'];
+			let iconIndex = 0;
+			
+			// Lấy element icon chính
+			const mainIconEl = document.getElementById('main-icon');
+
+			// Logic thay đổi icon (chạy mỗi 0.8 giây)
+			// Vì tổng animation CSS là 3s cho 4 chấm (0s, 0.3s, 0.6s, 0.9s delay),
+			// khoảng 0.7s - 0.8s đổi icon là khớp nhất.
+			function cycleIcons() {
+				if (!mainIconEl) return;
+				
+				// 1. Thêm class để tạo hiệu ứng mờ đi một chút trước khi đổi
+				mainIconEl.style.opacity = '0.5';
+				
+				// Đợi 100ms cho mờ đi, sau đó đổi content
+				setTimeout(() => {
+					// 2. Đổi icon trong array
+					mainIconEl.innerText = icons[iconIndex];
+					
+					// 3. Hiện rõ lại
+					mainIconEl.style.opacity = '1';
+
+					// 4. Tăng index, reset nếu hết vòng
+					iconIndex = (iconIndex + 1) % icons.length;
+				}, 100);
+			}
+
+			// Chạy logic này ngay khi load trang
+			cycleIcons();
+
+			// Chạy lặp lại logic đổi icon theo chu kỳ
+			// 0.8s là 800ms
+			setInterval(cycleIcons, 800); 
+
+		</script>
 	</body>
 </html>
+
+<style>
+	/* Layout chung */
+	main {
+		width: 100%;
+		max-width: 800px;
+		margin: auto;
+		padding: 40px 20px;
+	}
+
+	.hero-section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	/* Thiết kế Card chính (Phong cách Reto Xinh Xắn) */
+	.cute-card {
+		background-color: #f0f9ff;
+		border: 3px solid #1e293b;
+		border-radius: 50px;
+		width: 100%;
+		padding: 60px 20px;
+		position: relative;
+		overflow: hidden;
+		box-shadow: 12px 12px 0px #bae6fd;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	.card-content h1 {
+		font-size: 3.5rem;
+		margin: 0;
+		color: #0f172a;
+	}
+
+	.subtitle {
+		font-size: 1.1rem;
+		color: #64748b;
+		margin-top: 10px;
+	}
+
+	#typed {
+		color: #0284c7;
+	}
+
+	/* Animation Zone (Icon + Clouds) */
+	.animation-zone {
+		height: 200px;
+		position: relative;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+	}
+
+	.character-wrapper {
+		z-index: 10;
+	}
+
+	/* Cấu trúc Icon (Bay bổng) */
+	.floating-icon {
+		display: inline-block !important; 
+		font-size: 90px;
+		animation: floatAction 3s ease-in-out infinite;
+		will-change: transform;
+		transition: opacity 0.2s ease; /* Thêm transition mờ đi khi đổi icon */
+	}
+
+	@keyframes floatAction {
+		0%, 100% { transform: translateY(0px) rotate(0deg); }
+		50% { transform: translateY(-30px) rotate(8deg); }
+	}
+
+	/* Mây trôi */
+	.cloud {
+		position: absolute;
+		background: white;
+		height: 35px;
+		border-radius: 50px;
+		opacity: 0.7;
+		will-change: left;
+	}
+
+	.cloud-1 { width: 120px; top: 30%; animation: cloudRun 12s linear infinite; }
+	.cloud-2 { width: 80px; top: 60%; animation: cloudRun 18s linear infinite; animation-delay: 2s; }
+
+	@keyframes cloudRun {
+		from { left: -150px; }
+		to { left: 100%; }
+	}
+
+	/* Chấm vàng chạy mượt mà (Giữ nguyên) */
+	.dot-container {
+		display: flex;
+		justify-content: center;
+		gap: 15px;
+		margin-top: 30px;
+	}
+
+	.dot {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		border: 2px solid #1e293b;
+		background-color: #ffffff;
+		animation: dotWave 3s infinite; /* Tổng thời gian animation */
+	}
+
+	/* Tạo độ trễ cho từng dấu chấm */
+	.dot:nth-child(1) { animation-delay: 0s; }
+	.dot:nth-child(2) { animation-delay: 0.3s; }
+	.dot:nth-child(3) { animation-delay: 0.6s; }
+	.dot:nth-child(4) { animation-delay: 0.9s; }
+
+	@keyframes dotWave {
+		0%, 25% { 
+			background-color: #fbbf24; /* Vàng rực rỡ */
+			transform: scale(1.3);
+			box-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+		}
+		35%, 100% { 
+			background-color: #ffffff; 
+			transform: scale(1);
+			box-shadow: none;
+		}
+	}
+
+	/* Text và Nút dưới */
+	.intro-text p {
+		font-size: 1.2rem;
+		text-align: center;
+		color: #334155;
+	}
+
+	.cta-button {
+		display: inline-block;
+		margin-top: 20px;
+		padding: 14px 35px;
+		background-color: #0284c7;
+		color: white;
+		text-decoration: none;
+		border-radius: 100px;
+		font-weight: bold;
+		transition: all 0.3s ease;
+	}
+
+	.cta-button:hover {
+		transform: scale(1.1);
+		background-color: #0369a1;
+	}
+</style>
