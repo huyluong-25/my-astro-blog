@@ -9,6 +9,12 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
 	site: 'https://example.com',
 	output: 'static',
-	adapter: cloudflare(),
+	adapter: cloudflare({
+		imageService: 'compile'
+	}),
 	integrations: [mdx(), sitemap()],
+	image: {
+		domains: ['images.unsplash.com'],
+		remotePatterns: [{ protocol: 'https' }],
+	},
 });
