@@ -1,10 +1,6 @@
 name = "mechanical-main"
 compatibility_date = "2024-04-03"
 
-# Asset directory for Astro static files
-[asset]
-directory = ".output/static"
-
 # D1 Database Binding
 [[d1_databases]]
 binding = "DB"
