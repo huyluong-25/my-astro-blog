@@ -1,15 +1,15 @@
 // Admin endpoint for managing comments
 // Email header required for verification
 
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
-
-function verifyAdmin(request: any) {
+function verifyAdmin(request: any, adminPassword: string) {
   const authHeader = request.headers.get('Authorization')?.split(' ')[1];
-  return authHeader === ADMIN_PASSWORD;
+  return authHeader === adminPassword;
 }
 
 export async function onRequestGet(context: any) {
-  if (!verifyAdmin(context.request)) {
+  const adminPassword = context.env.ADMIN_PASSWORD || 'admin123';
+  
+  if (!verifyAdmin(context.request, adminPassword)) {
     return new Response(
       JSON.stringify({ error: 'Unauthorized' }),
       { status: 401, headers: { 'Content-Type': 'application/json' } }
@@ -49,7 +49,9 @@ export async function onRequestGet(context: any) {
 }
 
 export async function onRequestPatch(context: any) {
-  if (!verifyAdmin(context.request)) {
+  const adminPassword = context.env.ADMIN_PASSWORD || 'admin123';
+  
+  if (!verifyAdmin(context.request, adminPassword)) {
     return new Response(
       JSON.stringify({ error: 'Unauthorized' }),
       { status: 401, headers: { 'Content-Type': 'application/json' } }
@@ -86,7 +88,9 @@ export async function onRequestPatch(context: any) {
 }
 
 export async function onRequestDelete(context: any) {
-  if (!verifyAdmin(context.request)) {
+  const adminPassword = context.env.ADMIN_PASSWORD || 'admin123';
+  
+  if (!verifyAdmin(context.request, adminPassword)) {
     return new Response(
       JSON.stringify({ error: 'Unauthorized' }),
       { status: 401, headers: { 'Content-Type': 'application/json' } }
