@@ -7,10 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "dev:wrangler": "wrangler dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run build && wrangler deploy --env production"
+    "deploy": "npm run build && wrangler pages deploy dist --project-name mechanical-main"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.7",

@@ -8,10 +8,6 @@ database_name = "huy-blog-comments"
 database_id = "ce992000-33ec-4745-86cc-699942ea0736"
 migrations_dir = "migrations"
 
-# Static assets folder for Pages
-[site]
-bucket = "dist"
-
 # Environment configuration
 [env.production]
 vars = { ENVIRONMENT = "production" }
