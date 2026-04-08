@@ -17,6 +17,15 @@ export async function onRequestGet(context: any) {
   }
 
   const db = context.env.DB;
+  
+  if (!db) {
+    console.error('DB binding not found in context.env');
+    return new Response(
+      JSON.stringify({ error: 'Database binding error' }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+  
   const url = new URL(context.request.url);
   const status = url.searchParams.get('status') || 'pending';
 
@@ -40,9 +49,9 @@ export async function onRequestGet(context: any) {
       }
     );
   } catch (error: any) {
-    console.error('Error fetching pending comments:', error);
+    console.error('Error fetching comments:', error.message, error.stack);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: error.message || 'Internal server error' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
