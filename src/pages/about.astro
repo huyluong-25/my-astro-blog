@@ -80,7 +80,12 @@ import Layout from '../layouts/BlogPost.astro';
 		font-weight: 900;
 		letter-spacing: -0.5px; /* Cho chữ khít lại cho 'ngầu' */
 		margin-bottom: 1.2rem !important;
-		color: #1e293b;
+		color: #0f172a;
+		transition: color 0.3s;
+	}
+
+	[data-theme='dark'] .prose h1 {
+		color: #f1f5f9;
 	}
 
 	/* 2. Các đầu mục H2 */
@@ -90,6 +95,29 @@ import Layout from '../layouts/BlogPost.astro';
 		margin-top: 2.2rem !important;
 		margin-bottom: 0.8rem !important;
 		color: #0f172a;
+		transition: all 0.3s;
+		position: relative;
+		padding-bottom: 0.8rem;
+	}
+
+	.prose h2::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0;
+		height: 3px;
+		background: linear-gradient(90deg, #0284c7, #38bdf8);
+		border-radius: 2px;
+		transition: width 0.5s ease;
+	}
+
+	.prose h2:hover::after {
+		width: 100%;
+	}
+
+	[data-theme='dark'] .prose h2 {
+		color: #f1f5f9;
 	}
 
 	/* 3. Nội dung văn bản */
@@ -98,28 +126,151 @@ import Layout from '../layouts/BlogPost.astro';
 		line-height: 1.7;
 		color: #334155;
 		margin-bottom: 1.3rem !important;
+		transition: color 0.3s;
+	}
+
+	[data-theme='dark'] .prose p {
+		color: #cbd5e1;
 	}
 
 	/* 4. Trích dẫn */
 	.custom-quote {
 		border-left: 5px solid #0284c7 !important;
-		background: #f1f5f9;
+		background: linear-gradient(135deg, #f0f9ff 0%, #f1f5f9 100%);
 		padding: 1.2rem 1.8rem !important;
 		border-radius: 4px 15px 15px 4px;
 		margin: 1.8rem 0 !important;
 		font-style: italic;
+		color: #334155;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.custom-quote::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+		transition: left 0.5s ease;
+	}
+
+	.custom-quote:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 12px 30px rgba(2, 132, 199, 0.15);
+		border-left-color: #0369a1;
+	}
+
+	.custom-quote:hover::before {
+		left: 100%;
+	}
+
+	[data-theme='dark'] .custom-quote {
+		background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.5));
+		border-left-color: #38bdf8;
+		color: #cbd5e1;
+	}
+
+	[data-theme='dark'] .custom-quote:hover {
+		box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
+		border-left-color: #0ea5e9;
 	}
 
 	/* 5. Bảng */
 	.table-container { margin-top: 1.5rem; overflow-x: auto; }
-	table { width: 100%; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; border-spacing: 0; }
-	th, td { padding: 14px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; }
+	table { width: 100%; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; border-spacing: 0; transition: border-color 0.3s; }
+	th, td { padding: 14px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.95rem; color: #334155; transition: all 0.3s; }
 	th { background-color: #f8fafc; font-weight: 700; color: #475569; }
+
+	tbody tr {
+		transition: all 0.3s ease;
+	}
+
+	tbody tr:hover {
+		background-color: rgba(2, 132, 199, 0.08);
+		box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+	}
+
+	[data-theme='dark'] table {
+		border-color: #334155;
+	}
+
+	[data-theme='dark'] th,
+	[data-theme='dark'] td {
+		border-bottom-color: #334155;
+		color: #cbd5e1;
+	}
+
+	[data-theme='dark'] th {
+		background-color: #1e293b;
+		color: #f1f5f9;
+	}
+
+	[data-theme='dark'] tbody tr:hover {
+		background-color: rgba(56, 189, 248, 0.1);
+		box-shadow: 0 4px 12px rgba(56, 189, 248, 0.12);
+	}
 
 	/* 6. Tối ưu iPhone/iPad */
 	@media (max-width: 768px) {
 		.prose h1 { font-size: 1.6rem !important; }
 		.prose h2 { font-size: 1.25rem !important; }
 		.prose p { font-size: 0.98rem !important; }
+	}
+
+	/* Lists dark mode */
+	[data-theme='dark'] .prose ul,
+	[data-theme='dark'] .prose ol {
+		color: #cbd5e1;
+	}
+
+	[data-theme='dark'] .prose li {
+		color: #cbd5e1;
+	}
+
+	[data-theme='dark'] .prose a {
+		color: #38bdf8;
+	}
+
+	[data-theme='dark'] .prose a:hover {
+		color: #0284c7;
+	}
+
+	/* Animations */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.prose {
+		animation: fadeInUp 0.7s ease-out;
+	}
+
+	/* Content sections with animation */
+	.prose h2 {
+		animation: fadeInUp 0.8s ease-out forwards;
+	}
+
+	.prose p,
+	.prose ul,
+	.prose ol {
+		animation: fadeInUp 0.8s ease-out forwards;
+	}
+
+	.custom-quote {
+		animation: fadeInUp 0.8s ease-out forwards;
+	}
+
+	table {
+		animation: fadeInUp 0.8s ease-out forwards;
 	}
 </style>

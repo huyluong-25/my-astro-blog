@@ -34,6 +34,11 @@ const today = new Date();
 		background: linear-gradient(180deg, rgba(251, 207, 232, 0.2) 0%, rgba(255, 255, 255, 1) 100%);
 		text-align: center;
 		font-family: 'Arial', sans-serif !important;
+		transition: background 0.3s;
+	}
+
+	:global([data-theme='dark']) .apple-footer {
+		background: linear-gradient(180deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 1) 100%);
 	}
 
 	.copyright {
@@ -41,6 +46,11 @@ const today = new Date();
 		font-size: 0.9rem;
 		margin-bottom: 2rem;
 		letter-spacing: 0.5px;
+		transition: color 0.3s;
+	}
+
+	:global([data-theme='dark']) .copyright {
+		color: #cbd5e1;
 	}
 
 	.social-links {
@@ -68,6 +78,15 @@ const today = new Date();
 		text-decoration: none;
 	}
 
+	:global([data-theme='dark']) .glass-icon {
+		background: rgba(30, 41, 59, 0.6);
+		border-color: rgba(255, 255, 255, 0.1);
+		color: #cbd5e1;
+		box-shadow: 
+			inset 0 1px 1px rgba(255, 255, 255, 0.2),
+			0 10px 20px rgba(0, 0, 0, 0.3);
+	}
+
 	.glass-icon:hover {
 		transform: translateY(-8px) scale(1.15);
 		background: rgba(255, 255, 255, 0.6);
@@ -75,6 +94,14 @@ const today = new Date();
 		box-shadow: 
 			inset 0 1px 1px rgba(255, 255, 255, 0.9),
 			0 20px 35px rgba(0, 0, 0, 0.1);
+	}
+
+	:global([data-theme='dark']) .glass-icon:hover {
+		background: rgba(30, 41, 59, 0.8);
+		color: #38bdf8;
+		box-shadow: 
+			inset 0 1px 1px rgba(255, 255, 255, 0.3),
+			0 20px 35px rgba(0, 0, 0, 0.4);
 	}
 
 	.glass-icon svg {

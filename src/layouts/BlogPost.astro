@@ -15,6 +15,26 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+
 			main {
 				width: calc(100% - 2em);
 				max-width: 100%;
@@ -22,35 +42,143 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.hero-image {
 				width: 100%;
+				animation: fadeIn 0.8s ease-out;
+				overflow: hidden;
+				border-radius: 12px;
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				transition: transform 0.5s ease;
 			}
+
+			.hero-image:hover img {
+				transform: scale(1.02);
+			}
+
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
-				color: rgb(var(--gray-dark));
+				color: #334155;
+				transition: color 0.3s;
+				animation: fadeInUp 0.8s ease-out 0.1s backwards;
+			}
+			[data-theme='dark'] .prose {
+				color: rgb(var(--text-secondary));
 			}
 			.title {
 				margin-bottom: 1em;
 				padding: 1em 0;
 				text-align: center;
 				line-height: 1;
+				transition: color 0.3s;
+				animation: fadeInUp 0.8s ease-out 0.2s backwards;
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				color: #0f172a;
+				transition: color 0.3s;
+				font-weight: 700;
+			}
+			[data-theme='dark'] .title h1 {
+				color: #f1f5f9;
 			}
 			.date {
 				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				color: #64748b;
+				transition: color 0.3s;
+				font-size: 0.95rem;
+			}
+			[data-theme='dark'] .date {
+				color: rgb(var(--text-secondary));
 			}
 			.last-updated-on {
 				font-style: italic;
+				transition: color 0.3s;
+				font-size: 0.9rem;
+			}
+			[data-theme='dark'] .last-updated-on {
+				color: rgb(var(--text-secondary));
+			}
+			hr {
+				border: none;
+				border-top: 2px solid #e2e8f0;
+				transition: border-color 0.3s;
+				margin: 2em 0;
+			}
+			[data-theme='dark'] hr {
+				border-top-color: #334155;
+			}
+
+			/* Prose content animations */
+			.prose h2 {
+				animation: fadeInUp 0.8s ease-out forwards;
+				position: relative;
+				padding-bottom: 0.8rem;
+				margin-top: 2rem !important;
+			}
+
+			.prose h2::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 0;
+				height: 2px;
+				background: linear-gradient(90deg, #0284c7, #38bdf8);
+				transition: width 0.5s ease;
+			}
+
+			.prose h2:hover::after {
+				width: 100%;
+			}
+
+			.prose p {
+				animation: fadeInUp 0.8s ease-out forwards;
+			}
+
+			.prose ul,
+			.prose ol {
+				animation: fadeInUp 0.8s ease-out forwards;
+			}
+
+			.prose blockquote {
+				animation: fadeInUp 0.8s ease-out forwards;
+				transition: all 0.3s ease;
+			}
+
+			.prose blockquote:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 8px 20px rgba(2, 132, 199, 0.1);
+			}
+
+			[data-theme='dark'] .prose blockquote:hover {
+				box-shadow: 0 8px 20px rgba(56, 189, 248, 0.1);
+			}
+
+			.prose code {
+				background: #f1f5f9;
+				color: #0f172a;
+				padding: 0.2em 0.4em;
+				border-radius: 4px;
+				transition: all 0.3s;
+			}
+
+			[data-theme='dark'] .prose code {
+				background: #1e293b;
+				color: #f1f5f9;
+			}
+
+			.prose code:hover {
+				background: #e2e8f0;
+			}
+
+			[data-theme='dark'] .prose code:hover {
+				background: #334155;
 			}
 		</style>
 	</head>
