@@ -1,6 +1,10 @@
 name = "mechanical-main"
 compatibility_date = "2024-04-03"
 
+# Static assets for Pages
+[assets]
+directory = "./dist"
+
 # D1 Database Binding
 [[d1_databases]]
 binding = "DB"
@@ -13,7 +17,6 @@ migrations_dir = "migrations"
 vars = { ENVIRONMENT = "production" }
 secrets = ["ADMIN_PASSWORD"]
 
-[env.development]
-vars = { ENVIRONMENT = "development" }
 [env.development.vars]
+ENVIRONMENT = "development"
 ADMIN_PASSWORD = "admin123"

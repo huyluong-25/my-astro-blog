@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "dev:wrangler": "wrangler dev",
+    "dev:wrangler": "wrangler pages dev ./dist --local --persist",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
