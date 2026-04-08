@@ -1,19 +1,6 @@
 name = "mechanical-main"
 compatibility_date = "2024-04-03"
 
-# Build configuration for Astro static build
-[build]
-command = "npm run build"
-cwd = "."
-watch_paths = ["src/**/*.astro", "src/**/*.ts", "src/**/*.tsx"]
-
-# Static assets from Astro dist
-[env.production]
-routes = [
-  { pattern = "/api/*", zone_name = "blog.triv.me" },
-  { pattern = "/admin*", zone_name = "blog.triv.me" },
-]
-
 # D1 Database Binding
 [[d1_databases]]
 binding = "DB"
@@ -21,12 +8,16 @@ database_name = "huy-blog-comments"
 database_id = "ce992000-33ec-4745-86cc-699942ea0736"
 migrations_dir = "migrations"
 
+# Static assets folder for Pages
+[site]
+bucket = "dist"
+
 # Environment configuration
 [env.production]
 vars = { ENVIRONMENT = "production" }
-# Change this to a secure password!
 secrets = ["ADMIN_PASSWORD"]
 
-# Local environment (for testing)
 [env.development]
-vars = { ENVIRONMENT = "development", ADMIN_PASSWORD = "admin123" }
+vars = { ENVIRONMENT = "development" }
+[env.development.vars]
+ADMIN_PASSWORD = "admin123"
