@@ -1,0 +1,23 @@
+name = "mechanical-main"
+compatibility_date = "2024-04-03"
+
+# Asset directory for Astro static files
+[asset]
+directory = ".output/static"
+
+# D1 Database Binding
+[[d1_databases]]
+binding = "DB"
+database_name = "huy-blog-comments"
+database_id = "ce992000-33ec-4745-86cc-699942ea0736"
+migrations_dir = "migrations"
+
+# Environment configuration
+[env.production]
+vars = { ENVIRONMENT = "production" }
+# Change this to a secure password!
+secrets = ["ADMIN_PASSWORD"]
+
+# Local environment (for testing)
+[env.development]
+vars = { ENVIRONMENT = "development", ADMIN_PASSWORD = "admin123" }

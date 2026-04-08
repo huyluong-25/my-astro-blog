@@ -1,0 +1,357 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<section class="comments-section">
+  <h3>💬 Comments</h3>
+  
+  <form class="comment-form" id="commentForm">
+    <div class="form-group">
+      <input 
+        type="text" 
+        placeholder="Your name" 
+        id="author" 
+        required 
+      />
+    </div>
+    <div class="form-group">
+      <input 
+        type="email" 
+        placeholder="Your email" 
+        id="email" 
+        required 
+      />
+    </div>
+    <div class="form-group">
+      <textarea 
+        placeholder="Your comment..." 
+        id="content" 
+        rows="4" 
+        required
+      ></textarea>
+    </div>
+    <button type="submit" class="btn btn-submit">Post Comment</button>
+    <p class="form-note">Comments are moderated and may take a few hours to appear.</p>
+  </form>
+
+  <div class="comments-list" id="commentsList">
+    <p class="loading">Loading comments...</p>
+  </div>
+</section>
+
+<style is:global>
+  .comments-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 2px solid #e2e8f0;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  [data-theme='dark'] .comments-section {
+    border-top-color: #334155;
+  }
+
+  .comments-section h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 30px;
+    transition: color 0.3s;
+  }
+
+  [data-theme='dark'] .comments-section h3 {
+    color: #f1f5f9;
+  }
+
+  /* Comment Form */
+  .comment-form {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+  }
+
+  [data-theme='dark'] .comment-form {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: #334155;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .comment-form input,
+  .comment-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #334155;
+    background: white;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  [data-theme='dark'] .comment-form input,
+  [data-theme='dark'] .comment-form textarea {
+    background: #1e293b;
+    border-color: #475569;
+    color: #cbd5e1;
+  }
+
+  .comment-form input:focus,
+  .comment-form textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+  }
+
+  [data-theme='dark'] .comment-form input:focus,
+  [data-theme='dark'] .comment-form textarea:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+  }
+
+  .btn-submit {
+    background: #0284c7;
+    color: white;
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-submit:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(2, 132, 199, 0.3);
+  }
+
+  [data-theme='dark'] .btn-submit {
+    background: #38bdf8;
+    color: #0f172a;
+  }
+
+  [data-theme='dark'] .btn-submit:hover {
+    background: #0284c7;
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+  }
+
+  .form-note {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 12px;
+    transition: color 0.3s;
+  }
+
+  [data-theme='dark'] .form-note {
+    color: #94a3b8;
+  }
+
+  /* Comments List */
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .comment-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  [data-theme='dark'] .comment-item {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: #334155;
+  }
+
+  .comment-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  [data-theme='dark'] .comment-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .comment-author {
+    font-weight: 600;
+    color: #0f172a;
+    transition: color 0.3s;
+  }
+
+  [data-theme='dark'] .comment-author {
+    color: #f1f5f9;
+  }
+
+  .comment-date {
+    font-size: 0.85rem;
+    color: #64748b;
+    transition: color 0.3s;
+  }
+
+  [data-theme='dark'] .comment-date {
+    color: #94a3b8;
+  }
+
+  .comment-content {
+    color: #334155;
+    line-height: 1.6;
+    word-break: break-word;
+    transition: color 0.3s;
+  }
+
+  [data-theme='dark'] .comment-content {
+    color: #cbd5e1;
+  }
+
+  .loading,
+  .no-comments {
+    text-align: center;
+    color: #64748b;
+    padding: 20px;
+  }
+
+  [data-theme='dark'] .loading,
+  [data-theme='dark'] .no-comments {
+    color: #94a3b8;
+  }
+
+  .error-message {
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+  }
+
+  [data-theme='dark'] .error-message {
+    background: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.3);
+  }
+
+  .success-message {
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+  }
+
+  [data-theme='dark'] .success-message {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+</style>
+
+<script define:vars={{ slug }}>
+  const form = document.getElementById('commentForm');
+  const commentsList = document.getElementById('commentsList');
+
+  // Load comments
+  async function loadComments() {
+    try {
+      const res = await fetch(`/api/comments?slug=${slug}`);
+      const comments = await res.json();
+      
+      if (!Array.isArray(comments) || comments.length === 0) {
+        commentsList.innerHTML = '<p class="no-comments">No comments yet. Be the first to comment!</p>';
+        return;
+      }
+
+      commentsList.innerHTML = comments.map(comment => `
+        <div class="comment-item">
+          <div class="comment-header">
+            <span class="comment-author">${escapeHtml(comment.author)}</span>
+            <span class="comment-date">${new Date(comment.created_at).toLocaleDateString()}</span>
+          </div>
+          <p class="comment-content">${escapeHtml(comment.content)}</p>
+        </div>
+      `).join('');
+    } catch (error) {
+      console.error('Error loading comments:', error);
+      commentsList.innerHTML = '<p class="error-message">Failed to load comments. Please try again later.</p>';
+    }
+  }
+
+  // Submit comment
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const author = document.getElementById('author').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const content = document.getElementById('content').value.trim();
+
+    if (!author || !email || !content) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/comments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, author, email, content })
+      });
+
+      if (res.ok) {
+        const successMsg = document.createElement('p');
+        successMsg.className = 'success-message';
+        successMsg.textContent = '✓ Thank you! Your comment is awaiting moderation.';
+        form.parentElement.insertBefore(successMsg, form);
+        
+        form.reset();
+        setTimeout(() => { 
+          successMsg.remove();
+          loadComments(); 
+        }, 3000);
+      } else {
+        const errorData = await res.json();
+        alert('Error: ' + (errorData.error || 'Failed to post comment'));
+      }
+    } catch (error) {
+      console.error('Error posting comment:', error);
+      alert('Error: ' + error.message);
+    }
+  });
+
+  function escapeHtml(text) {
+    const map = { 
+      '&': '&amp;', 
+      '<': '&lt;', 
+      '>': '&gt;', 
+      '"': '&quot;', 
+      "'": '&#039;' 
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
+  }
+
+  // Load comments on page load
+  loadComments();
+</script>
