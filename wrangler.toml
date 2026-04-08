@@ -10,8 +10,8 @@ watch_paths = ["src/**/*.astro", "src/**/*.ts", "src/**/*.tsx"]
 # Static assets from Astro dist
 [env.production]
 routes = [
-  { pattern = "/api/*", zone_name = "triv.me" },
-  { pattern = "/admin*", zone_name = "triv.me" },
+  { pattern = "/api/*", zone_name = "blog.triv.me" },
+  { pattern = "/admin*", zone_name = "blog.triv.me" },
 ]
 
 # D1 Database Binding
