@@ -6,16 +6,14 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "npm run build && wrangler pages dev ./dist --port 8788",
+    "dev": "astro dev --port 8788",
     "dev:astro": "astro dev --port 8788",
-    "dev:wrangler": "wrangler pages dev ./dist --port 8788",
     "build": "astro build",
     "preview": "astro preview --port 8788",
     "astro": "astro",
-    "deploy": "npm run build && wrangler pages deploy dist --project-name mechanical-main"
+    "deploy": "npm run build"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.1.7",
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
@@ -24,7 +22,5 @@
     "typed.js": "^3.0.0",
     "vanilla-tilt": "^1.8.1"
   },
-  "devDependencies": {
-    "wrangler": "^4.81.0"
-  }
+  "devDependencies": {}
 }

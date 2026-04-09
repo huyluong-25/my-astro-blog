@@ -4,8 +4,7 @@ interface Props {
 }
 
 const { slug } = Astro.props;
-const commentsApiOrigin = (import.meta.env.PUBLIC_COMMENTS_API_ORIGIN || '').toString().trim().replace(/\/+$/, '');
-const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
+const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').toString().trim().replace(/\/+$/, '');
 ---
 
 <section class="comments-section">
@@ -273,44 +272,12 @@ const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
   }
 </style>
 
-<script define:vars={{ slug, commentsApiOrigin, fallbackApiOrigin }}>
+<script define:vars={{ slug, commentsApiBaseUrl }}>
   const form = document.getElementById('commentForm');
   const commentsList = document.getElementById('commentsList');
 
-  function normalizedOrigin(origin) {
-    if (!origin) return '';
-    return String(origin).trim().replace(/\/+$/, '');
-  }
-
-  function uniqueOrigins(origins) {
-    const seen = new Set();
-    const out = [];
-
-    for (const origin of origins) {
-      const value = normalizedOrigin(origin);
-      if (seen.has(value)) continue;
-      seen.add(value);
-      out.push(value);
-    }
-
-    return out;
-  }
-
-  const apiOrigins = uniqueOrigins([
-    '',
-    commentsApiOrigin,
-    fallbackApiOrigin
-  ]);
-
-  function commentsApiUrl(origin, slugValue) {
-    const base = normalizedOrigin(origin);
-    const path = `/api/comments?slug=${encodeURIComponent(slugValue)}`;
-    return base ? `${base}${path}` : path;
-  }
-
-  function commentsPostUrl(origin) {
-    const base = normalizedOrigin(origin);
-    return base ? `${base}/api/comments` : '/api/comments';
+  function apiPath(path) {
+    return commentsApiBaseUrl ? `${commentsApiBaseUrl}${path}` : path;
   }
 
   function resolveSlug() {
@@ -328,6 +295,11 @@ const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
     console.error('Comments UI elements not found');
   }
 
+  if (!commentsApiBaseUrl) {
+    commentsList.innerHTML = '<p class="error-message">Comment API is not configured. Set PUBLIC_COMMENTS_API_BASE_URL for your new backend.</p>';
+    form?.setAttribute('style', 'display:none');
+  }
+
   // Load comments
   async function loadComments() {
     if (!currentSlug) {
@@ -335,43 +307,28 @@ const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
       return;
     }
 
+    if (!commentsApiBaseUrl) {
+      return;
+    }
+
     try {
-      let comments = null;
-      let lastError = new Error('Comments API request failed');
+      const res = await fetch(apiPath(`/api/comments?slug=${encodeURIComponent(currentSlug)}`));
+      const responseType = res.headers.get('content-type') || '';
 
-      for (const origin of apiOrigins) {
-        const res = await fetch(commentsApiUrl(origin, currentSlug));
-        const responseType = res.headers.get('content-type') || '';
-
-        if (!res.ok) {
-          let message = `Request failed (${res.status})`;
-
-          if (responseType.includes('application/json')) {
-            const err = await res.json();
-            message = err?.error || message;
-          } else {
-            const text = await res.text();
-            if (text) {
-              message = text.slice(0, 120);
-            }
-          }
-
-          lastError = new Error(message);
-          continue;
+      if (!res.ok) {
+        let message = `Request failed (${res.status})`;
+        if (responseType.includes('application/json')) {
+          const err = await res.json();
+          message = err?.error || message;
         }
-
-        if (!responseType.includes('application/json')) {
-          lastError = new Error('Comments API returned invalid response type');
-          continue;
-        }
-
-        comments = await res.json();
-        break;
+        throw new Error(message);
       }
 
-      if (!comments) {
-        throw lastError;
+      if (!responseType.includes('application/json')) {
+        throw new Error('Comments API returned invalid response type');
       }
+
+      const comments = await res.json();
       
       if (!Array.isArray(comments) || comments.length === 0) {
         commentsList.innerHTML = '<p class="no-comments">No comments yet. Be the first to comment!</p>';
@@ -403,6 +360,11 @@ const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
       return;
     }
 
+    if (!commentsApiBaseUrl) {
+      alert('Error: Comment API is not configured yet.');
+      return;
+    }
+
     const author = document.getElementById('author').value.trim();
     const email = document.getElementById('email').value.trim();
     const content = document.getElementById('content').value.trim();
@@ -413,31 +375,13 @@ const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
     }
 
     try {
-      let postSuccess = false;
-      let postError = null;
+      const res = await fetch(apiPath('/api/comments'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: currentSlug, author, email, content })
+      });
 
-      for (const origin of apiOrigins) {
-        const res = await fetch(commentsPostUrl(origin), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ slug: currentSlug, author, email, content })
-        });
-
-        if (res.ok) {
-          postSuccess = true;
-          break;
-        }
-
-        const responseType = res.headers.get('content-type') || '';
-        if (responseType.includes('application/json')) {
-          const errorData = await res.json();
-          postError = errorData?.error || `Failed to post comment (${res.status})`;
-        } else {
-          postError = `Failed to post comment (${res.status})`;
-        }
-      }
-
-      if (postSuccess) {
+      if (res.ok) {
         const successMsg = document.createElement('p');
         successMsg.className = 'success-message';
         successMsg.textContent = '✓ Thank you! Your comment is awaiting moderation.';
@@ -449,7 +393,13 @@ const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
           loadComments(); 
         }, 3000);
       } else {
-        alert('Error: ' + (postError || 'Failed to post comment'));
+        const responseType = res.headers.get('content-type') || '';
+        if (responseType.includes('application/json')) {
+          const errorData = await res.json();
+          alert('Error: ' + (errorData?.error || `Failed to post comment (${res.status})`));
+        } else {
+          alert(`Error: Failed to post comment (${res.status})`);
+        }
       }
     } catch (error) {
       console.error('Error posting comment:', error);
