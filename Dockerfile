@@ -1,6 +1,8 @@
 # Build stage
 FROM node:lts-alpine as build
 WORKDIR /app
+ARG PUBLIC_COMMENTS_API_ORIGIN=https://mechanical-main.pages.dev
+ENV PUBLIC_COMMENTS_API_ORIGIN=${PUBLIC_COMMENTS_API_ORIGIN}
 COPY . .
 RUN npm install
 RUN npm run build
