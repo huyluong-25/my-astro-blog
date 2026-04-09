@@ -121,6 +121,16 @@ ADMIN_PASSWORD=admin123
 wrangler secret put ADMIN_PASSWORD --env production
 ```
 
+### VPS/Nginx static deployment (important)
+
+If you deploy `dist/` behind Nginx on VPS, set this environment variable for the container:
+
+```bash
+CF_API_ORIGIN=https://mechanical-main.pages.dev
+```
+
+Then Nginx will proxy all `/api/*` requests to Cloudflare Functions.
+
 ---
 
 ## Troubleshooting
