@@ -7,7 +7,8 @@ RUN npm run build
 
 # Runtime stage
 FROM nginx:alpine
+ENV CF_API_ORIGIN=https://mechanical-main.pages.dev
 COPY --from=build /app/dist /usr/share/nginx/html
-# Dòng mới được thêm vào để nạp cấu hình Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Render nginx.conf as template at container startup with CF_API_ORIGIN
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 EXPOSE 80
