@@ -132,6 +132,14 @@ CF_API_ORIGIN=https://mechanical-main.pages.dev
 Then Nginx will proxy all `/api/*` requests to Cloudflare Functions.
 Use the exact Cloudflare origin/domain that serves your Functions, and do not add a trailing slash.
 
+For extra safety, set a frontend fallback API origin at build time:
+
+```bash
+PUBLIC_COMMENTS_API_ORIGIN=https://mechanical-main.pages.dev npm run build
+```
+
+This lets the browser call Cloudflare API directly if VPS `/api/*` proxy returns HTML/405.
+
 ---
 
 ## Troubleshooting

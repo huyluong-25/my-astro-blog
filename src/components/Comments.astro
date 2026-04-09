@@ -4,6 +4,8 @@ interface Props {
 }
 
 const { slug } = Astro.props;
+const commentsApiOrigin = (import.meta.env.PUBLIC_COMMENTS_API_ORIGIN || '').toString().trim().replace(/\/+$/, '');
+const fallbackApiOrigin = 'https://mechanical-main.pages.dev';
 ---
 
 <section class="comments-section">
@@ -271,9 +273,45 @@ const { slug } = Astro.props;
   }
 </style>
 
-<script define:vars={{ slug }}>
+<script define:vars={{ slug, commentsApiOrigin, fallbackApiOrigin }}>
   const form = document.getElementById('commentForm');
   const commentsList = document.getElementById('commentsList');
+
+  function normalizedOrigin(origin) {
+    if (!origin) return '';
+    return String(origin).trim().replace(/\/+$/, '');
+  }
+
+  function uniqueOrigins(origins) {
+    const seen = new Set();
+    const out = [];
+
+    for (const origin of origins) {
+      const value = normalizedOrigin(origin);
+      if (seen.has(value)) continue;
+      seen.add(value);
+      out.push(value);
+    }
+
+    return out;
+  }
+
+  const apiOrigins = uniqueOrigins([
+    '',
+    commentsApiOrigin,
+    fallbackApiOrigin
+  ]);
+
+  function commentsApiUrl(origin, slugValue) {
+    const base = normalizedOrigin(origin);
+    const path = `/api/comments?slug=${encodeURIComponent(slugValue)}`;
+    return base ? `${base}${path}` : path;
+  }
+
+  function commentsPostUrl(origin) {
+    const base = normalizedOrigin(origin);
+    return base ? `${base}/api/comments` : '/api/comments';
+  }
 
   function resolveSlug() {
     if (typeof slug === 'string' && slug.trim()) {
@@ -298,30 +336,42 @@ const { slug } = Astro.props;
     }
 
     try {
-      const res = await fetch(`/api/comments?slug=${encodeURIComponent(currentSlug)}`);
-      const responseType = res.headers.get('content-type') || '';
+      let comments = null;
+      let lastError = new Error('Comments API request failed');
 
-      if (!res.ok) {
-        let message = `Request failed (${res.status})`;
+      for (const origin of apiOrigins) {
+        const res = await fetch(commentsApiUrl(origin, currentSlug));
+        const responseType = res.headers.get('content-type') || '';
 
-        if (responseType.includes('application/json')) {
-          const err = await res.json();
-          message = err?.error || message;
-        } else {
-          const text = await res.text();
-          if (text) {
-            message = text.slice(0, 120);
+        if (!res.ok) {
+          let message = `Request failed (${res.status})`;
+
+          if (responseType.includes('application/json')) {
+            const err = await res.json();
+            message = err?.error || message;
+          } else {
+            const text = await res.text();
+            if (text) {
+              message = text.slice(0, 120);
+            }
           }
+
+          lastError = new Error(message);
+          continue;
         }
 
-        throw new Error(message);
+        if (!responseType.includes('application/json')) {
+          lastError = new Error('Comments API returned invalid response type');
+          continue;
+        }
+
+        comments = await res.json();
+        break;
       }
 
-      if (!responseType.includes('application/json')) {
-        throw new Error('Comments API returned invalid response type');
+      if (!comments) {
+        throw lastError;
       }
-
-      const comments = await res.json();
       
       if (!Array.isArray(comments) || comments.length === 0) {
         commentsList.innerHTML = '<p class="no-comments">No comments yet. Be the first to comment!</p>';
@@ -363,13 +413,31 @@ const { slug } = Astro.props;
     }
 
     try {
-      const res = await fetch('/api/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: currentSlug, author, email, content })
-      });
+      let postSuccess = false;
+      let postError = null;
 
-      if (res.ok) {
+      for (const origin of apiOrigins) {
+        const res = await fetch(commentsPostUrl(origin), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: currentSlug, author, email, content })
+        });
+
+        if (res.ok) {
+          postSuccess = true;
+          break;
+        }
+
+        const responseType = res.headers.get('content-type') || '';
+        if (responseType.includes('application/json')) {
+          const errorData = await res.json();
+          postError = errorData?.error || `Failed to post comment (${res.status})`;
+        } else {
+          postError = `Failed to post comment (${res.status})`;
+        }
+      }
+
+      if (postSuccess) {
         const successMsg = document.createElement('p');
         successMsg.className = 'success-message';
         successMsg.textContent = '✓ Thank you! Your comment is awaiting moderation.';
@@ -381,13 +449,7 @@ const { slug } = Astro.props;
           loadComments(); 
         }, 3000);
       } else {
-        const responseType = res.headers.get('content-type') || '';
-        if (responseType.includes('application/json')) {
-          const errorData = await res.json();
-          alert('Error: ' + (errorData.error || 'Failed to post comment'));
-        } else {
-          alert(`Error: Failed to post comment (${res.status})`);
-        }
+        alert('Error: ' + (postError || 'Failed to post comment'));
       }
     } catch (error) {
       console.error('Error posting comment:', error);

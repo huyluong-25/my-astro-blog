@@ -18,6 +18,19 @@ async function ensureCommentsTable(db: any) {
     .run();
 }
 
+function jsonResponse(body: any, status = 200, extraHeaders: Record<string, string> = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      ...extraHeaders
+    }
+  });
+}
+
 function slugFromReferer(request: Request) {
   const referer = request.headers.get('referer');
   if (!referer) return '';
@@ -44,13 +57,7 @@ export async function onRequestPost(context: any) {
   const db = context.env.DB;
 
   if (!db) {
-    return new Response(
-      JSON.stringify({ error: 'Database binding DB is missing in runtime environment' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'Database binding DB is missing in runtime environment' }, 500);
   }
 
   await ensureCommentsTable(db);
@@ -90,9 +97,14 @@ export async function onRequestPost(context: any) {
 
     return new Response(
       JSON.stringify({ error: `Missing required fields: ${missingFields}` }),
-      { 
+      {
         status: 400,
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+        }
       }
     );
   }
@@ -100,24 +112,12 @@ export async function onRequestPost(context: any) {
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return new Response(
-      JSON.stringify({ error: 'Invalid email format' }),
-      { 
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'Invalid email format' }, 400);
   }
 
   // Validate content length
   if (content.length < 3 || content.length > 5000) {
-    return new Response(
-      JSON.stringify({ error: 'Comment must be between 3 and 5000 characters' }),
-      { 
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'Comment must be between 3 and 5000 characters' }, 400);
   }
 
   try {
@@ -128,26 +128,17 @@ export async function onRequestPost(context: any) {
       .bind(slug, author, email, content)
       .run();
 
-    return new Response(
-      JSON.stringify({
+    return jsonResponse(
+      {
         success: true,
         id: result.meta.last_row_id,
         message: 'Comment submitted! It will appear after moderation.'
-      }),
-      {
-        status: 201,
-        headers: { 'Content-Type': 'application/json' }
-      }
+      },
+      201
     );
   } catch (error: any) {
     console.error('Error inserting comment:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to save comment. Please try again.' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'Failed to save comment. Please try again.' }, 500);
   }
 }
 
@@ -155,13 +146,7 @@ export async function onRequestGet(context: any) {
   const db = context.env.DB;
 
   if (!db) {
-    return new Response(
-      JSON.stringify({ error: 'Database binding DB is missing in runtime environment' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'Database binding DB is missing in runtime environment' }, 500);
   }
 
   await ensureCommentsTable(db);
@@ -170,13 +155,7 @@ export async function onRequestGet(context: any) {
   const slug = url.searchParams.get('slug');
 
   if (!slug) {
-    return new Response(
-      JSON.stringify({ error: 'slug parameter is required' }),
-      {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'slug parameter is required' }, 400);
   }
 
   try {
@@ -190,25 +169,12 @@ export async function onRequestGet(context: any) {
       .bind(slug)
       .all();
 
-    return new Response(
-      JSON.stringify(result.results || []),
-      {
-        status: 200,
-        headers: { 
-          'Content-Type': 'application/json',
-          'Cache-Control': 'public, max-age=60' // Cache for 1 minute
-        }
-      }
-    );
+    return jsonResponse(result.results || [], 200, {
+      'Cache-Control': 'public, max-age=60' // Cache for 1 minute
+    });
   } catch (error: any) {
     console.error('Error fetching comments:', error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to load comments' }),
-      {
-        status: 500,
-        headers: { 'Content-Type': 'application/json' }
-      }
-    );
+    return jsonResponse({ error: 'Failed to load comments' }, 500);
   }
 }
 
@@ -218,7 +184,7 @@ export async function onRequestOptions(context: any) {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
     }
   });
 }
