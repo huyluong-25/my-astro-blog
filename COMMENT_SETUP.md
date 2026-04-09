@@ -130,6 +130,7 @@ CF_API_ORIGIN=https://mechanical-main.pages.dev
 ```
 
 Then Nginx will proxy all `/api/*` requests to Cloudflare Functions.
+Use the exact Cloudflare origin/domain that serves your Functions, and do not add a trailing slash.
 
 ---
 
