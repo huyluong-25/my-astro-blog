@@ -275,10 +275,52 @@ const { slug } = Astro.props;
   const form = document.getElementById('commentForm');
   const commentsList = document.getElementById('commentsList');
 
+  function resolveSlug() {
+    if (typeof slug === 'string' && slug.trim()) {
+      return slug.trim();
+    }
+
+    const match = window.location.pathname.match(/^\/blog\/(.+?)\/?$/);
+    return match ? decodeURIComponent(match[1]) : '';
+  }
+
+  const currentSlug = resolveSlug();
+
+  if (!form || !commentsList) {
+    console.error('Comments UI elements not found');
+  }
+
   // Load comments
   async function loadComments() {
+    if (!currentSlug) {
+      commentsList.innerHTML = '<p class="error-message">Cannot determine post slug for comments.</p>';
+      return;
+    }
+
     try {
-      const res = await fetch(`/api/comments?slug=${slug}`);
+      const res = await fetch(`/api/comments?slug=${encodeURIComponent(currentSlug)}`);
+      const responseType = res.headers.get('content-type') || '';
+
+      if (!res.ok) {
+        let message = `Request failed (${res.status})`;
+
+        if (responseType.includes('application/json')) {
+          const err = await res.json();
+          message = err?.error || message;
+        } else {
+          const text = await res.text();
+          if (text) {
+            message = text.slice(0, 120);
+          }
+        }
+
+        throw new Error(message);
+      }
+
+      if (!responseType.includes('application/json')) {
+        throw new Error('Comments API returned invalid response type');
+      }
+
       const comments = await res.json();
       
       if (!Array.isArray(comments) || comments.length === 0) {
@@ -297,13 +339,20 @@ const { slug } = Astro.props;
       `).join('');
     } catch (error) {
       console.error('Error loading comments:', error);
-      commentsList.innerHTML = '<p class="error-message">Failed to load comments. Please try again later.</p>';
+      const message = error instanceof Error ? error.message : 'Failed to load comments.';
+      commentsList.innerHTML = `<p class="error-message">Failed to load comments. ${escapeHtml(message)}</p>`;
     }
   }
 
   // Submit comment
-  form.addEventListener('submit', async (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    if (!currentSlug) {
+      alert('Error: Cannot determine post slug for this comment.');
+      return;
+    }
+
     const author = document.getElementById('author').value.trim();
     const email = document.getElementById('email').value.trim();
     const content = document.getElementById('content').value.trim();
@@ -317,7 +366,7 @@ const { slug } = Astro.props;
       const res = await fetch('/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug, author, email, content })
+        body: JSON.stringify({ slug: currentSlug, author, email, content })
       });
 
       if (res.ok) {
@@ -332,8 +381,13 @@ const { slug } = Astro.props;
           loadComments(); 
         }, 3000);
       } else {
-        const errorData = await res.json();
-        alert('Error: ' + (errorData.error || 'Failed to post comment'));
+        const responseType = res.headers.get('content-type') || '';
+        if (responseType.includes('application/json')) {
+          const errorData = await res.json();
+          alert('Error: ' + (errorData.error || 'Failed to post comment'));
+        } else {
+          alert(`Error: Failed to post comment (${res.status})`);
+        }
       }
     } catch (error) {
       console.error('Error posting comment:', error);

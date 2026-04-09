@@ -7,9 +7,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import Comments from '../components/Comments.astro';
 
-type Props = CollectionEntry<'blog'>['data'] & { slug: string };
+type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
 
 const { title, description, pubDate, updatedDate, heroImage, slug } = Astro.props;
+const hasCommentSlug = typeof slug === 'string' && slug.trim().length > 0;
 ---
 
 <html lang="en">
@@ -208,7 +209,7 @@ const { title, description, pubDate, updatedDate, heroImage, slug } = Astro.prop
 					</div>
 					<slot />
 				</div>
-				<Comments slug={slug} />
+				{hasCommentSlug && <Comments slug={slug} />}
 			</article>
 		</main>
 		<Footer />

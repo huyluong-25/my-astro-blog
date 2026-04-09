@@ -17,9 +17,18 @@ npx wrangler d1 execute huy-blog-comments --remote --file ./migrations/0001_init
 #### 2. Local Development
 ```bash
 npm run dev
-# Visit: http://localhost:3000/blog/[post-slug]
-# Admin: http://localhost:3000/admin
+# Visit: http://localhost:8788/blog/[post-slug]
+# Admin: http://localhost:8788/admin
 ```
+
+`npm run dev` uses `wrangler pages dev` so Cloudflare Functions (`/api/*`) and D1 bindings are available locally.
+If you only want to preview Astro UI without API, run:
+
+```bash
+npm run dev:astro
+```
+
+Astro dev/preview is also pinned to `http://localhost:8788`.
 
 #### 3. Deployment to Cloudflare
 
