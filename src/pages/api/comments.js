@@ -9,6 +9,12 @@ function json(data, status = 200) {
 
 let schemaReadyPromise;
 
+const REACTION_COLUMN_MAP = {
+  like: 'reactions_like',
+  love: 'reactions_love',
+  haha: 'reactions_haha'
+};
+
 function ensureCommentsSchema() {
   if (!hasDatabaseUrl || !sql) {
     throw new Error('DATABASE_URL is missing. Please set DATABASE_URL in your environment.');
@@ -26,9 +32,17 @@ function ensureCommentsSchema() {
           email TEXT NOT NULL,
           content TEXT NOT NULL,
           status TEXT NOT NULL DEFAULT 'pending',
+          reactions_like INTEGER NOT NULL DEFAULT 0,
+          reactions_love INTEGER NOT NULL DEFAULT 0,
+          reactions_haha INTEGER NOT NULL DEFAULT 0,
           created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
         );
       `;
+
+      // Ensure reaction columns exist for old tables created before reaction feature
+      await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS reactions_like INTEGER NOT NULL DEFAULT 0;`;
+      await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS reactions_love INTEGER NOT NULL DEFAULT 0;`;
+      await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS reactions_haha INTEGER NOT NULL DEFAULT 0;`;
 
       // 2. Lệnh tạo Index
       await sql`
@@ -57,7 +71,7 @@ export async function GET({ request }) {
     await ensureCommentsSchema();
 
     const comments = await sql`
-      SELECT id, slug, author, content, created_at
+      SELECT id, slug, author, content, created_at, reactions_like, reactions_love, reactions_haha
       FROM comments 
       WHERE slug = ${slug} AND status = 'approved'
       ORDER BY created_at DESC
@@ -103,6 +117,45 @@ export async function POST({ request }) {
     `;
 
     return json({ success: true, message: 'Comment submitted and awaiting moderation.' }, 201);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown server error';
+    return json({ error: `Server error: ${message}` }, 500);
+  }
+}
+
+export async function PATCH({ request }) {
+  if (!hasDatabaseUrl) {
+    return json({ error: 'DATABASE_URL is missing. Please set DATABASE_URL in your environment.' }, 503);
+  }
+
+  try {
+    await ensureCommentsSchema();
+
+    const payload = await request.json();
+    const commentId = Number(payload?.commentId);
+    const reaction = String(payload?.reaction || '').trim().toLowerCase();
+    const reactionColumn = REACTION_COLUMN_MAP[reaction];
+
+    if (!Number.isInteger(commentId) || commentId <= 0) {
+      return json({ error: 'Invalid commentId' }, 400);
+    }
+
+    if (!reactionColumn) {
+      return json({ error: 'Invalid reaction. Allowed: like, love, haha' }, 400);
+    }
+
+    const updated = await sql`
+      UPDATE comments
+      SET ${sql(reactionColumn)} = ${sql(reactionColumn)} + 1
+      WHERE id = ${commentId}
+      RETURNING id, reactions_like, reactions_love, reactions_haha
+    `;
+
+    if (updated.length === 0) {
+      return json({ error: 'Comment not found' }, 404);
+    }
+
+    return json({ success: true, comment: updated[0] });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown server error';
     return json({ error: `Server error: ${message}` }, 500);

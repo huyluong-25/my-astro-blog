@@ -225,8 +225,48 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     transition: color 0.3s;
   }
 
+  .comment-reactions {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .reaction-btn {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #0f172a;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .reaction-btn:hover {
+    border-color: #0284c7;
+    transform: translateY(-1px);
+  }
+
+  .reaction-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+  }
+
   [data-theme='dark'] .comment-content {
     color: #cbd5e1;
+  }
+
+  [data-theme='dark'] .reaction-btn {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-color: #475569;
+  }
+
+  [data-theme='dark'] .reaction-btn:hover {
+    border-color: #38bdf8;
   }
 
   .loading,
@@ -275,6 +315,33 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
 <script define:vars={{ slug, commentsApiBaseUrl }}>
   const form = document.getElementById('commentForm');
   const commentsList = document.getElementById('commentsList');
+  const REACTION_TYPES = ['like', 'love', 'haha'];
+
+  function reactionLabel(type) {
+    if (type === 'like') return '👍';
+    if (type === 'love') return '❤️';
+    return '😂';
+  }
+
+  function getReactionCount(comment, type) {
+    const key = `reactions_${type}`;
+    const value = Number(comment?.[key] || 0);
+    return Number.isFinite(value) ? value : 0;
+  }
+
+  function renderReactionButtons(comment) {
+    return REACTION_TYPES.map(type => {
+      const count = getReactionCount(comment, type);
+      return `
+        <button
+          type="button"
+          class="reaction-btn"
+          data-comment-id="${Number(comment.id)}"
+          data-reaction="${type}"
+        >${reactionLabel(type)} ${count}</button>
+      `;
+    }).join('');
+  }
 
   function apiPath(path) {
     return commentsApiBaseUrl ? `${commentsApiBaseUrl}${path}` : path;
@@ -333,6 +400,9 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
             <span class="comment-date">${new Date(comment.created_at).toLocaleDateString()}</span>
           </div>
           <p class="comment-content">${escapeHtml(comment.content)}</p>
+          <div class="comment-reactions">
+            ${renderReactionButtons(comment)}
+          </div>
         </div>
       `).join('');
     } catch (error) {
@@ -390,6 +460,52 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     } catch (error) {
       console.error('Error posting comment:', error);
       alert('Error: ' + error.message);
+    }
+  });
+
+  commentsList?.addEventListener('click', async (event) => {
+    const button = event.target.closest('.reaction-btn');
+    if (!button) return;
+
+    const commentId = Number(button.getAttribute('data-comment-id'));
+    const reaction = button.getAttribute('data-reaction');
+
+    if (!Number.isInteger(commentId) || commentId <= 0 || !REACTION_TYPES.includes(reaction)) {
+      return;
+    }
+
+    const previousText = button.textContent;
+    button.disabled = true;
+    button.textContent = '...';
+
+    try {
+      const res = await fetch(apiPath('/api/comments'), {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ commentId, reaction })
+      });
+
+      const responseType = res.headers.get('content-type') || '';
+      if (!res.ok) {
+        let message = `Failed to react (${res.status})`;
+        if (responseType.includes('application/json')) {
+          const err = await res.json();
+          message = err?.error || message;
+        }
+        throw new Error(message);
+      }
+
+      const data = responseType.includes('application/json') ? await res.json() : null;
+      const updated = data?.comment;
+      const count = Number(updated?.[`reactions_${reaction}`] || 0);
+      button.textContent = `${reactionLabel(reaction)} ${count}`;
+    } catch (error) {
+      console.error('Error reacting to comment:', error);
+      button.textContent = previousText;
+      const message = error instanceof Error ? error.message : 'Failed to react';
+      alert(`Error: ${message}`);
+    } finally {
+      button.disabled = false;
     }
   });
 
