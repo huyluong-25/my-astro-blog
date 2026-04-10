@@ -10,17 +10,19 @@
     "dev:astro": "astro dev --port 8788",
     "build": "astro build",
     "preview": "astro preview --port 8788",
+    "start": "node ./dist/server/entry.mjs",
     "astro": "astro",
     "deploy": "npm run build"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",
+    "@astrojs/node": "^10.0.4",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.4",
+    "postgres": "^3.4.9",
     "sharp": "^0.34.3",
     "typed.js": "^3.0.0",
     "vanilla-tilt": "^1.8.1"
-  },
-  "devDependencies": {}
+  }
 }

@@ -295,19 +295,10 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     console.error('Comments UI elements not found');
   }
 
-  if (!commentsApiBaseUrl) {
-    commentsList.innerHTML = '<p class="error-message">Comment API is not configured. Set PUBLIC_COMMENTS_API_BASE_URL for your new backend.</p>';
-    form?.setAttribute('style', 'display:none');
-  }
-
   // Load comments
   async function loadComments() {
     if (!currentSlug) {
       commentsList.innerHTML = '<p class="error-message">Cannot determine post slug for comments.</p>';
-      return;
-    }
-
-    if (!commentsApiBaseUrl) {
       return;
     }
 
@@ -357,11 +348,6 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
 
     if (!currentSlug) {
       alert('Error: Cannot determine post slug for this comment.');
-      return;
-    }
-
-    if (!commentsApiBaseUrl) {
-      alert('Error: Comment API is not configured yet.');
       return;
     }
 
