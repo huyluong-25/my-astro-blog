@@ -10,26 +10,32 @@ function json(data, status = 200) {
 let schemaReadyPromise;
 
 function ensureCommentsSchema() {
-  // Đã sửa thành hasDatabaseUrl (không có ngoặc)
   if (!hasDatabaseUrl || !sql) {
     throw new Error('DATABASE_URL is missing. Please set DATABASE_URL in your environment.');
   }
 
   if (!schemaReadyPromise) {
-    schemaReadyPromise = sql`
-      CREATE TABLE IF NOT EXISTS comments (
-        id BIGSERIAL PRIMARY KEY,
-        slug TEXT NOT NULL,
-        author TEXT NOT NULL,
-        email TEXT NOT NULL,
-        content TEXT NOT NULL,
-        status TEXT NOT NULL DEFAULT 'pending',
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-      );
+    // Tách riêng 2 lệnh SQL ra để chiều lòng thằng Postgres
+    schemaReadyPromise = (async () => {
+      // 1. Lệnh tạo bảng
+      await sql`
+        CREATE TABLE IF NOT EXISTS comments (
+          id BIGSERIAL PRIMARY KEY,
+          slug TEXT NOT NULL,
+          author TEXT NOT NULL,
+          email TEXT NOT NULL,
+          content TEXT NOT NULL,
+          status TEXT NOT NULL DEFAULT 'pending',
+          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        );
+      `;
 
-      CREATE INDEX IF NOT EXISTS idx_comments_slug_status_created_at
-      ON comments (slug, status, created_at DESC);
-    `;
+      // 2. Lệnh tạo Index
+      await sql`
+        CREATE INDEX IF NOT EXISTS idx_comments_slug_status_created_at
+        ON comments (slug, status, created_at DESC);
+      `;
+    })();
   }
 
   return schemaReadyPromise;
@@ -39,7 +45,6 @@ export async function GET({ request }) {
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug')?.trim();
 
-  // Đã sửa thành hasDatabaseUrl (không có ngoặc)
   if (!hasDatabaseUrl) {
     return json({ error: 'DATABASE_URL is missing. Please set DATABASE_URL in your environment.' }, 503);
   }
@@ -66,7 +71,6 @@ export async function GET({ request }) {
 }
 
 export async function POST({ request }) {
-  // Đã sửa thành hasDatabaseUrl (không có ngoặc)
   if (!hasDatabaseUrl) {
     return json({ error: 'DATABASE_URL is missing. Please set DATABASE_URL in your environment.' }, 503);
   }
