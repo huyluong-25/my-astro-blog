@@ -1,16 +1,15 @@
 import postgres from 'postgres';
 
-// Lấy chuỗi kết nối từ file .env
-// Nếu chưa có file .env ở thư mục gốc, hãy tạo một cái và dán dòng này vào:
-// DATABASE_URL="postgres://huyhandsome:mysecretpassword@localhost:5432/astro_blog_db"
+// QUAN TRỌNG: Ưu tiên đọc từ process.env (môi trường Docker lúc chạy thật)
+// Nếu không có thì mới tìm trong import.meta.env (lúc code trên máy tính)
+const connectionString = process.env.DATABASE_URL || import.meta.env.DATABASE_URL;
 
-const connectionString = import.meta.env.DATABASE_URL?.toString().trim();
-
-// Khởi tạo kết nối khi đã có chuỗi kết nối
-const sql = connectionString ? postgres(connectionString) : null;
-
-export function hasDatabaseUrl() {
-  return Boolean(connectionString);
+// Kiểm tra chặn lỗi nếu lỡ quên truyền biến
+if (!connectionString) {
+  throw new Error("DATABASE_URL is missing. Vui lòng kiểm tra lại biến môi trường!");
 }
+
+// Khởi tạo kết nối
+const sql = postgres(connectionString);
 
 export default sql;
