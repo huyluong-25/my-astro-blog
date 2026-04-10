@@ -10,7 +10,8 @@ function json(data, status = 200) {
 let schemaReadyPromise;
 
 function ensureCommentsSchema() {
-  if (!hasDatabaseUrl() || !sql) {
+  // Đã sửa thành hasDatabaseUrl (không có ngoặc)
+  if (!hasDatabaseUrl || !sql) {
     throw new Error('DATABASE_URL is missing. Please set DATABASE_URL in your environment.');
   }
 
@@ -38,7 +39,8 @@ export async function GET({ request }) {
   const url = new URL(request.url);
   const slug = url.searchParams.get('slug')?.trim();
 
-  if (!hasDatabaseUrl()) {
+  // Đã sửa thành hasDatabaseUrl (không có ngoặc)
+  if (!hasDatabaseUrl) {
     return json({ error: 'DATABASE_URL is missing. Please set DATABASE_URL in your environment.' }, 503);
   }
 
@@ -64,7 +66,8 @@ export async function GET({ request }) {
 }
 
 export async function POST({ request }) {
-  if (!hasDatabaseUrl()) {
+  // Đã sửa thành hasDatabaseUrl (không có ngoặc)
+  if (!hasDatabaseUrl) {
     return json({ error: 'DATABASE_URL is missing. Please set DATABASE_URL in your environment.' }, 503);
   }
 
