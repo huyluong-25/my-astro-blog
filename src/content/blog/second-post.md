@@ -1,16 +1,152 @@
 ---
-title: 'Second post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 15 2022'
-heroImage: '../../assets/blog-placeholder-4.jpg'
+title: 'Bye Bye PuTTY: Dùng Sshwifty để SSH VPS trực tiếp từ trình duyệt mọi lúc mọi nơi'
+description: 'Hướng dẫn cài đặt Sshwifty bằng Docker Compose để SSH vào VPS ngay trên trình duyệt, không cần PuTTY hay MobaXterm.'
+pubDate: '2026-03-11'
+heroImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=80'
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+Đã bao giờ bạn đang ngồi cafe, không mang theo laptop cá nhân nhưng lại nhận được cuộc gọi khẩn cần xử lý server chưa? Hoặc bạn đang mượn máy của đồng nghiệp, ngại cài thêm PuTTY hay MobaXterm chỉ để vào SSH 5 phút?
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+Nếu bạn làm IT Support, Helpdesk, Sysadmin hoặc vận hành hệ thống, việc truy cập server mọi lúc mọi nơi là nhu cầu thật. Bài viết này sẽ hướng dẫn bạn cài đặt **Sshwifty** bằng Docker để SSH vào VPS trực tiếp từ trình duyệt, gọn nhẹ, dễ dùng và rất linh hoạt.
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+## 1. Sshwifty là gì?
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+Sshwifty là một ứng dụng Web SSH/Telnet client mã nguồn mở. Nó cho phép mở terminal và kết nối đến server ngay trong trình duyệt (Chrome, Edge, Firefox, Safari), không cần cài SSH client trên máy đang dùng.
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+**Điểm mạnh để dùng thực tế:**
+
+- Không cần cài app client trên máy tính mượn hoặc máy công cộng.
+- Dùng được trên cả điện thoại, tablet, laptop.
+- Hỗ trợ copy/paste, phím tắt terminal, làm việc đa tab.
+- Triển khai nhanh bằng Docker, dễ backup và dễ di dời.
+
+## 2. Kịch bản sử dụng phù hợp
+
+Sshwifty rất hợp với các trường hợp:
+
+- Đang đi công tác, cần vào server gấp.
+- Làm on-call, cần check log và restart service nhanh.
+- Môi trường homelab, cần một công cụ SSH web để dùng chung.
+
+Không nên xem Sshwifty là giải pháp thay thế hoàn toàn cho bastion host chuyên nghiệp trong hệ thống enterprise lớn. Hãy coi đây là công cụ linh hoạt, cần tối ưu bảo mật khi public lên Internet.
+
+## 3. Chuẩn bị trước khi cài đặt
+
+Bạn cần:
+
+- Một VPS đã cài Docker và Docker Compose.
+- Một domain (khuyến nghị) để setup HTTPS qua reverse proxy.
+- Firewall chỉ mở cổng cần thiết.
+
+Kiểm tra nhanh trên VPS:
+
+~~~bash
+docker --version
+docker compose version
+~~~
+
+## 4. Cài đặt Sshwifty bằng Docker Compose
+
+Tạo thư mục triển khai:
+
+~~~bash
+mkdir -p /opt/sshwifty
+cd /opt/sshwifty
+~~~
+
+Tạo file docker-compose.yml:
+
+~~~yaml
+services:
+  sshwifty:
+        image: niruix/sshwifty:latest
+        container_name: sshwifty
+        restart: unless-stopped
+        ports:
+            - "8182:8182"
+        environment:
+            - SSHWIFTY_SHAREDKEY=ThayBangMatKhauManh_CuaBan
+            - SSHWIFTY_LISTENINTERFACE=0.0.0.0
+~~~
+
+Khởi động dịch vụ:
+
+~~~bash
+docker compose up -d
+docker compose ps
+~~~
+
+Sau đó mở trình duyệt và truy cập:
+
+~~~text
+http://IP_VPS:8182
+~~~
+
+## 5. Tạo kết nối SSH trên giao diện web
+
+Khi vào Sshwifty, bạn tạo session mới với các thông tin:
+
+- Host: IP hoặc domain của server đích.
+- Port: Thường là 22 (hoặc port SSH bạn đã đổi).
+- Username: Tài khoản đăng nhập SSH.
+- Authentication: Mật khẩu hoặc private key.
+
+Nếu server dùng xác thực key, bạn nên ưu tiên key thay vì mật khẩu để an toàn hơn.
+
+## 6. Bảo mật bắt buộc khi đưa vào sử dụng thật
+
+Đây là phần quan trọng nhất.
+
+**Khuyến nghị bảo mật tối thiểu:**
+
+- Đặt mật khẩu SSHWIFTY_SHAREDKEY dài và khó đoán.
+- Đặt reverse proxy (Nginx/Traefik/Caddy) + HTTPS.
+- Giới hạn IP truy cập bằng firewall nếu có thể.
+- Tắt đăng nhập root trực tiếp qua SSH trên server đích.
+- Bật fail2ban và dùng key auth cho SSH.
+
+Nếu public ra Internet mà không có HTTPS và không giới hạn truy cập, rủi ro sẽ rất cao.
+
+## 7. Ví dụ reverse proxy Nginx (có SSL)
+
+Nếu bạn đã có Nginx, có thể proxy về cổng 8182:
+
+~~~nginx
+server {
+    listen 80;
+    server_name ssh.your-domain.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8182;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+~~~
+
+Sau đó cấp SSL bằng Let's Encrypt và bật redirect HTTPS.
+
+## 8. Xử lý sự cố thường gặp
+
+1. Không vào được trang Sshwifty: kiểm tra container có đang chạy không bằng docker compose ps và log bằng docker compose logs -f.
+2. Kết nối SSH thất bại: kiểm tra firewall server đích, port SSH, user và key.
+3. Bị disconnect giữa chừng: kiểm tra timeout của reverse proxy và chất lượng mạng.
+
+Lệnh kiểm tra log nhanh:
+
+~~~bash
+docker compose logs -f sshwifty
+~~~
+
+## 9. Tổng kết
+
+Sshwifty là một công cụ rất đáng có trong bộ đồ nghề của anh em IT Support và homelab. Ưu điểm lớn nhất là sự linh hoạt: mở trình duyệt là có thể SSH ngay, không phụ thuộc vào máy đang dùng có cài sẵn công cụ hay không.
+
+Nếu bạn cần thao tác server mọi lúc mọi nơi, đây là giải pháp nhẹ, dễ triển khai và rất thực dụng. Chỉ cần nhớ một điều: triển khai nhanh là một chuyện, triển khai an toàn mới là chuyện quan trọng.
+
+---
+
+Nếu bạn muốn, ở bài tiếp theo mình sẽ viết thêm cách đặt Sshwifty sau Cloudflare Tunnel để an toàn hơn mà vẫn không cần mở cổng trực tiếp trên VPS.

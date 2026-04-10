@@ -29,3 +29,9 @@ Vì đang trong quá trình luyện thi TOEIC và nâng cao vốn tiếng Anh ch
 
 ```bash
 git add . && git commit -m "Update blog" && git push
+```
+
+Lệnh này giúp tiết kiệm thời gian khi làm việc cá nhân, nhưng trong môi trường team thì mình vẫn tách từng bước để dễ kiểm soát lịch sử commit.
+
+---
+Nếu bạn cũng đang bắt đầu học IT Support hay luyện tiếng Anh chuyên ngành, cứ thoải mái kết nối với mình để cùng trao đổi nhé.
