@@ -181,27 +181,43 @@ blockquote {
 pre {
     padding: 1.5em;
     border-radius: 12px;
-    background-color: #1e293b !important;
-    color: #f1f5f9;
+    background-color: #0f172a !important;
+    border: 1px solid #1e293b;
+    color: #e2e8f0;
     overflow-x: auto;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     transition: box-shadow 0.3s;
 }
 
+/* Keep fenced code clean: no light patches inside dark block */
+pre code,
+pre code span {
+    background: transparent !important;
+}
+
+pre code {
+    color: #e2e8f0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+
 [data-theme='dark'] pre {
+    border-color: #334155;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-code {
+:not(pre) > code {
     padding: 2px 6px;
     background-color: #f1f5f9;
+    border: 1px solid #dbe5f0;
     border-radius: 4px;
     font-size: 0.9em;
     color: #1e293b;
 }
 
-[data-theme='dark'] code {
+[data-theme='dark'] :not(pre) > code {
     background-color: #1e293b;
+    border-color: #334155;
     color: #f1f5f9;
 }
 
