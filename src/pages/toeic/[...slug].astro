@@ -1,0 +1,23 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import StudyNote from '../../layouts/StudyNote.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const notes = await getCollection('toeic');
+  return notes.map((note) => ({
+    params: { slug: note.id },
+    props: note,
+  }));
+}
+
+type Props = CollectionEntry<'toeic'>;
+
+const note = Astro.props;
+const { Content } = await render(note);
+---
+
+<StudyNote title={note.data.title} description={note.data.description} pubDate={note.data.pubDate}>
+  <Content />
+</StudyNote>

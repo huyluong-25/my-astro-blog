@@ -1,0 +1,728 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title="Smart English Learning"
+      description="Save vocabulary, organize by tense and word type, and compare learning coverage intelligently."
+    />
+  </head>
+  <body>
+    <Header />
+
+    <main class="english-page">
+      <section class="hero">
+        <p class="eyebrow">English Learning System</p>
+        <h1>Learn English With Structure</h1>
+        <p class="sub">
+          Add new vocabulary, save it to the database, and track progress by tense and word type.
+          The system generates smart insights so you know what to study next.
+        </p>
+        <p class="sub" style="margin-top:0.6rem;">
+          Need detailed grammar notes by topic? Open
+          <a href="/toeic" data-astro-prefetch="hover">TOEIC Grammar Notes</a>.
+        </p>
+      </section>
+
+      <section class="panel form-panel">
+        <h2>Add New Vocabulary</h2>
+        <form id="vocabForm" class="vocab-form">
+          <label>
+            New word
+            <input name="word" type="text" maxlength="120" placeholder="reliable" required />
+          </label>
+
+          <label>
+            Meaning
+            <input name="meaning" type="text" maxlength="500" placeholder="dependable and trustworthy" required />
+          </label>
+
+          <label>
+            Word type
+            <select name="wordType" required>
+              <option value="noun">Noun</option>
+              <option value="verb">Verb</option>
+              <option value="adjective">Adjective</option>
+              <option value="adverb">Adverb</option>
+              <option value="phrase">Phrase</option>
+              <option value="idiom">Idiom</option>
+            </select>
+          </label>
+
+          <label>
+            Related tense
+            <select name="tense" required>
+              <option value="present_simple">Present Simple</option>
+              <option value="present_continuous">Present Continuous</option>
+              <option value="present_perfect">Present Perfect</option>
+              <option value="past_simple">Past Simple</option>
+              <option value="past_continuous">Past Continuous</option>
+              <option value="past_perfect">Past Perfect</option>
+              <option value="future_simple">Future Simple</option>
+              <option value="future_continuous">Future Continuous</option>
+              <option value="future_perfect">Future Perfect</option>
+            </select>
+          </label>
+
+          <label class="wide">
+            Example sentence
+            <textarea name="exampleSentence" rows="3" maxlength="600" placeholder="The system is reliable during peak hours."></textarea>
+          </label>
+
+          <label class="wide">
+            Study notes
+            <textarea name="notes" rows="3" maxlength="800" placeholder="Often confused with robust. Review contextual differences."></textarea>
+          </label>
+
+          <button type="submit">Save Vocabulary</button>
+          <p id="formStatus" class="status"></p>
+        </form>
+      </section>
+
+      <section class="panel stats-panel">
+        <div class="stats-header">
+          <h2>Smart Analytics</h2>
+          <button id="reloadBtn" type="button" class="ghost-btn">Refresh data</button>
+        </div>
+
+        <div class="stats-grid" id="summaryCards"></div>
+
+        <div class="insights-box">
+          <h3>Smart Suggestions</h3>
+          <ul id="insightList"></ul>
+        </div>
+      </section>
+
+      <section class="panel compare-panel">
+        <h2>Tense x Word Type Comparison</h2>
+        <p class="hint">
+          Cells with value 0 show areas you have not covered yet. Prioritize those to balance your vocabulary.
+        </p>
+        <div class="table-wrap" id="matrixWrap"></div>
+      </section>
+
+      <section class="panel list-panel">
+        <div class="stats-header">
+          <h2>Vocabulary List</h2>
+          <input id="searchInput" type="search" placeholder="Search by word, meaning, or notes..." />
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Word</th>
+                <th>Meaning</th>
+                <th>Word Type</th>
+                <th>Tense</th>
+                <th>Example</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="vocabTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel tense-guide-panel">
+        <h2>Sổ Tay Các Thì TOEIC (Bấm Để Ôn Lại)</h2>
+        <p class="hint">
+          Dùng mục này để ôn nhanh khi quên. Mỗi khi bí cấu trúc, dấu hiệu nhận biết hoặc lỗi dễ nhầm,
+          bạn chỉ cần bấm mở thì tương ứng.
+        </p>
+
+        <div class="tense-accordion">
+          <details open>
+            <summary>Present Simple (Hiện tại đơn)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + V(s/es), S + do/does not + V, Do/Does + S + V?</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> always, usually, often, every day, rarely, on Mondays</li>
+              <li><strong>Cách dùng chính:</strong> thói quen, nhiệm vụ công việc, lịch trình, sự thật hiển nhiên</li>
+              <li><strong>Lưu ý TOEIC:</strong> xuất hiện rất nhiều trong nội quy công ty, mô tả công việc và quy trình.</li>
+              <li><strong>Dễ nhầm:</strong> sau "every day" không dùng Present Continuous.</li>
+              <li><strong>Ví dụ:</strong> The sales manager checks the monthly report every Monday.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Present Continuous (Hiện tại tiếp diễn)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + am/is/are + V-ing</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> now, right now, currently, at the moment</li>
+              <li><strong>Cách dùng chính:</strong> hành động đang diễn ra ở hiện tại, tình huống tạm thời</li>
+              <li><strong>Lưu ý TOEIC:</strong> thường có trong hội thoại văn phòng và cập nhật trạng thái theo thời gian thực.</li>
+              <li><strong>Dễ nhầm:</strong> động từ chỉ trạng thái (know, need, believe, own) thường không dùng dạng tiếp diễn.</li>
+              <li><strong>Ví dụ:</strong> Ms. Lee is meeting a client in Conference Room B right now.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Present Perfect (Hiện tại hoàn thành)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + have/has + V3</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> already, yet, just, since, for, recently, so far</li>
+              <li><strong>Cách dùng chính:</strong> hành động đã xong nhưng còn liên quan hiện tại, kinh nghiệm đến hiện tại</li>
+              <li><strong>Lưu ý TOEIC:</strong> rất hay gặp trong email cập nhật tiến độ và thông báo hoàn tất.</li>
+              <li><strong>Dễ nhầm:</strong> có mốc thời gian đã kết thúc như "yesterday/last week/in 2024" thì dùng Past Simple.</li>
+              <li><strong>Ví dụ:</strong> We have already submitted the budget proposal to the finance team.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Past Simple (Quá khứ đơn)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + V2/ed, S + did not + V, Did + S + V?</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> yesterday, last week, in 2023, ago</li>
+              <li><strong>Cách dùng chính:</strong> hành động đã hoàn thành tại một thời điểm xác định trong quá khứ</li>
+              <li><strong>Lưu ý TOEIC:</strong> thường xuất hiện trong báo cáo sự cố và timeline dự án đã hoàn tất.</li>
+              <li><strong>Dễ nhầm:</strong> khi thời điểm đã kết thúc rõ ràng thì không dùng Present Perfect.</li>
+              <li><strong>Ví dụ:</strong> The technician replaced the printer parts yesterday afternoon.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Past Continuous (Quá khứ tiếp diễn)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + was/were + V-ing</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> while, at 8 p.m., when</li>
+              <li><strong>Cách dùng chính:</strong> hành động đang diễn ra tại một thời điểm trong quá khứ, làm nền cho hành động khác</li>
+              <li><strong>Lưu ý TOEIC:</strong> thường đi cùng Past Simple trong câu tường thuật diễn biến.</li>
+              <li><strong>Dễ nhầm:</strong> hành động nền dùng Past Continuous, hành động chen vào dùng Past Simple.</li>
+              <li><strong>Ví dụ:</strong> We were discussing the contract when the client called.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Past Perfect (Quá khứ hoàn thành)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + had + V3</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> before, by the time, after, already</li>
+              <li><strong>Cách dùng chính:</strong> hành động xảy ra và hoàn thành trước một hành động khác trong quá khứ</li>
+              <li><strong>Lưu ý TOEIC:</strong> hữu ích khi mô tả nguyên nhân - kết quả trong biên bản họp và báo cáo.</li>
+              <li><strong>Dễ nhầm:</strong> không lạm dụng nếu chỉ có một hành động quá khứ.</li>
+              <li><strong>Ví dụ:</strong> The supplier had shipped the goods before we sent the revised order.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Future Simple (Tương lai đơn)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + will + V</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> tomorrow, next week, soon, I think, probably</li>
+              <li><strong>Cách dùng chính:</strong> quyết định tức thời, lời hứa, dự đoán</li>
+              <li><strong>Lưu ý TOEIC:</strong> gặp nhiều trong thông báo, cam kết và dự báo kinh doanh.</li>
+              <li><strong>Dễ nhầm:</strong> với lịch cố định hoặc sắp xếp đã lên kế hoạch, Present Continuous có thể tự nhiên hơn.</li>
+              <li><strong>Ví dụ:</strong> I will send you the updated quotation by 3 p.m.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Future Continuous (Tương lai tiếp diễn)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + will be + V-ing</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> this time tomorrow, at 10 a.m. next Monday</li>
+              <li><strong>Cách dùng chính:</strong> hành động đang diễn ra tại một thời điểm xác định trong tương lai</li>
+              <li><strong>Lưu ý TOEIC:</strong> hay dùng trong email sắp lịch và thông báo tình trạng rảnh/bận.</li>
+              <li><strong>Dễ nhầm:</strong> không dùng cho hành động hoàn thành một lần, trường hợp đó dùng Future Simple.</li>
+              <li><strong>Ví dụ:</strong> At 9 a.m. tomorrow, our team will be presenting the new plan.</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Future Perfect (Tương lai hoàn thành)</summary>
+            <ul>
+              <li><strong>Cấu trúc:</strong> S + will have + V3</li>
+              <li><strong>Dấu hiệu nhận biết:</strong> by, by the time, before + future point</li>
+              <li><strong>Cách dùng chính:</strong> hành động sẽ hoàn thành trước một mốc thời gian trong tương lai</li>
+              <li><strong>Lưu ý TOEIC:</strong> thường xuất hiện khi nói về deadline mục tiêu và cột mốc dự án.</li>
+              <li><strong>Dễ nhầm:</strong> nếu không nhấn mạnh mốc hoàn thành, Future Simple thường đủ dùng.</li>
+              <li><strong>Ví dụ:</strong> We will have finalized the contract by Friday noon.</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script>
+      const apiUrl = '/api/english';
+      const vocabForm = document.getElementById('vocabForm');
+      const formStatus = document.getElementById('formStatus');
+      const vocabTableBody = document.getElementById('vocabTableBody');
+      const summaryCards = document.getElementById('summaryCards');
+      const insightList = document.getElementById('insightList');
+      const matrixWrap = document.getElementById('matrixWrap');
+      const searchInput = document.getElementById('searchInput');
+      const reloadBtn = document.getElementById('reloadBtn');
+
+      let latestData = null;
+
+      function escapeHtml(value) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function formatLabel(value) {
+        return String(value || '').replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+      }
+
+      function formatDate(value) {
+        if (!value) return '-';
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return '-';
+        return date.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+      }
+
+      function renderSummary(stats) {
+        const topTense = stats.byTense[0];
+        const topType = stats.byType[0];
+
+        summaryCards.innerHTML = `
+          <article class="card">
+            <p class="card-label">Total Words</p>
+            <p class="card-value">${stats.total}</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Top Tense</p>
+            <p class="card-value">${topTense ? formatLabel(topTense.tense) : '-'}</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Top Word Type</p>
+            <p class="card-value">${topType ? formatLabel(topType.word_type) : '-'}</p>
+          </article>
+        `;
+      }
+
+      function renderInsights(stats) {
+        const lines = Array.isArray(stats.insights) ? stats.insights : [];
+        if (!lines.length) {
+          insightList.innerHTML = '<li>No suggestions yet.</li>';
+          return;
+        }
+
+        insightList.innerHTML = lines.map((line) => `<li>${escapeHtml(line)}</li>`).join('');
+      }
+
+      function renderMatrix(stats) {
+        const tenses = stats.dictionary?.tenses || [];
+        const wordTypes = stats.dictionary?.wordTypes || [];
+        const map = new Map();
+
+        for (const item of stats.matrix || []) {
+          map.set(`${item.tense}::${item.word_type}`, Number(item.total || 0));
+        }
+
+        const head = `<tr><th>Tense \\ Word Type</th>${wordTypes.map((t) => `<th>${formatLabel(t)}</th>`).join('')}</tr>`;
+
+        const rows = tenses.map((tense) => {
+          const cols = wordTypes
+            .map((wordType) => {
+              const total = map.get(`${tense}::${wordType}`) || 0;
+              const className = total === 0 ? 'zero' : total >= 3 ? 'good' : 'warn';
+              return `<td class="${className}">${total}</td>`;
+            })
+            .join('');
+
+          return `<tr><th>${formatLabel(tense)}</th>${cols}</tr>`;
+        });
+
+        matrixWrap.innerHTML = `<table><thead>${head}</thead><tbody>${rows.join('')}</tbody></table>`;
+      }
+
+      function renderTable(vocabulary) {
+        if (!Array.isArray(vocabulary) || vocabulary.length === 0) {
+          vocabTableBody.innerHTML = '<tr><td colspan="6">No data available yet.</td></tr>';
+          return;
+        }
+
+        vocabTableBody.innerHTML = vocabulary
+          .map(
+            (item) => `
+              <tr>
+                <td>${escapeHtml(item.word)}</td>
+                <td>${escapeHtml(item.meaning)}</td>
+                <td>${escapeHtml(formatLabel(item.word_type))}</td>
+                <td>${escapeHtml(formatLabel(item.tense))}</td>
+                <td>${escapeHtml(item.example_sentence || '-')}</td>
+                <td>${formatDate(item.created_at)}</td>
+              </tr>
+            `
+          )
+          .join('');
+      }
+
+      async function fetchData(query = '') {
+        const url = query ? `${apiUrl}?q=${encodeURIComponent(query)}` : apiUrl;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Unable to load data');
+        }
+
+        latestData = data;
+        renderSummary(data.stats);
+        renderInsights(data.stats);
+        renderMatrix(data.stats);
+        renderTable(data.vocabulary);
+      }
+
+      async function submitVocabulary(payload) {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Unable to save vocabulary');
+        }
+      }
+
+      vocabForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(vocabForm);
+        const payload = {
+          word: String(formData.get('word') || ''),
+          meaning: String(formData.get('meaning') || ''),
+          wordType: String(formData.get('wordType') || ''),
+          tense: String(formData.get('tense') || ''),
+          exampleSentence: String(formData.get('exampleSentence') || ''),
+          notes: String(formData.get('notes') || '')
+        };
+
+        try {
+          formStatus.textContent = 'Saving...';
+          await submitVocabulary(payload);
+          formStatus.textContent = 'Saved successfully.';
+          vocabForm.reset();
+          await fetchData(searchInput.value.trim());
+        } catch (error) {
+          formStatus.textContent = error instanceof Error ? error.message : 'Something went wrong';
+        }
+      });
+
+      searchInput.addEventListener('input', async () => {
+        try {
+          await fetchData(searchInput.value.trim());
+        } catch (error) {
+          formStatus.textContent = error instanceof Error ? error.message : 'Something went wrong';
+        }
+      });
+
+      reloadBtn.addEventListener('click', async () => {
+        try {
+          await fetchData(searchInput.value.trim());
+        } catch (error) {
+          formStatus.textContent = error instanceof Error ? error.message : 'Something went wrong';
+        }
+      });
+
+      fetchData().catch((error) => {
+        formStatus.textContent = error instanceof Error ? error.message : 'Unable to load initial data';
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .english-page {
+    width: min(1100px, calc(100% - 2rem));
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero {
+    background: linear-gradient(120deg, rgba(2, 132, 199, 0.1), rgba(56, 189, 248, 0.08));
+    border: 1px solid rgba(2, 132, 199, 0.18);
+    border-radius: 18px;
+    padding: 1.2rem 1.2rem 1.4rem;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0369a1;
+    margin: 0;
+  }
+
+  .hero h1 {
+    margin: 0.3rem 0 0.5rem;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: #0f172a;
+  }
+
+  .sub {
+    margin: 0;
+    color: #334155;
+  }
+
+  .panel {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  }
+
+  .vocab-form {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .vocab-form label {
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.92rem;
+    color: #334155;
+  }
+
+  .vocab-form .wide {
+    grid-column: 1 / -1;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0.55rem 0.65rem;
+    background: #fff;
+    color: #0f172a;
+  }
+
+  button {
+    border: none;
+    background: linear-gradient(120deg, #0284c7, #0ea5e9);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    width: fit-content;
+    padding: 0.6rem 1rem;
+  }
+
+  .ghost-btn {
+    background: #f1f5f9;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+  }
+
+  .status {
+    grid-column: 1 / -1;
+    margin: 0;
+    min-height: 1.2rem;
+    color: #0f766e;
+    font-size: 0.9rem;
+  }
+
+  .stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .stats-grid {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .card {
+    margin: 0;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.8rem;
+  }
+
+  .card-label {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .card-value {
+    margin: 0.2rem 0 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .insights-box {
+    margin-top: 0.8rem;
+    background: #f8fafc;
+    border: 1px dashed #94a3b8;
+    border-radius: 12px;
+    padding: 0.8rem;
+  }
+
+  .insights-box h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+  }
+
+  .insights-box ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .hint {
+    margin-top: 0;
+    color: #475569;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .tense-accordion {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .tense-accordion details {
+    border: 1px solid #dbe5f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    padding: 0.15rem 0.8rem 0.7rem;
+  }
+
+  .tense-accordion summary {
+    font-weight: 800;
+    color: #0f172a;
+    cursor: pointer;
+    padding: 0.55rem 0;
+  }
+
+  .tense-accordion ul {
+    margin: 0;
+    padding-left: 1.05rem;
+    display: grid;
+    gap: 0.4rem;
+    color: #334155;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+
+  th,
+  td {
+    border: 1px solid #dbe5f0;
+    text-align: left;
+    padding: 0.45rem 0.55rem;
+    vertical-align: top;
+  }
+
+  tbody td.zero {
+    background: #fef2f2;
+    color: #991b1b;
+    font-weight: 700;
+  }
+
+  tbody td.warn {
+    background: #fff7ed;
+    color: #9a3412;
+    font-weight: 700;
+  }
+
+  tbody td.good {
+    background: #ecfdf5;
+    color: #065f46;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .vocab-form {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  :global([data-theme='dark']) .hero {
+    background: linear-gradient(120deg, rgba(2, 132, 199, 0.18), rgba(14, 165, 233, 0.12));
+    border-color: rgba(56, 189, 248, 0.35);
+  }
+
+  :global([data-theme='dark']) .hero h1,
+  :global([data-theme='dark']) .sub,
+  :global([data-theme='dark']) .vocab-form label,
+  :global([data-theme='dark']) .hint,
+  :global([data-theme='dark']) .card-value,
+  :global([data-theme='dark']) .card-label,
+  :global([data-theme='dark']) .insights-box h3,
+  :global([data-theme='dark']) .insights-box li,
+  :global([data-theme='dark']) .ghost-btn {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme='dark']) .panel,
+  :global([data-theme='dark']) .card,
+  :global([data-theme='dark']) .insights-box,
+  :global([data-theme='dark']) .tense-accordion details,
+  :global([data-theme='dark']) input,
+  :global([data-theme='dark']) select,
+  :global([data-theme='dark']) textarea,
+  :global([data-theme='dark']) .ghost-btn {
+    background: rgba(15, 23, 42, 0.92);
+    border-color: #334155;
+  }
+
+  :global([data-theme='dark']) input,
+  :global([data-theme='dark']) select,
+  :global([data-theme='dark']) textarea,
+  :global([data-theme='dark']) option,
+  :global([data-theme='dark']) #searchInput {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme='dark']) input::placeholder,
+  :global([data-theme='dark']) textarea::placeholder {
+    color: #94a3b8;
+  }
+
+  :global([data-theme='dark']) th,
+  :global([data-theme='dark']) td {
+    border-color: #334155;
+    color: #e2e8f0;
+  }
+
+  :global([data-theme='dark']) .tense-accordion summary,
+  :global([data-theme='dark']) .tense-accordion ul {
+    color: #e2e8f0;
+  }
+</style>

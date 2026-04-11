@@ -1,0 +1,121 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+
+const notes = (await getCollection('toeic')).sort((a, b) => {
+  const ao = a.data.order ?? 999;
+  const bo = b.data.order ?? 999;
+  if (ao !== bo) return ao - bo;
+  return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <BaseHead title="Thư Viện Ngữ Pháp TOEIC" description="Kho bài học TOEIC theo từng chủ đề và từng thì." />
+    <style>
+      main {
+        width: 960px;
+      }
+
+      .hero {
+        margin-bottom: 1.2rem;
+        background: linear-gradient(120deg, rgba(2, 132, 199, 0.1), rgba(56, 189, 248, 0.08));
+        border: 1px solid rgba(2, 132, 199, 0.18);
+        border-radius: 16px;
+        padding: 1rem;
+      }
+
+      .hero h1 {
+        margin: 0 0 0.35rem;
+      }
+
+      .hero p {
+        margin: 0;
+        color: #334155;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      li a {
+        display: block;
+        border: 1px solid #dbe5f0;
+        border-radius: 12px;
+        padding: 0.85rem;
+        background: #fff;
+        text-decoration: none;
+      }
+
+      .title {
+        margin: 0;
+        color: #0f172a;
+      }
+
+      .desc {
+        margin: 0.3rem 0;
+        color: #475569;
+      }
+
+      .date {
+        margin: 0;
+        font-size: 0.88rem;
+        color: #64748b;
+      }
+
+      [data-theme='dark'] .hero {
+        background: linear-gradient(120deg, rgba(2, 132, 199, 0.2), rgba(56, 189, 248, 0.12));
+        border-color: rgba(56, 189, 248, 0.35);
+      }
+
+      [data-theme='dark'] .hero p,
+      [data-theme='dark'] .title,
+      [data-theme='dark'] .desc,
+      [data-theme='dark'] .date {
+        color: #e2e8f0;
+      }
+
+      [data-theme='dark'] li a {
+        background: rgba(15, 23, 42, 0.92);
+        border-color: #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <h1>Thư Viện Ngữ Pháp TOEIC</h1>
+        <p>
+          Chọn một bài học để ôn tập nhanh. Mỗi bài là một trang riêng để bạn đọc lại và chỉnh sửa nội dung dễ dàng.
+        </p>
+      </section>
+
+      <ul>
+        {
+          notes.map((note) => (
+            <li>
+              <a href={`/toeic/${note.id}/`} data-astro-prefetch="hover">
+                <h3 class="title">{note.data.title}</h3>
+                <p class="desc">{note.data.description}</p>
+                <p class="date">
+                  <FormattedDate date={note.data.pubDate} />
+                </p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+    <Footer />
+  </body>
+</html>

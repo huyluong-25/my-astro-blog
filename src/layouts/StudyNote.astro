@@ -1,0 +1,175 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+
+type Props = {
+  title: string;
+  description: string;
+  pubDate: Date;
+};
+
+const { title, description, pubDate } = Astro.props;
+---
+
+<html lang="vi">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style>
+      main {
+        width: calc(100% - 2em);
+        max-width: 100%;
+        margin: 0;
+      }
+
+      .prose {
+        width: 860px;
+        max-width: calc(100% - 2em);
+        margin: auto;
+        padding: 1.2em 1em 2em;
+        color: #334155;
+        line-height: 1.75;
+      }
+
+      .title {
+        margin-bottom: 1.2em;
+        padding: 1em 0;
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .title h1 {
+        margin: 0.4em 0 0.5em;
+        color: #0f172a;
+        font-weight: 800;
+      }
+
+      .date {
+        margin-bottom: 0.5em;
+        color: #64748b;
+        font-size: 0.95rem;
+      }
+
+      .title p {
+        margin: 0;
+        color: #475569;
+        font-size: 1rem;
+      }
+
+      hr {
+        border: none;
+        border-top: 2px solid #e2e8f0;
+        margin: 1.5em 0;
+      }
+
+      .prose h2 {
+        margin-top: 2rem;
+        margin-bottom: 0.7rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .prose h3 {
+        margin-top: 1.35rem;
+        margin-bottom: 0.45rem;
+      }
+
+      .prose ul,
+      .prose ol {
+        padding-left: 1.1rem;
+      }
+
+      .prose li {
+        margin: 0.3rem 0;
+      }
+
+      .prose table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.96rem;
+      }
+
+      .prose th,
+      .prose td {
+        border: 1px solid #dbe5f0;
+        padding: 0.5rem 0.65rem;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .prose th {
+        background: #f8fafc;
+      }
+
+      .prose tbody tr:nth-child(even) {
+        background: #fbfdff;
+      }
+
+      .prose blockquote {
+        margin: 1rem 0;
+        border-left: 4px solid #0284c7;
+        background: #f8fbff;
+        padding: 0.7rem 0.9rem;
+        border-radius: 6px;
+      }
+
+      @media (max-width: 760px) {
+        .prose {
+          padding: 0.8em 0.6em 1.4em;
+          line-height: 1.68;
+        }
+      }
+
+      [data-theme='dark'] .prose {
+        color: #cbd5e1;
+      }
+
+      [data-theme='dark'] .title h1 {
+        color: #f1f5f9;
+      }
+
+      [data-theme='dark'] .title p {
+        color: #cbd5e1;
+      }
+
+      [data-theme='dark'] hr,
+      [data-theme='dark'] .prose h2,
+      [data-theme='dark'] .prose th,
+      [data-theme='dark'] .prose td {
+        border-color: #334155;
+      }
+
+      [data-theme='dark'] .prose th {
+        background: #1e293b;
+      }
+
+      [data-theme='dark'] .prose tbody tr:nth-child(even) {
+        background: rgba(30, 41, 59, 0.5);
+      }
+
+      [data-theme='dark'] .prose blockquote {
+        background: rgba(15, 23, 42, 0.9);
+        border-left-color: #38bdf8;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <article class="prose">
+        <div class="title">
+          <div class="date">
+            <FormattedDate date={pubDate} />
+          </div>
+          <h1>{title}</h1>
+          <p>{description}</p>
+          <hr />
+        </div>
+        <slot />
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

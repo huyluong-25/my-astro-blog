@@ -17,4 +17,14 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+const toeic = defineCollection({
+	loader: glob({ base: './src/content/toeic', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		pubDate: z.coerce.date(),
+		order: z.number().int().nonnegative().optional(),
+	}),
+});
+
+export const collections = { blog, toeic };
