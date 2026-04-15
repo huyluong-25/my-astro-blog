@@ -176,5 +176,25 @@ import HeaderLink from './HeaderLink.astro';
 	@media (max-width: 720px) {
 		.social-links { gap: 8px; }
 		.logo a { font-size: 1rem; }
+
+		.internal-links {
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
+			-ms-overflow-style: none;
+			flex-shrink: 1;
+			min-width: 0;
+		}
+
+		.internal-links::-webkit-scrollbar {
+			display: none;
+		}
+
+		.internal-links a {
+			padding: 6px 12px;
+			font-size: 0.85rem;
+			white-space: nowrap;
+			flex-shrink: 0;
+		}
 	}
 </style>

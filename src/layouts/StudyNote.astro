@@ -17,12 +17,57 @@ const { title, description, pubDate } = Astro.props;
   <head>
     <BaseHead title={title} description={description} />
     <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
       main {
         width: calc(100% - 2em);
         max-width: 100%;
         margin: 0;
       }
 
+      /* Breadcrumb */
+      .breadcrumb {
+        width: 860px;
+        max-width: calc(100% - 2em);
+        margin: 1.5rem auto 0;
+        padding: 0 1em;
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      .breadcrumb a {
+        font-size: 0.88rem;
+        color: #64748b;
+        text-decoration: none;
+        transition: color 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .breadcrumb a:hover {
+        color: #0284c7;
+      }
+
+      .breadcrumb a svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* Prose */
       .prose {
         width: 860px;
         max-width: calc(100% - 2em);
@@ -30,6 +75,7 @@ const { title, description, pubDate } = Astro.props;
         padding: 1.2em 1em 2em;
         color: #334155;
         line-height: 1.75;
+        animation: fadeInUp 0.8s ease-out 0.1s backwards;
       }
 
       .title {
@@ -37,37 +83,66 @@ const { title, description, pubDate } = Astro.props;
         padding: 1em 0;
         text-align: center;
         line-height: 1.2;
+        animation: fadeInUp 0.8s ease-out 0.2s backwards;
       }
 
       .title h1 {
         margin: 0.4em 0 0.5em;
         color: #0f172a;
         font-weight: 800;
+        transition: color 0.3s;
       }
 
       .date {
         margin-bottom: 0.5em;
         color: #64748b;
         font-size: 0.95rem;
+        transition: color 0.3s;
       }
 
-      .title p {
+      .title .desc-badge {
+        display: inline-block;
         margin: 0;
-        color: #475569;
-        font-size: 1rem;
+        padding: 6px 16px;
+        background: linear-gradient(120deg, rgba(2, 132, 199, 0.08), rgba(56, 189, 248, 0.06));
+        border: 1px solid rgba(2, 132, 199, 0.15);
+        border-radius: 20px;
+        color: #0369a1;
+        font-size: 0.92rem;
+        font-weight: 500;
+        transition: all 0.3s;
       }
 
       hr {
         border: none;
         border-top: 2px solid #e2e8f0;
         margin: 1.5em 0;
+        transition: border-color 0.3s;
       }
 
+      /* H2 with animated gradient underline */
       .prose h2 {
         margin-top: 2rem;
         margin-bottom: 0.7rem;
-        padding-bottom: 0.35rem;
-        border-bottom: 1px solid #e2e8f0;
+        padding-bottom: 0.45rem;
+        position: relative;
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      .prose h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #0284c7, #38bdf8);
+        border-radius: 2px;
+        transition: width 0.5s ease;
+      }
+
+      .prose h2:hover::after {
+        width: 100%;
       }
 
       .prose h3 {
@@ -78,17 +153,20 @@ const { title, description, pubDate } = Astro.props;
       .prose ul,
       .prose ol {
         padding-left: 1.1rem;
+        animation: fadeInUp 0.8s ease-out forwards;
       }
 
       .prose li {
         margin: 0.3rem 0;
       }
 
+      /* Table styling */
       .prose table {
         width: 100%;
         border-collapse: collapse;
         margin: 1rem 0;
         font-size: 0.96rem;
+        animation: fadeInUp 0.8s ease-out forwards;
       }
 
       .prose th,
@@ -97,6 +175,7 @@ const { title, description, pubDate } = Astro.props;
         padding: 0.5rem 0.65rem;
         text-align: left;
         vertical-align: top;
+        transition: all 0.3s;
       }
 
       .prose th {
@@ -107,19 +186,94 @@ const { title, description, pubDate } = Astro.props;
         background: #fbfdff;
       }
 
+      .prose tbody tr {
+        transition: background 0.3s;
+      }
+
+      .prose tbody tr:hover {
+        background: rgba(2, 132, 199, 0.06);
+      }
+
+      /* Blockquote with hover effect */
       .prose blockquote {
         margin: 1rem 0;
         border-left: 4px solid #0284c7;
         background: #f8fbff;
         padding: 0.7rem 0.9rem;
         border-radius: 6px;
+        transition: all 0.3s ease;
+        animation: fadeInUp 0.8s ease-out forwards;
       }
 
+      .prose blockquote:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.1);
+      }
+
+      /* Inline code styling */
+      .prose :not(pre) > code {
+        background: #f1f5f9;
+        color: #0f172a;
+        padding: 0.2em 0.4em;
+        border-radius: 4px;
+        border: 1px solid #dbe5f0;
+        font-size: 0.9em;
+        transition: all 0.3s;
+      }
+
+      .prose :not(pre) > code:hover {
+        background: #e2e8f0;
+      }
+
+      /* Fenced code blocks */
+      .prose pre {
+        background: #0f172a;
+        border: 1px solid #1e293b;
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        overflow-x: auto;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .prose pre code {
+        background: transparent !important;
+        border: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        color: #e2e8f0 !important;
+      }
+
+      /* Strong highlight */
+      .prose strong {
+        color: #0f172a;
+        font-weight: 700;
+        transition: color 0.3s;
+      }
+
+      /* Paragraph animation */
+      .prose p {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      /* Responsive */
       @media (max-width: 760px) {
         .prose {
           padding: 0.8em 0.6em 1.4em;
           line-height: 1.68;
         }
+
+        .breadcrumb {
+          margin-top: 1rem;
+        }
+      }
+
+      /* ======= DARK MODE ======= */
+      [data-theme='dark'] .breadcrumb a {
+        color: #94a3b8;
+      }
+
+      [data-theme='dark'] .breadcrumb a:hover {
+        color: #38bdf8;
       }
 
       [data-theme='dark'] .prose {
@@ -130,12 +284,25 @@ const { title, description, pubDate } = Astro.props;
         color: #f1f5f9;
       }
 
-      [data-theme='dark'] .title p {
-        color: #cbd5e1;
+      [data-theme='dark'] .title .desc-badge {
+        background: linear-gradient(120deg, rgba(56, 189, 248, 0.12), rgba(14, 165, 233, 0.08));
+        border-color: rgba(56, 189, 248, 0.25);
+        color: #7dd3fc;
+      }
+
+      [data-theme='dark'] .date {
+        color: #94a3b8;
       }
 
       [data-theme='dark'] hr,
-      [data-theme='dark'] .prose h2,
+      [data-theme='dark'] .prose h2::after {
+        border-color: #334155;
+      }
+
+      [data-theme='dark'] .prose h2::after {
+        background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+      }
+
       [data-theme='dark'] .prose th,
       [data-theme='dark'] .prose td {
         border-color: #334155;
@@ -149,22 +316,57 @@ const { title, description, pubDate } = Astro.props;
         background: rgba(30, 41, 59, 0.5);
       }
 
+      [data-theme='dark'] .prose tbody tr:hover {
+        background: rgba(56, 189, 248, 0.08);
+      }
+
       [data-theme='dark'] .prose blockquote {
         background: rgba(15, 23, 42, 0.9);
         border-left-color: #38bdf8;
+      }
+
+      [data-theme='dark'] .prose blockquote:hover {
+        box-shadow: 0 8px 20px rgba(56, 189, 248, 0.1);
+      }
+
+      [data-theme='dark'] .prose :not(pre) > code {
+        background: #1e293b;
+        color: #f1f5f9;
+        border-color: #334155;
+      }
+
+      [data-theme='dark'] .prose :not(pre) > code:hover {
+        background: #334155;
+      }
+
+      [data-theme='dark'] .prose pre {
+        border-color: #334155;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      [data-theme='dark'] .prose strong {
+        color: #f1f5f9;
       }
     </style>
   </head>
   <body>
     <Header />
     <main>
+      <nav class="breadcrumb">
+        <a href="/toeic" data-astro-prefetch="hover">
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+          </svg>
+          Quay lại Thư Viện TOEIC
+        </a>
+      </nav>
       <article class="prose">
         <div class="title">
           <div class="date">
             <FormattedDate date={pubDate} />
           </div>
           <h1>{title}</h1>
-          <p>{description}</p>
+          <p class="desc-badge">{description}</p>
           <hr />
         </div>
         <slot />

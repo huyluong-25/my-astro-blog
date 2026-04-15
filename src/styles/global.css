@@ -76,15 +76,6 @@ h1, h2, h3, h4, h5, h6 {
 [data-theme='dark'] h4,
 [data-theme='dark'] h5,
 [data-theme='dark'] h6 {
-    color: #f1f5f9;
-}
-
-[data-theme='dark'] h1,
-[data-theme='dark'] h2,
-[data-theme='dark'] h3,
-[data-theme='dark'] h4,
-[data-theme='dark'] h5,
-[data-theme='dark'] h6 {
     color: rgb(var(--text-primary));
 }
 
@@ -100,8 +91,8 @@ a {
 
 /* --- HIỆU ỨNG HOVER TINH TẾ CHO BÀI VIẾT (POST CARD) --- */
 
-/* Áp dụng cho các thẻ li hoặc bất kỳ card nào trong danh sách */
-ul li, .post-card {
+/* Chỉ áp dụng cho danh sách bài viết & card, KHÔNG áp cho mọi ul li */
+.post-list li, .post-card {
     list-style: none;
     transition: var(--transition-smooth);
     border-radius: 16px;
@@ -111,38 +102,34 @@ ul li, .post-card {
     color: #334155;
 }
 
-[data-theme='dark'] ul li,
+[data-theme='dark'] .post-list li,
 [data-theme='dark'] .post-card {
     color: rgb(var(--text-primary));
 }
 
-ul li:hover, .post-card:hover {
-    /* Nâng nhẹ và tạo độ bóng kính */
+.post-list li:hover, .post-card:hover {
     transform: translateY(-6px) scale(1.01);
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(8px) saturate(150%);
     -webkit-backdrop-filter: blur(8px) saturate(150%);
-    
-    /* Đổ bóng mềm mại - Soft Glow */
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.05),
         inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
-[data-theme='dark'] ul li:hover, [data-theme='dark'] .post-card:hover {
+[data-theme='dark'] .post-list li:hover, [data-theme='dark'] .post-card:hover {
     background: rgba(30, 41, 59, 0.8);
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.3),
         inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
-/* Hiệu ứng cho ảnh trong bài viết khi rà chuột */
-ul li:hover img, .post-card:hover img {
+.post-list li:hover img, .post-card:hover img {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transform: scale(1.02);
 }
 
-[data-theme='dark'] ul li:hover img, [data-theme='dark'] .post-card:hover img {
+[data-theme='dark'] .post-list li:hover img, [data-theme='dark'] .post-card:hover img {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
@@ -227,7 +214,7 @@ pre code {
     main { padding: 1.5em 1em; }
     
     /* Tắt hiệu ứng hover trên mobile để tránh bị lag */
-    ul li:hover, .post-card:hover {
+    .post-list li:hover, .post-card:hover {
         transform: none;
         background: transparent;
         box-shadow: none;

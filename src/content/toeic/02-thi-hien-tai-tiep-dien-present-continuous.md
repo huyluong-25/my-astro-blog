@@ -38,13 +38,65 @@ order: 2
 2. **We are preparing the quarterly report this week.**
 3. **Ms. Linh is meeting a supplier at 2 p.m. tomorrow.**
 
-## 7. Phân biệt nhanh với Present Simple
+## 7. Quy tắc thêm -ing (hay quên!)
 
-- **Present Simple:** We hold this meeting every Monday. (thói quen/lịch cố định)
-- **Present Continuous:** We are holding an extra meeting this Monday. (sắp xếp riêng, mang tính tạm thời)
+| Trường hợp | Quy tắc | Ví dụ |
+| --- | --- | --- |
+| Đa số V thường | + ing | work → working, read → reading |
+| V tận cùng -e | bỏ e + ing | make → making, write → writing |
+| V 1 âm tiết, tận cùng phụ âm-nguyên âm-phụ âm | gấp đôi phụ âm cuối + ing | run → running, sit → sitting |
+| V tận cùng -ie | ie → y + ing | die → dying, lie → lying |
+| V tận cùng -ee | giữ nguyên + ing | see → seeing, agree → agreeing |
 
-## 8. Mẹo làm bài
+## 8. Phân biệt nhanh với Present Simple
 
-1. Thấy now/currently/at the moment -> ưu tiên V-ing.
+| Tiêu chí | Present Simple | Present Continuous |
+| --- | --- | --- |
+| **Dùng khi** | Thói quen, lịch cố định, sự thật | Đang xảy ra, tạm thời, kế hoạch gần |
+| **Dấu hiệu** | always, usually, every day | now, currently, at the moment |
+| **Ví dụ** | We **hold** this meeting every Monday. | We **are holding** an extra meeting this Monday. |
+| **Sắc thái** | Ổn định, lặp đi lặp lại | Tạm thời, đang diễn ra, có thể thay đổi |
+
+> ⚠️ **Bẫy TOEIC:** Động từ trạng thái (know, believe, own, need, understand) **KHÔNG dùng** thì tiếp diễn!
+> - ❌ *I am knowing the answer.*
+> - ✅ *I know the answer.*
+
+## 9. Bài tập TOEIC mini (5 câu)
+
+**1.** The marketing team ___ a new campaign this month.
+   A. develops  B. is developing  C. develop  D. developed
+
+**2.** Our office ___ at 8:30 a.m. every day.
+   A. is opening  B. opens  C. opening  D. are opening
+
+**3.** Mr. Park ___ with a client right now and cannot take your call.
+   A. meets  B. meeting  C. is meeting  D. met
+
+**4.** The company ___ new software to improve efficiency. (currently)
+   A. tests  B. is testing  C. test  D. tested
+
+**5.** She always ___ her reports before the deadline.
+   A. is submitting  B. submitting  C. submit  D. submits
+
+### Đáp án
+
+1. **B** – "this month" → thời gian hiện tại, tạm thời → Present Continuous.
+2. **B** – "every day" → thói quen lặp lại → Present Simple.
+3. **C** – "right now" → đang diễn ra → Present Continuous.
+4. **B** – "currently" → đang diễn ra → Present Continuous.
+5. **D** – "always" → thói quen → Present Simple, chủ ngữ "She" → V-s.
+
+## 10. Mẹo làm bài
+
+1. Thấy now/currently/at the moment → ưu tiên V-ing.
 2. Kiểm tra to-be hòa hợp chủ ngữ trước khi nhìn động từ chính.
 3. Nếu có sắc thái phàn nàn với always/constantly/forever, hiện tại tiếp diễn có thể là đáp án đúng.
+
+## 11. Tổng kết nhanh
+
+| Nhớ gì? | Chi tiết |
+| --- | --- |
+| Công thức | S + am/is/are + V-ing |
+| Dấu hiệu | now, currently, at the moment, this week |
+| Không dùng với | Động từ trạng thái: know, believe, own, need |
+| Bẫy TOEIC | Nhầm với Present Simple khi thấy "always" |
