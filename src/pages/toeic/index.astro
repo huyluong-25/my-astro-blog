@@ -18,17 +18,6 @@ const notes = (await getCollection('toeic')).sort((a, b) => {
   <head>
     <BaseHead title="Thư Viện Ngữ Pháp TOEIC" description="Kho bài học TOEIC theo từng chủ đề và từng thì." />
     <style>
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       main {
         width: 960px;
       }
