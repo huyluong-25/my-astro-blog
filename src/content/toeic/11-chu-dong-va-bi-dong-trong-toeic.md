@@ -23,6 +23,18 @@ Sau bài này, bạn sẽ làm được 3 việc rất nhanh trong TOEIC:
 - Chủ động: **S + V + O**
 - Bị động: **S + be + V3/ed (+ by O)**
 
+### Bảng chuyển Chủ động -> Bị động (nhanh)
+
+| Dạng | Công thức |
+| --- | --- |
+| Active | **S + V + O** |
+| Passive | **O + be + V3/ed + (by + S)** |
+
+Mẹo nhớ ký hiệu:
+
+- Khi viết theo công thức chuyển đổi: **S + V + O -> O + be + V3/ed + (by + S)**.
+- Khi viết câu bị động độc lập (đổi O của câu chủ động lên làm chủ ngữ mới): **S + be + V3/ed + (by + O tác nhân)**.
+
 Ghi nhớ lõi:
 
 - Thấy **be + V3/ed** -> nghiêng mạnh về bị động.
