@@ -32,6 +32,7 @@ function ensureCommentsSchema() {
           email TEXT NOT NULL,
           content TEXT NOT NULL,
           status TEXT NOT NULL DEFAULT 'pending',
+          parent_id BIGINT DEFAULT NULL,
           reactions_like INTEGER NOT NULL DEFAULT 0,
           reactions_love INTEGER NOT NULL DEFAULT 0,
           reactions_haha INTEGER NOT NULL DEFAULT 0,
@@ -39,10 +40,11 @@ function ensureCommentsSchema() {
         );
       `;
 
-      // Ensure reaction columns exist for old tables created before reaction feature
+      // Ensure columns exist for old tables
       await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS reactions_like INTEGER NOT NULL DEFAULT 0;`;
       await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS reactions_love INTEGER NOT NULL DEFAULT 0;`;
       await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS reactions_haha INTEGER NOT NULL DEFAULT 0;`;
+      await sql`ALTER TABLE comments ADD COLUMN IF NOT EXISTS parent_id BIGINT DEFAULT NULL;`;
 
       // 2. Lệnh tạo Index
       await sql`
@@ -71,10 +73,10 @@ export async function GET({ request }) {
     await ensureCommentsSchema();
 
     const comments = await sql`
-      SELECT id, slug, author, content, created_at, reactions_like, reactions_love, reactions_haha
+      SELECT id, slug, author, content, created_at, parent_id, reactions_like, reactions_love, reactions_haha
       FROM comments 
       WHERE slug = ${slug} AND status = 'approved'
-      ORDER BY created_at DESC
+      ORDER BY created_at ASC
     `;
 
     return json(comments);
@@ -97,6 +99,7 @@ export async function POST({ request }) {
     const author = String(payload?.author || '').trim();
     const email = String(payload?.email || '').trim();
     const content = String(payload?.content || '').trim();
+    const parentId = payload?.parent_id ? Number(payload.parent_id) : null;
 
     if (!slug || !author || !email || !content) {
       return json({ error: 'slug, author, email, content are required' }, 400);
@@ -112,8 +115,8 @@ export async function POST({ request }) {
     }
 
     await sql`
-      INSERT INTO comments (slug, author, email, content, status)
-      VALUES (${slug}, ${author}, ${email}, ${content}, 'pending')
+      INSERT INTO comments (slug, author, email, content, status, parent_id)
+      VALUES (${slug}, ${author}, ${email}, ${content}, 'pending', ${parentId})
     `;
 
     return json({ success: true, message: 'Comment submitted and awaiting moderation.' }, 201);

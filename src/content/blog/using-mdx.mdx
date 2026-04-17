@@ -1,31 +1,53 @@
 ---
-title: 'Using MDX'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jun 01 2024'
-heroImage: '../../assets/blog-placeholder-5.jpg'
+title: 'Kinh nghiệm thực tế: Triển khai Lưu trữ (Storage) khi dựng Proxmox Homelab'
+description: 'Chia sẻ thực tế về cách thiết lập hệ thống lưu trữ cho Proxmox Homelab, từ việc chọn ZFS hay LVM-Thin đến các giải pháp backup hiệu quả.'
+pubDate: 'Apr 15 2026'
+heroImage: 'https://images.unsplash.com/photo-1551808195-337dc93f8e9a?auto=format&fit=crop&w=1020&h=510&q=80'
 ---
 
-This theme comes with the [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) integration installed and configured in your `astro.config.mjs` config file. If you prefer not to use MDX, you can disable support by removing the integration from your config file.
+Dựng một hệ thống Homelab bằng Proxmox là một hành trình thú vị, nhưng cũng đầy rẫy những quyết định khó khăn. Một trong những câu hỏi phổ biến nhất mà mình nhận được là: "Nên cấu hình Storage như thế nào cho tối ưu?". 
 
-## Why MDX?
+Với kinh nghiệm thực tế sau nhiều lần "phá đi xây lại", mình xin chia sẻ lộ trình triển khai lưu trữ chuyên nghiệp nhưng vẫn phù hợp với túi tiền của anh em Homelab.
 
-MDX is a special flavor of Markdown that supports embedded JavaScript & JSX syntax. This unlocks the ability to [mix JavaScript and UI Components into your Markdown content](https://docs.astro.build/en/guides/integrations-guide/mdx/#mdx-in-astro) for things like interactive charts or alerts.
+## 1. Triết lý "Tam tầng" (Three-Tier Storage)
 
-If you have existing content authored in MDX, this integration will hopefully make migrating to Astro a breeze.
+Đừng bao giờ dồn tất cả trứng vào một giỏ. Trong thế giới Proxmox, mình luôn tách biệt 3 loại dữ liệu này:
 
-## Example
+*   **Ổ chạy OS (Boot Drive):** Dùng một ổ SSD hoặc NVMe riêng (khoảng 256GB là quá đủ). Ưu tiên định dạng **EXT4** để hệ điều hành chạy ổn định nhất. Nếu ổ này hỏng, Host có thể sập nhưng dữ liệu VM của bạn vẫn an toàn trên các ổ khác.
+*   **Ổ chạy VM/LXC (System Storage):** Đây là nơi chứa file `.qcow2` hoặc raw disk của các máy ảo. Cần tốc độ cao và khả năng snapshot nhanh để "back-up" trước khi vọc vạch.
+*   **Ổ chứa dữ liệu lớn (Bulk/Media Storage):** Các ổ HDD truyền thống được gắn vào để lưu phim (Plex/Jellyfin), ISO, hoặc các file backup định kỳ.
 
-Here is how you import and use a UI component inside of MDX.  
-When you open this page in the browser, you should see the clickable button below.
+## 2. Cuộc chiến ZFS vs LVM-Thin: Chọn bên nào?
 
-import HeaderLink from '../../components/HeaderLink.astro';
+Đây là phần khiến nhiều người đau đầu nhất. Hãy nhớ quy tắc đơn giản sau:
 
-<HeaderLink href="#" onclick="alert('clicked!')">
-	Embedded component in MDX
-</HeaderLink>
+### ZFS (Enterprise-Grade)
+*   **Điểm mạnh:** Bảo vệ dữ liệu cực tốt (RAIDZ), hỗ trợ Snapshot siêu tốc, nén dữ liệu (Compression).
+*   **Lưu ý thực tế:** Nó cực kỳ **"ngốn RAM"**. Theo kinh nghiệm, bạn nên có ít nhất 8GB RAM chỉ dành riêng cho ZFS nếu chạy nhiều ổ. Ngoài ra, ZFS trên các dòng SSD giá rẻ (Consumer SSD) sẽ làm ổ đĩa nhanh "tèo" do lượng ghi dữ liệu (Write Amplification) rất lớn.
 
-## More Links
+### LVM-Thin (Lightweight & Fast)
+*   **Điểm mạnh:** Rất nhẹ, không chiếm RAM, tốc độ gần như nguyên bản của ổ đĩa.
+*   **Lưu ý thực tế:** Không có khả năng bảo vệ dữ liệu kiểu RAID như ZFS. Nếu ổ chết, dữ liệu mất sạch nếu không có backup.
 
-- [MDX Syntax Documentation](https://mdxjs.com/docs/what-is-mdx)
-- [Astro Usage Documentation](https://docs.astro.build/en/basics/astro-pages/#markdownmdx-pages)
-- **Note:** [Client Directives](https://docs.astro.build/en/reference/directives-reference/#client-directives) are still required to create interactive components. Otherwise, all components in your MDX will render as static HTML (no JavaScript) by default.
+**Lời khuyên:** Nếu bạn có RAM dư dả (>32GB) và dùng SSD xịn, hãy chọn **ZFS**. Nếu không, cứ **LVM-Thin** cho nhẹ máy.
+
+## 3. SSD Wearout - Kẻ thù thầm lặng
+
+Trong Homelab, chúng ta thường dùng SSD gia dụng. Proxmox (đặc biệt là khi chạy Cluster hoặc ZFS) ghi dữ liệu liên tục 24/7. 
+
+**Mẹo nhỏ:** Hãy vào phần `Disks` -> `S.M.A.R.T.` để kiểm tra chỉ số `Wearout`. Nếu thấy con số này tăng quá nhanh, hãy cân nhắc tắt các dịch vụ log không cần thiết hoặc chuyển ZFS sang ổ HDD.
+
+## 4. Giải pháp Backup: Proxmox Backup Server (PBS)
+
+Dù bạn dùng ZFS Mirror hay RAID 10, **RAID không phải là Backup**. 
+
+Mình cực kỳ đề xuất anh em dựng một cái máy ảo (hoặc một con mini-PC cũ) chạy **Proxmox Backup Server**. Nó hỗ trợ deduplication (chống trùng lặp dữ liệu), giúp bạn backup 10 ngày nhưng chỉ tốn dung lượng của 1-2 ngày. Đây là chiếc "phao cứu sinh" thực sự khi bạn lỡ tay xóa nhầm cấu hình.
+
+## 5. Kết luận
+
+Triển khai Storage cho Proxmox không có công thức "tốt nhất", chỉ có công thức "phù hợp nhất". 
+1. Tách biệt Boot và Data.
+2. Cân nhắc RAM trước khi chọn ZFS.
+3. Luôn luôn có Backup (PBS).
+
+Hy vọng chia sẻ này giúp anh em có cái nhìn thực tế hơn khi bắt tay vào dựng Homelab. Chúc anh em thành công với hệ thống "nhà làm" của mình!

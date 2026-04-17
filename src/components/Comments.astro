@@ -310,6 +310,188 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     background: rgba(34, 197, 94, 0.1);
     border-color: rgba(34, 197, 94, 0.3);
   }
+
+  /* Reply Button */
+  .reply-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .reply-btn:hover {
+    color: #0284c7;
+    background: rgba(2, 132, 199, 0.08);
+  }
+
+  [data-theme='dark'] .reply-btn {
+    color: #94a3b8;
+  }
+
+  [data-theme='dark'] .reply-btn:hover {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+  }
+
+  /* Reply Form (inline) */
+  .reply-form-container {
+    margin-top: 12px;
+    padding: 16px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  [data-theme='dark'] .reply-form-container {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: #475569;
+  }
+
+  .reply-form-container .form-group {
+    margin-bottom: 10px;
+  }
+
+  .reply-form-container input,
+  .reply-form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #334155;
+    background: white;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  [data-theme='dark'] .reply-form-container input,
+  [data-theme='dark'] .reply-form-container textarea {
+    background: #1e293b;
+    border-color: #475569;
+    color: #cbd5e1;
+  }
+
+  .reply-form-container input:focus,
+  .reply-form-container textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+  }
+
+  .reply-form-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .btn-reply-submit {
+    background: #0284c7;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-reply-submit:hover {
+    background: #0369a1;
+    transform: translateY(-1px);
+  }
+
+  [data-theme='dark'] .btn-reply-submit {
+    background: #38bdf8;
+    color: #0f172a;
+  }
+
+  .btn-reply-cancel {
+    background: none;
+    border: 1px solid #cbd5e1;
+    color: #64748b;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-reply-cancel:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+
+  [data-theme='dark'] .btn-reply-cancel {
+    border-color: #475569;
+    color: #94a3b8;
+  }
+
+  [data-theme='dark'] .btn-reply-cancel:hover {
+    background: rgba(30, 41, 59, 0.5);
+  }
+
+  /* Nested Replies */
+  .comment-replies {
+    margin-top: 14px;
+    margin-left: 20px;
+    padding-left: 16px;
+    border-left: 2px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  [data-theme='dark'] .comment-replies {
+    border-left-color: #334155;
+  }
+
+  .comment-replies .comment-item {
+    padding: 14px 16px;
+    background: #ffffff;
+    border: 1px solid #e9ecf0;
+  }
+
+  [data-theme='dark'] .comment-replies .comment-item {
+    background: rgba(22, 33, 50, 0.5);
+    border-color: #2d3b50;
+  }
+
+  .reply-to-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+
+  .reply-to-label span {
+    color: #0284c7;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  [data-theme='dark'] .reply-to-label span {
+    color: #38bdf8;
+  }
+
+  .comment-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
 </style>
 
 <script define:vars={{ slug, commentsApiBaseUrl }}>
@@ -362,6 +544,60 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     console.error('Comments UI elements not found');
   }
 
+  // Build comment tree from flat list
+  function buildCommentTree(comments) {
+    const map = {};
+    const roots = [];
+
+    comments.forEach(c => {
+      map[c.id] = { ...c, replies: [] };
+    });
+
+    comments.forEach(c => {
+      if (c.parent_id && map[c.parent_id]) {
+        map[c.parent_id].replies.push(map[c.id]);
+      } else {
+        roots.push(map[c.id]);
+      }
+    });
+
+    return roots;
+  }
+
+  // Render a single comment with replies
+  function renderComment(comment, parentAuthor) {
+    const replyToHtml = parentAuthor
+      ? `<div class="reply-to-label">↳ trả lời <span>${escapeHtml(parentAuthor)}</span></div>`
+      : '';
+
+    const repliesHtml = comment.replies && comment.replies.length > 0
+      ? `<div class="comment-replies">
+          ${comment.replies.map(r => renderComment(r, comment.author)).join('')}
+        </div>`
+      : '';
+
+    return `
+      <div class="comment-item" data-comment-id="${Number(comment.id)}">
+        ${replyToHtml}
+        <div class="comment-header">
+          <span class="comment-author">${escapeHtml(comment.author)}</span>
+          <span class="comment-date">${new Date(comment.created_at).toLocaleDateString()}</span>
+        </div>
+        <p class="comment-content">${escapeHtml(comment.content)}</p>
+        <div class="comment-footer">
+          <div class="comment-reactions">
+            ${renderReactionButtons(comment)}
+          </div>
+          <button type="button" class="reply-btn" data-reply-to="${Number(comment.id)}" data-reply-author="${escapeHtml(comment.author)}">
+            ↩️ Trả lời
+          </button>
+        </div>
+        <div class="reply-form-slot" id="reply-slot-${Number(comment.id)}"></div>
+        ${repliesHtml}
+      </div>
+    `;
+  }
+
   // Load comments
   async function loadComments() {
     if (!currentSlug) {
@@ -393,18 +629,8 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
         return;
       }
 
-      commentsList.innerHTML = comments.map(comment => `
-        <div class="comment-item">
-          <div class="comment-header">
-            <span class="comment-author">${escapeHtml(comment.author)}</span>
-            <span class="comment-date">${new Date(comment.created_at).toLocaleDateString()}</span>
-          </div>
-          <p class="comment-content">${escapeHtml(comment.content)}</p>
-          <div class="comment-reactions">
-            ${renderReactionButtons(comment)}
-          </div>
-        </div>
-      `).join('');
+      const tree = buildCommentTree(comments);
+      commentsList.innerHTML = tree.map(c => renderComment(c, null)).join('');
     } catch (error) {
       console.error('Error loading comments:', error);
       const message = error instanceof Error ? error.message : 'Failed to load comments.';
@@ -412,7 +638,7 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     }
   }
 
-  // Submit comment
+  // Submit top-level comment
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -463,7 +689,107 @@ const commentsApiBaseUrl = (import.meta.env.PUBLIC_COMMENTS_API_BASE_URL || '').
     }
   });
 
+  // Handle Reply button clicks + Reply form submit/cancel
   commentsList?.addEventListener('click', async (event) => {
+    // --- Reply button ---
+    const replyBtn = event.target.closest('.reply-btn');
+    if (replyBtn) {
+      const parentId = replyBtn.getAttribute('data-reply-to');
+      const parentAuthor = replyBtn.getAttribute('data-reply-author');
+      const slot = document.getElementById(`reply-slot-${parentId}`);
+
+      // Close any other open reply forms
+      document.querySelectorAll('.reply-form-container').forEach(f => f.remove());
+
+      if (!slot) return;
+
+      // If already open on this comment, toggle off
+      if (slot.querySelector('.reply-form-container')) {
+        slot.innerHTML = '';
+        return;
+      }
+
+      slot.innerHTML = `
+        <div class="reply-form-container">
+          <div class="form-group">
+            <input type="text" placeholder="Your name" class="reply-author" required />
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your email" class="reply-email" required />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Trả lời ${parentAuthor}..." class="reply-content" rows="3" required></textarea>
+          </div>
+          <div class="reply-form-actions">
+            <button type="button" class="btn-reply-submit" data-parent-id="${parentId}">Gửi trả lời</button>
+            <button type="button" class="btn-reply-cancel">Hủy</button>
+          </div>
+        </div>
+      `;
+
+      // Focus the textarea
+      slot.querySelector('.reply-content')?.focus();
+      return;
+    }
+
+    // --- Cancel reply ---
+    const cancelBtn = event.target.closest('.btn-reply-cancel');
+    if (cancelBtn) {
+      cancelBtn.closest('.reply-form-container')?.remove();
+      return;
+    }
+
+    // --- Submit reply ---
+    const submitBtn = event.target.closest('.btn-reply-submit');
+    if (submitBtn) {
+      const parentId = submitBtn.getAttribute('data-parent-id');
+      const container = submitBtn.closest('.reply-form-container');
+      const author = container.querySelector('.reply-author')?.value.trim();
+      const email = container.querySelector('.reply-email')?.value.trim();
+      const content = container.querySelector('.reply-content')?.value.trim();
+
+      if (!author || !email || !content) {
+        alert('Vui lòng điền đầy đủ thông tin');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Đang gửi...';
+
+      try {
+        const res = await fetch(apiPath('/api/comments'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: currentSlug, author, email, content, parent_id: Number(parentId) })
+        });
+
+        if (res.ok) {
+          container.innerHTML = '<p class="success-message">✓ Trả lời của bạn đang chờ duyệt.</p>';
+          setTimeout(() => {
+            container.remove();
+            loadComments();
+          }, 2500);
+        } else {
+          const responseType = res.headers.get('content-type') || '';
+          if (responseType.includes('application/json')) {
+            const errorData = await res.json();
+            alert('Lỗi: ' + (errorData?.error || `Không thể gửi trả lời (${res.status})`));
+          } else {
+            alert(`Lỗi: Không thể gửi trả lời (${res.status})`);
+          }
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Gửi trả lời';
+        }
+      } catch (error) {
+        console.error('Error posting reply:', error);
+        alert('Lỗi: ' + error.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Gửi trả lời';
+      }
+      return;
+    }
+
+    // --- Reaction button ---
     const button = event.target.closest('.reaction-btn');
     if (!button) return;
 
