@@ -2,7 +2,7 @@
 title: 'Kinh nghiệm thực tế: Triển khai Lưu trữ (Storage) khi dựng Proxmox Homelab'
 description: 'Chia sẻ thực tế về cách thiết lập hệ thống lưu trữ cho Proxmox Homelab, từ việc chọn ZFS hay LVM-Thin đến các giải pháp backup hiệu quả.'
 pubDate: 'Apr 15 2026'
-heroImage: 'https://images.unsplash.com/photo-1551808195-337dc93f8e9a?auto=format&fit=crop&w=1020&h=510&q=80'
+heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1020&h=510&q=80'
 ---
 
 Dựng một hệ thống Homelab bằng Proxmox là một hành trình thú vị, nhưng cũng đầy rẫy những quyết định khó khăn. Một trong những câu hỏi phổ biến nhất mà mình nhận được là: "Nên cấu hình Storage như thế nào cho tối ưu?".
@@ -49,10 +49,10 @@ Bảng so sánh nhanh:
 
 | Tiêu chí | ZFS | LVM-Thin |
 | --- | --- | --- |
-| Bảo vệ dữ liệu | Cao (RAIDZ/Mirror) | Thấp (khong co RAID) |
-| Snapshot | Rat nhanh | Nhanh |
-| RAM | Cao | Thap |
-| Do ben SSD | Co rui ro | Tot hon |
+| Bảo vệ dữ liệu | Cao (RAIDZ/Mirror) | Thấp (không có RAID) |
+| Snapshot | Rất nhanh | Nhanh |
+| RAM | Cao | Thấp |
+| Độ bền SSD | Có rủi ro | Tốt hơn |
 
 ![Server dashboard](https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=600&q=80)
 
@@ -62,7 +62,7 @@ Trong Homelab, chúng ta thường dùng SSD gia dụng. Proxmox (đặc biệt 
 
 **Mẹo nhỏ:** Hãy vào phần `Disks` -> `S.M.A.R.T.` để kiểm tra chỉ số `Wearout`. Nếu thấy con số này tăng quá nhanh, hãy cân nhắc tắt các dịch vụ log không cần thiết hoặc chuyển ZFS sang ổ HDD.
 
-Ví dụ check nhanh tren Proxmox:
+Ví dụ check nhanh trên Proxmox:
 
 ```bash
 smartctl -a /dev/sda | grep -i wear
@@ -74,10 +74,10 @@ Dù bạn dùng ZFS Mirror hay RAID 10, **RAID không phải là Backup**.
 
 Mình cực kỳ đề xuất anh em dựng một cái máy ảo (hoặc một con mini-PC cũ) chạy **Proxmox Backup Server**. Nó hỗ trợ deduplication (chống trùng lặp dữ liệu), giúp bạn backup 10 ngày nhưng chỉ tốn dung lượng của 1-2 ngày. Đây là chiếc "phao cứu sinh" thực sự khi bạn lỡ tay xóa nhầm cấu hình.
 
-Luồng backup toi thieu:
+Luồng backup tối thiểu:
 
 ```md
-Proxmox Host -> PBS -> HDD/NAS (offsite neu co)
+Proxmox Host -> PBS -> HDD/NAS (offsite nếu có)
 ```
 
 ![Backup storage](https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&h=600&q=80)

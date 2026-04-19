@@ -7,11 +7,13 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-const posts = (await getCollection('blog'))
+const allPosts = await getCollection('blog');
+const posts = allPosts
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
 
-const toeicNotes = (await getCollection('toeic'))
+const allToeicNotes = await getCollection('toeic');
+const toeicNotes = allToeicNotes
 	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
 	.slice(0, 6);
 ---
@@ -60,12 +62,12 @@ const toeicNotes = (await getCollection('toeic'))
 			<section class="stats-section">
 				<div class="stat-card">
 					<span class="stat-icon">📝</span>
-					<span class="stat-number">{posts.length > 0 ? '5+' : '0'}</span>
+					<span class="stat-number">{allPosts.length}</span>
 					<span class="stat-label">Blog Posts</span>
 				</div>
 				<div class="stat-card">
 					<span class="stat-icon">📚</span>
-					<span class="stat-number">{toeicNotes.length > 0 ? '13' : '0'}</span>
+					<span class="stat-number">{allToeicNotes.length}</span>
 					<span class="stat-label">TOEIC Lessons</span>
 				</div>
 				<div class="stat-card">
