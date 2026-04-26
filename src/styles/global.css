@@ -309,3 +309,63 @@ pre code {
 [data-theme='dark'] .prose a:hover {
     color: #0284c7;
 }
+
+/* --- TABLES --- */
+.prose table {
+    width: 100%;
+    margin: 1.5em 0;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    overflow-x: auto;
+    display: block;
+}
+
+@media (min-width: 640px) {
+    .prose table {
+        display: table;
+    }
+}
+
+.prose th,
+.prose td {
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+}
+
+.prose th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.prose tbody tr:nth-of-type(even) {
+    background-color: #f8fafc;
+}
+
+.prose td {
+    color: #334155;
+}
+
+/* Dark Mode Tables */
+[data-theme='dark'] .prose th,
+[data-theme='dark'] .prose td {
+    border-color: #475569;
+}
+
+[data-theme='dark'] .prose th {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+[data-theme='dark'] .prose tbody tr:nth-of-type(even) {
+    background-color: #1e293b;
+}
+
+[data-theme='dark'] .prose tbody tr {
+    background-color: #0f172a;
+}
+
+[data-theme='dark'] .prose td {
+    color: #cbd5e1;
+}

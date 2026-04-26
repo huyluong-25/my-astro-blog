@@ -5,11 +5,11 @@ import Footer from '../components/Footer.astro';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <BaseHead
-      title="Smart English Learning"
-      description="Save vocabulary, organize by tense and word type, and compare learning coverage intelligently."
+      title="Sổ Tay Từ Vựng TOEIC"
+      description="Ghi chép từ vựng TOEIC với đầy đủ phiên âm, từ loại, đồng nghĩa theo đúng chuẩn bảng."
     />
   </head>
   <body>
@@ -17,33 +17,22 @@ import Footer from '../components/Footer.astro';
 
     <main class="english-page">
       <section class="hero">
-        <p class="eyebrow">English Learning System</p>
-        <h1>Learn English With Structure</h1>
+        <p class="eyebrow">TOEIC Vocabulary System</p>
+        <h1>Smart Vocabulary Notebook</h1>
         <p class="sub">
-          Add new vocabulary, save it to the database, and track progress by tense and word type.
-          The system generates smart insights so you know what to study next.
-        </p>
-        <p class="sub" style="margin-top:0.6rem;">
-          Need detailed grammar notes by topic? Open
-          <a href="/toeic" data-astro-prefetch="hover">TOEIC Grammar Notes</a>.
+          Ghi chú từ vựng mới theo đúng chuẩn, đầy đủ hệ thống gia đình từ (word family), đồng nghĩa và các ví dụ để nhớ lâu hơn.
         </p>
       </section>
 
       <section class="panel form-panel">
-        <h2>Add New Vocabulary</h2>
+        <h2>Thêm Từ Vựng Mới</h2>
         <form id="vocabForm" class="vocab-form">
           <label>
-            New word
-            <input name="word" type="text" maxlength="120" placeholder="reliable" required />
+            Nhãn (Chủ đề)
+            <input name="label" type="text" maxlength="50" placeholder="Vd: Contract" required />
           </label>
-
           <label>
-            Meaning
-            <input name="meaning" type="text" maxlength="500" placeholder="dependable and trustworthy" required />
-          </label>
-
-          <label>
-            Word type
+            Loại từ
             <select name="wordType" required>
               <option value="noun">Noun</option>
               <option value="verb">Verb</option>
@@ -53,74 +42,69 @@ import Footer from '../components/Footer.astro';
               <option value="idiom">Idiom</option>
             </select>
           </label>
-
           <label>
-            Related tense
-            <select name="tense" required>
-              <option value="present_simple">Present Simple</option>
-              <option value="present_continuous">Present Continuous</option>
-              <option value="present_perfect">Present Perfect</option>
-              <option value="past_simple">Past Simple</option>
-              <option value="past_continuous">Past Continuous</option>
-              <option value="past_perfect">Past Perfect</option>
-              <option value="future_simple">Future Simple</option>
-              <option value="future_continuous">Future Continuous</option>
-              <option value="future_perfect">Future Perfect</option>
-            </select>
+            Tiếng Anh
+            <input name="word" type="text" maxlength="120" placeholder="Vd: agreement" required />
           </label>
-
+          <label>
+            Phiên âm
+            <input name="pronunciation" type="text" maxlength="100" placeholder="Vd: /əˈɡriːmənt/" />
+          </label>
           <label class="wide">
-            Example sentence
-            <textarea name="exampleSentence" rows="3" maxlength="600" placeholder="The system is reliable during peak hours."></textarea>
+            Phiên dịch
+            <input name="meaning" type="text" maxlength="500" placeholder="Vd: hiệp định, thỏa thuận" required />
           </label>
-
+          <label>
+            Word form
+            <textarea name="wordForm" rows="3" placeholder="- agree (v): đồng ý"></textarea>
+          </label>
+          <label>
+            Đồng nghĩa
+            <textarea name="synonym" rows="3" placeholder="contract (n)"></textarea>
+          </label>
           <label class="wide">
-            Study notes
-            <textarea name="notes" rows="3" maxlength="800" placeholder="Often confused with robust. Review contextual differences."></textarea>
+            Ghi chú
+            <textarea name="notes" rows="3" placeholder="- a provision in the contract"></textarea>
           </label>
 
-          <button type="submit">Save Vocabulary</button>
+          <button type="submit">Lưu Từ Vựng</button>
           <p id="formStatus" class="status"></p>
         </form>
       </section>
 
       <section class="panel stats-panel">
         <div class="stats-header">
-          <h2>Smart Analytics</h2>
-          <button id="reloadBtn" type="button" class="ghost-btn">Refresh data</button>
+          <h2>Thống kê tiến độ</h2>
+          <button id="reloadBtn" type="button" class="ghost-btn">Tải lại dữ liệu</button>
         </div>
 
         <div class="stats-grid" id="summaryCards"></div>
 
         <div class="insights-box">
-          <h3>Smart Suggestions</h3>
+          <h3>Gợi Ý Học Tập</h3>
           <ul id="insightList"></ul>
         </div>
       </section>
 
-      <section class="panel compare-panel">
-        <h2>Tense x Word Type Comparison</h2>
-        <p class="hint">
-          Cells with value 0 show areas you have not covered yet. Prioritize those to balance your vocabulary.
-        </p>
-        <div class="table-wrap" id="matrixWrap"></div>
-      </section>
-
       <section class="panel list-panel">
         <div class="stats-header">
-          <h2>Vocabulary List</h2>
-          <input id="searchInput" type="search" placeholder="Search by word, meaning, or notes..." />
+          <h2>Danh Sách Từ Vựng</h2>
+          <input id="searchInput" type="search" placeholder="Tìm kiếm từ, nghĩa, chủ đề..." />
         </div>
-        <div class="table-wrap">
-          <table>
+        <div class="table-wrap custom-table-scroll">
+          <table class="vocab-table">
             <thead>
               <tr>
-                <th>Word</th>
-                <th>Meaning</th>
-                <th>Word Type</th>
-                <th>Tense</th>
-                <th>Example</th>
-                <th>Date</th>
+                <th>STT</th>
+                <th>Nhãn</th>
+                <th>Loại từ</th>
+                <th>Tiếng anh</th>
+                <th>Phiên âm</th>
+                <th>Phiên dịch</th>
+                <th>Phát âm</th>
+                <th>Word form</th>
+                <th>Đồng nghĩa</th>
+                <th>Ghi chú</th>
               </tr>
             </thead>
             <tbody id="vocabTableBody"></tbody>
@@ -128,123 +112,7 @@ import Footer from '../components/Footer.astro';
         </div>
       </section>
 
-      <section class="panel tense-guide-panel">
-        <h2>Sổ Tay Các Thì TOEIC (Bấm Để Ôn Lại)</h2>
-        <p class="hint">
-          Dùng mục này để ôn nhanh khi quên. Mỗi khi bí cấu trúc, dấu hiệu nhận biết hoặc lỗi dễ nhầm,
-          bạn chỉ cần bấm mở thì tương ứng.
-        </p>
 
-        <div class="tense-accordion">
-          <details open>
-            <summary>Present Simple (Hiện tại đơn)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + V(s/es), S + do/does not + V, Do/Does + S + V?</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> always, usually, often, every day, rarely, on Mondays</li>
-              <li><strong>Cách dùng chính:</strong> thói quen, nhiệm vụ công việc, lịch trình, sự thật hiển nhiên</li>
-              <li><strong>Lưu ý TOEIC:</strong> xuất hiện rất nhiều trong nội quy công ty, mô tả công việc và quy trình.</li>
-              <li><strong>Dễ nhầm:</strong> sau "every day" không dùng Present Continuous.</li>
-              <li><strong>Ví dụ:</strong> The sales manager checks the monthly report every Monday.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Present Continuous (Hiện tại tiếp diễn)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + am/is/are + V-ing</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> now, right now, currently, at the moment</li>
-              <li><strong>Cách dùng chính:</strong> hành động đang diễn ra ở hiện tại, tình huống tạm thời</li>
-              <li><strong>Lưu ý TOEIC:</strong> thường có trong hội thoại văn phòng và cập nhật trạng thái theo thời gian thực.</li>
-              <li><strong>Dễ nhầm:</strong> động từ chỉ trạng thái (know, need, believe, own) thường không dùng dạng tiếp diễn.</li>
-              <li><strong>Ví dụ:</strong> Ms. Lee is meeting a client in Conference Room B right now.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Present Perfect (Hiện tại hoàn thành)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + have/has + V3</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> already, yet, just, since, for, recently, so far</li>
-              <li><strong>Cách dùng chính:</strong> hành động đã xong nhưng còn liên quan hiện tại, kinh nghiệm đến hiện tại</li>
-              <li><strong>Lưu ý TOEIC:</strong> rất hay gặp trong email cập nhật tiến độ và thông báo hoàn tất.</li>
-              <li><strong>Dễ nhầm:</strong> có mốc thời gian đã kết thúc như "yesterday/last week/in 2024" thì dùng Past Simple.</li>
-              <li><strong>Ví dụ:</strong> We have already submitted the budget proposal to the finance team.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Past Simple (Quá khứ đơn)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + V2/ed, S + did not + V, Did + S + V?</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> yesterday, last week, in 2023, ago</li>
-              <li><strong>Cách dùng chính:</strong> hành động đã hoàn thành tại một thời điểm xác định trong quá khứ</li>
-              <li><strong>Lưu ý TOEIC:</strong> thường xuất hiện trong báo cáo sự cố và timeline dự án đã hoàn tất.</li>
-              <li><strong>Dễ nhầm:</strong> khi thời điểm đã kết thúc rõ ràng thì không dùng Present Perfect.</li>
-              <li><strong>Ví dụ:</strong> The technician replaced the printer parts yesterday afternoon.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Past Continuous (Quá khứ tiếp diễn)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + was/were + V-ing</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> while, at 8 p.m., when</li>
-              <li><strong>Cách dùng chính:</strong> hành động đang diễn ra tại một thời điểm trong quá khứ, làm nền cho hành động khác</li>
-              <li><strong>Lưu ý TOEIC:</strong> thường đi cùng Past Simple trong câu tường thuật diễn biến.</li>
-              <li><strong>Dễ nhầm:</strong> hành động nền dùng Past Continuous, hành động chen vào dùng Past Simple.</li>
-              <li><strong>Ví dụ:</strong> We were discussing the contract when the client called.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Past Perfect (Quá khứ hoàn thành)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + had + V3</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> before, by the time, after, already</li>
-              <li><strong>Cách dùng chính:</strong> hành động xảy ra và hoàn thành trước một hành động khác trong quá khứ</li>
-              <li><strong>Lưu ý TOEIC:</strong> hữu ích khi mô tả nguyên nhân - kết quả trong biên bản họp và báo cáo.</li>
-              <li><strong>Dễ nhầm:</strong> không lạm dụng nếu chỉ có một hành động quá khứ.</li>
-              <li><strong>Ví dụ:</strong> The supplier had shipped the goods before we sent the revised order.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Future Simple (Tương lai đơn)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + will + V</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> tomorrow, next week, soon, I think, probably</li>
-              <li><strong>Cách dùng chính:</strong> quyết định tức thời, lời hứa, dự đoán</li>
-              <li><strong>Lưu ý TOEIC:</strong> gặp nhiều trong thông báo, cam kết và dự báo kinh doanh.</li>
-              <li><strong>Dễ nhầm:</strong> với lịch cố định hoặc sắp xếp đã lên kế hoạch, Present Continuous có thể tự nhiên hơn.</li>
-              <li><strong>Ví dụ:</strong> I will send you the updated quotation by 3 p.m.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Future Continuous (Tương lai tiếp diễn)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + will be + V-ing</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> this time tomorrow, at 10 a.m. next Monday</li>
-              <li><strong>Cách dùng chính:</strong> hành động đang diễn ra tại một thời điểm xác định trong tương lai</li>
-              <li><strong>Lưu ý TOEIC:</strong> hay dùng trong email sắp lịch và thông báo tình trạng rảnh/bận.</li>
-              <li><strong>Dễ nhầm:</strong> không dùng cho hành động hoàn thành một lần, trường hợp đó dùng Future Simple.</li>
-              <li><strong>Ví dụ:</strong> At 9 a.m. tomorrow, our team will be presenting the new plan.</li>
-            </ul>
-          </details>
-
-          <details>
-            <summary>Future Perfect (Tương lai hoàn thành)</summary>
-            <ul>
-              <li><strong>Cấu trúc:</strong> S + will have + V3</li>
-              <li><strong>Dấu hiệu nhận biết:</strong> by, by the time, before + future point</li>
-              <li><strong>Cách dùng chính:</strong> hành động sẽ hoàn thành trước một mốc thời gian trong tương lai</li>
-              <li><strong>Lưu ý TOEIC:</strong> thường xuất hiện khi nói về deadline mục tiêu và cột mốc dự án.</li>
-              <li><strong>Dễ nhầm:</strong> nếu không nhấn mạnh mốc hoàn thành, Future Simple thường đủ dùng.</li>
-              <li><strong>Ví dụ:</strong> We will have finalized the contract by Friday noon.</li>
-            </ul>
-          </details>
-        </div>
-      </section>
     </main>
 
     <Footer />
@@ -256,51 +124,55 @@ import Footer from '../components/Footer.astro';
       const vocabTableBody = document.getElementById('vocabTableBody');
       const summaryCards = document.getElementById('summaryCards');
       const insightList = document.getElementById('insightList');
-      const matrixWrap = document.getElementById('matrixWrap');
       const searchInput = document.getElementById('searchInput');
       const reloadBtn = document.getElementById('reloadBtn');
 
-      let latestData = null;
+      let synth = window.speechSynthesis;
+
+      window.speakWord = function(word) {
+        if (!synth) {
+          alert('Trình duyệt của bạn không hỗ trợ Text-to-Speech.');
+          return;
+        }
+        // Chọn giọng đọc tiếng Anh mặc định
+        const utterThis = new SpeechSynthesisUtterance(word);
+        utterThis.lang = 'en-US';
+        utterThis.rate = 0.9; // Đọc chậm một chút cho dễ nghe
+        synth.speak(utterThis);
+      };
 
       function escapeHtml(value) {
         return String(value || '')
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
           .replace(/>/g, '&gt;')
-          .replace(/\"/g, '&quot;')
+          .replace(/"/g, '&quot;')
           .replace(/'/g, '&#39;');
+      }
+
+      function formatTextarea(value) {
+        return escapeHtml(value).split('\n').join('<br/>');
       }
 
       function formatLabel(value) {
         return String(value || '').replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
       }
 
-      function formatDate(value) {
-        if (!value) return '-';
-        const date = new Date(value);
-        if (Number.isNaN(date.getTime())) return '-';
-        return date.toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-        });
-      }
-
       function renderSummary(stats) {
-        const topTense = stats.byTense[0];
-        const topType = stats.byType[0];
+        const topLabel = stats.byLabel && stats.byLabel.length ? stats.byLabel[0] : null;
+        const topType = stats.byType && stats.byType.length ? stats.byType[0] : null;
 
         summaryCards.innerHTML = `
           <article class="card">
-            <p class="card-label">Total Words</p>
+            <p class="card-label">Tổng Số Từ</p>
             <p class="card-value">${stats.total}</p>
           </article>
           <article class="card">
-            <p class="card-label">Top Tense</p>
-            <p class="card-value">${topTense ? formatLabel(topTense.tense) : '-'}</p>
+            <p class="card-label">Chủ Đề Dẫn Đầu</p>
+            <p class="card-value">${topLabel ? formatLabel(topLabel.label) : '-'}</p>
           </article>
           <article class="card">
-            <p class="card-label">Top Word Type</p>
+            <p class="card-label">Từ Loại Phổ Biến</p>
             <p class="card-value">${topType ? formatLabel(topType.word_type) : '-'}</p>
           </article>
         `;
@@ -309,55 +181,34 @@ import Footer from '../components/Footer.astro';
       function renderInsights(stats) {
         const lines = Array.isArray(stats.insights) ? stats.insights : [];
         if (!lines.length) {
-          insightList.innerHTML = '<li>No suggestions yet.</li>';
+          insightList.innerHTML = '<li>Chưa có gợi ý nào.</li>';
           return;
         }
-
         insightList.innerHTML = lines.map((line) => `<li>${escapeHtml(line)}</li>`).join('');
-      }
-
-      function renderMatrix(stats) {
-        const tenses = stats.dictionary?.tenses || [];
-        const wordTypes = stats.dictionary?.wordTypes || [];
-        const map = new Map();
-
-        for (const item of stats.matrix || []) {
-          map.set(`${item.tense}::${item.word_type}`, Number(item.total || 0));
-        }
-
-        const head = `<tr><th>Tense \\ Word Type</th>${wordTypes.map((t) => `<th>${formatLabel(t)}</th>`).join('')}</tr>`;
-
-        const rows = tenses.map((tense) => {
-          const cols = wordTypes
-            .map((wordType) => {
-              const total = map.get(`${tense}::${wordType}`) || 0;
-              const className = total === 0 ? 'zero' : total >= 3 ? 'good' : 'warn';
-              return `<td class="${className}">${total}</td>`;
-            })
-            .join('');
-
-          return `<tr><th>${formatLabel(tense)}</th>${cols}</tr>`;
-        });
-
-        matrixWrap.innerHTML = `<table><thead>${head}</thead><tbody>${rows.join('')}</tbody></table>`;
       }
 
       function renderTable(vocabulary) {
         if (!Array.isArray(vocabulary) || vocabulary.length === 0) {
-          vocabTableBody.innerHTML = '<tr><td colspan="6">No data available yet.</td></tr>';
+          vocabTableBody.innerHTML = '<tr><td colspan="10" style="text-align: center;">Chưa có dữ liệu từ vựng.</td></tr>';
           return;
         }
 
         vocabTableBody.innerHTML = vocabulary
           .map(
-            (item) => `
+            (item, index) => `
               <tr>
-                <td>${escapeHtml(item.word)}</td>
-                <td>${escapeHtml(item.meaning)}</td>
-                <td>${escapeHtml(formatLabel(item.word_type))}</td>
-                <td>${escapeHtml(formatLabel(item.tense))}</td>
-                <td>${escapeHtml(item.example_sentence || '-')}</td>
-                <td>${formatDate(item.created_at)}</td>
+                <td style="text-align:center;">${index + 1}</td>
+                <td><span class="label-chip">${escapeHtml(item.label || '-')}</span></td>
+                <td style="text-align:center;"><span class="type-pill type-${item.word_type}">${escapeHtml(formatLabel(item.word_type))}</span></td>
+                <td class="font-en">${escapeHtml(item.word)}</td>
+                <td class="font-pronun">${escapeHtml(item.pronunciation || '')}</td>
+                <td class="font-vi">${escapeHtml(item.meaning)}</td>
+                <td style="text-align:center;">
+                  <button class="play-btn" onclick="speakWord('${escapeHtml(item.word.replace(/'/g, "\\'"))}')">Play</button>
+                </td>
+                <td class="small-text">${formatTextarea(item.word_form || '')}</td>
+                <td class="small-text"><strong>${formatTextarea(item.synonym || '')}</strong></td>
+                <td class="small-text">${formatTextarea(item.notes || '')}</td>
               </tr>
             `
           )
@@ -370,13 +221,11 @@ import Footer from '../components/Footer.astro';
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || 'Unable to load data');
+          throw new Error(data.error || 'Lỗi không tải được dữ liệu');
         }
 
-        latestData = data;
         renderSummary(data.stats);
         renderInsights(data.stats);
-        renderMatrix(data.stats);
         renderTable(data.vocabulary);
       }
 
@@ -389,31 +238,33 @@ import Footer from '../components/Footer.astro';
 
         const data = await response.json();
         if (!response.ok) {
-          throw new Error(data.error || 'Unable to save vocabulary');
+          throw new Error(data.error || 'Lỗi khi lưu từ vựng');
         }
       }
 
       vocabForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-
         const formData = new FormData(vocabForm);
         const payload = {
           word: String(formData.get('word') || ''),
           meaning: String(formData.get('meaning') || ''),
           wordType: String(formData.get('wordType') || ''),
-          tense: String(formData.get('tense') || ''),
-          exampleSentence: String(formData.get('exampleSentence') || ''),
+          label: String(formData.get('label') || ''),
+          pronunciation: String(formData.get('pronunciation') || ''),
+          wordForm: String(formData.get('wordForm') || ''),
+          synonym: String(formData.get('synonym') || ''),
           notes: String(formData.get('notes') || '')
         };
 
         try {
-          formStatus.textContent = 'Saving...';
+          formStatus.textContent = 'Đang lưu...';
           await submitVocabulary(payload);
-          formStatus.textContent = 'Saved successfully.';
+          formStatus.textContent = 'Lưu thành công!';
           vocabForm.reset();
           await fetchData(searchInput.value.trim());
         } catch (error) {
-          formStatus.textContent = error instanceof Error ? error.message : 'Something went wrong';
+          formStatus.textContent = error instanceof Error ? error.message : 'Có lỗi xảy ra';
+          formStatus.style.color = '#dc2626';
         }
       });
 
@@ -421,7 +272,7 @@ import Footer from '../components/Footer.astro';
         try {
           await fetchData(searchInput.value.trim());
         } catch (error) {
-          formStatus.textContent = error instanceof Error ? error.message : 'Something went wrong';
+          formStatus.textContent = error instanceof Error ? error.message : 'Có lỗi xảy ra';
         }
       });
 
@@ -429,12 +280,12 @@ import Footer from '../components/Footer.astro';
         try {
           await fetchData(searchInput.value.trim());
         } catch (error) {
-          formStatus.textContent = error instanceof Error ? error.message : 'Something went wrong';
+          formStatus.textContent = error instanceof Error ? error.message : 'Có lỗi xảy ra';
         }
       });
 
       fetchData().catch((error) => {
-        formStatus.textContent = error instanceof Error ? error.message : 'Unable to load initial data';
+        formStatus.textContent = error instanceof Error ? error.message : 'Không kết nối được server';
       });
     </script>
   </body>
@@ -442,10 +293,10 @@ import Footer from '../components/Footer.astro';
 
 <style>
   .english-page {
-    width: min(1100px, calc(100% - 2rem));
+    width: min(1200px, calc(100% - 2rem));
     margin: 0 auto;
     display: grid;
-    gap: 1rem;
+    gap: 1.5rem;
     padding-top: 2rem;
     padding-bottom: 3rem;
   }
@@ -454,7 +305,7 @@ import Footer from '../components/Footer.astro';
     background: linear-gradient(120deg, rgba(2, 132, 199, 0.1), rgba(56, 189, 248, 0.08));
     border: 1px solid rgba(2, 132, 199, 0.18);
     border-radius: 18px;
-    padding: 1.2rem 1.2rem 1.4rem;
+    padding: 1.2rem 1.4rem;
   }
 
   .eyebrow {
@@ -466,53 +317,41 @@ import Footer from '../components/Footer.astro';
     margin: 0;
   }
 
-  .hero h1 {
-    margin: 0.3rem 0 0.5rem;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    color: #0f172a;
-  }
-
-  .sub {
-    margin: 0;
-    color: #334155;
-  }
+  .hero h1 { margin: 0.3rem 0 0.5rem; font-size: clamp(1.5rem, 3vw, 2.2rem); color: #0f172a; }
+  .sub { margin: 0; color: #334155; }
 
   .panel {
     background: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(148, 163, 184, 0.28);
     border-radius: 16px;
-    padding: 1rem;
+    padding: 1.2rem;
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
   }
 
   .vocab-form {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.8rem;
+    gap: 1rem;
   }
 
-  .vocab-form label {
-    display: grid;
-    gap: 0.3rem;
-    font-size: 0.92rem;
-    color: #334155;
-  }
+  .vocab-form label { display: grid; gap: 0.4rem; font-size: 0.95rem; color: #334155; font-weight: 500; }
+  .vocab-form .wide { grid-column: 1 / -1; }
 
-  .vocab-form .wide {
-    grid-column: 1 / -1;
-  }
-
-  input,
-  select,
-  textarea,
-  button {
+  input, select, textarea, button {
     font: inherit;
     border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    padding: 0.55rem 0.65rem;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
     background: #fff;
     color: #0f172a;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
   }
 
   button {
@@ -522,8 +361,11 @@ import Footer from '../components/Footer.astro';
     cursor: pointer;
     font-weight: 700;
     width: fit-content;
-    padding: 0.6rem 1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
   }
+
+  button:hover { opacity: 0.9; }
 
   .ghost-btn {
     background: #f1f5f9;
@@ -531,14 +373,89 @@ import Footer from '../components/Footer.astro';
     border: 1px solid #cbd5e1;
   }
 
-  .status {
-    grid-column: 1 / -1;
-    margin: 0;
-    min-height: 1.2rem;
-    color: #0f766e;
-    font-size: 0.9rem;
+  /* CUSTOM BẢNG (Giống y hệt Excel) */
+  .custom-table-scroll {
+    overflow-x: auto;
+    margin-top: 1rem;
+    border-radius: 8px;
+    border: 1px solid #a3d9b5; /* Màu viền cho tone xanh */
   }
 
+  .vocab-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: #ffffff;
+  }
+
+  .vocab-table th, .vocab-table td {
+    padding: 10px 12px;
+    border-right: 1px dashed #bbf7d0;
+    border-bottom: 1px dashed #bbf7d0;
+  }
+
+  .vocab-table th:last-child, .vocab-table td:last-child {
+    border-right: none;
+  }
+
+  .vocab-table th {
+    background-color: #a3d9b5; /* Xanh lá nhạt Excel */
+    color: #1b5e20;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+  }
+
+  .vocab-table tbody tr:nth-child(even) { background-color: #f0fdf4; } /* Hàng chẵn màu xanh lợt hơn nữa */
+  .vocab-table tbody tr:hover { background-color: #dcfce7; }
+
+  .font-en { font-weight: 700; color: #004085; }
+  .font-vi { font-weight: 700; color: #2e7d32; }
+  .font-pronun { color: #555; }
+  .small-text { font-size: 0.85rem; line-height: 1.4; color: #b45309; }
+
+  .play-btn {
+    background: transparent;
+    border: none;
+    color: #0275d8;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 2px 5px;
+    font-size: 0.9rem;
+  }
+  .play-btn:hover { color: #d9534f; }
+
+  .type-pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .type-noun { background: #d1fae5; color: #065f46; }
+  .type-verb { background: #fee2e2; color: #991b1b; }
+  .type-adjective { background: #e0f2fe; color: #0369a1; }
+  .type-adverb { background: #fef3c7; color: #92400e; }
+  .type-phrase, .type-idiom { background: #f3e8ff; color: #6b21a8; }
+
+  .label-chip {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    color: #334155;
+    white-space: nowrap;
+  }
+
+  /* Thống kê */
   .stats-header {
     display: flex;
     align-items: center;
@@ -548,131 +465,44 @@ import Footer from '../components/Footer.astro';
   }
 
   .stats-grid {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.7rem;
+    gap: 0.8rem;
   }
 
   .card {
-    margin: 0;
     background: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 0.8rem;
+    padding: 1rem;
   }
 
-  .card-label {
-    margin: 0;
-    font-size: 0.8rem;
-    color: #64748b;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-
-  .card-value {
-    margin: 0.2rem 0 0;
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: #0f172a;
-  }
+  .card-label { margin: 0; font-size: 0.8rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+  .card-value { margin: 0.3rem 0 0; font-size: 1.3rem; font-weight: 800; color: #0f172a; }
 
   .insights-box {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     background: #f8fafc;
     border: 1px dashed #94a3b8;
     border-radius: 12px;
-    padding: 0.8rem;
+    padding: 1rem;
   }
 
-  .insights-box h3 {
-    margin: 0 0 0.4rem;
-    font-size: 1rem;
-  }
+  .insights-box h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+  .insights-box ul { margin: 0; padding-left: 1.2rem; color: #334155; }
 
-  .insights-box ul {
-    margin: 0;
-    padding-left: 1.1rem;
-  }
+  .status { grid-column: 1 / -1; margin: 0; color: #0f766e; font-size: 0.95rem; }
 
-  .hint {
-    margin-top: 0;
-    color: #475569;
-  }
 
-  .table-wrap {
-    overflow-x: auto;
-  }
 
-  .tense-accordion {
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .tense-accordion details {
-    border: 1px solid #dbe5f0;
-    border-radius: 12px;
-    background: #f8fafc;
-    padding: 0.15rem 0.8rem 0.7rem;
-  }
-
-  .tense-accordion summary {
-    font-weight: 800;
-    color: #0f172a;
-    cursor: pointer;
-    padding: 0.55rem 0;
-  }
-
-  .tense-accordion ul {
-    margin: 0;
-    padding-left: 1.05rem;
-    display: grid;
-    gap: 0.4rem;
-    color: #334155;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.92rem;
-  }
-
-  th,
-  td {
-    border: 1px solid #dbe5f0;
-    text-align: left;
-    padding: 0.45rem 0.55rem;
-    vertical-align: top;
-  }
-
-  tbody td.zero {
-    background: #fef2f2;
-    color: #991b1b;
-    font-weight: 700;
-  }
-
-  tbody td.warn {
-    background: #fff7ed;
-    color: #9a3412;
-    font-weight: 700;
-  }
-
-  tbody td.good {
-    background: #ecfdf5;
-    color: #065f46;
-    font-weight: 700;
-  }
-
+  /* Responsive Constraints */
   @media (max-width: 900px) {
-    .vocab-form {
-      grid-template-columns: 1fr;
-    }
-
-    .stats-grid {
-      grid-template-columns: 1fr;
-    }
+    .vocab-form { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
   }
 
+  /* TỐI ƯU DARK MODE TÍCH HỢP */
   :global([data-theme='dark']) .hero {
     background: linear-gradient(120deg, rgba(2, 132, 199, 0.18), rgba(14, 165, 233, 0.12));
     border-color: rgba(56, 189, 248, 0.35);
@@ -681,48 +511,49 @@ import Footer from '../components/Footer.astro';
   :global([data-theme='dark']) .hero h1,
   :global([data-theme='dark']) .sub,
   :global([data-theme='dark']) .vocab-form label,
-  :global([data-theme='dark']) .hint,
   :global([data-theme='dark']) .card-value,
-  :global([data-theme='dark']) .card-label,
   :global([data-theme='dark']) .insights-box h3,
-  :global([data-theme='dark']) .insights-box li,
-  :global([data-theme='dark']) .ghost-btn {
+  :global([data-theme='dark']) .insights-box li {
     color: #e2e8f0;
   }
 
   :global([data-theme='dark']) .panel,
   :global([data-theme='dark']) .card,
   :global([data-theme='dark']) .insights-box,
-  :global([data-theme='dark']) .tense-accordion details,
   :global([data-theme='dark']) input,
   :global([data-theme='dark']) select,
-  :global([data-theme='dark']) textarea,
-  :global([data-theme='dark']) .ghost-btn {
+  :global([data-theme='dark']) textarea {
     background: rgba(15, 23, 42, 0.92);
     border-color: #334155;
-  }
-
-  :global([data-theme='dark']) input,
-  :global([data-theme='dark']) select,
-  :global([data-theme='dark']) textarea,
-  :global([data-theme='dark']) option,
-  :global([data-theme='dark']) #searchInput {
     color: #e2e8f0;
   }
 
   :global([data-theme='dark']) input::placeholder,
   :global([data-theme='dark']) textarea::placeholder {
-    color: #94a3b8;
+    color: #64748b;
   }
 
-  :global([data-theme='dark']) th,
-  :global([data-theme='dark']) td {
+  :global([data-theme='dark']) .vocab-table {
+    background: #1e293b;
+  }
+
+  :global([data-theme='dark']) .vocab-table th {
+    background-color: #14532d;
+    color: #bbf7d0;
+  }
+
+  :global([data-theme='dark']) .vocab-table td {
     border-color: #334155;
-    color: #e2e8f0;
   }
 
-  :global([data-theme='dark']) .tense-accordion summary,
-  :global([data-theme='dark']) .tense-accordion ul {
-    color: #e2e8f0;
-  }
+  :global([data-theme='dark']) .vocab-table tbody tr:nth-child(even) { background-color: #0f172a; }
+  :global([data-theme='dark']) .vocab-table tbody tr:hover { background-color: #334155; }
+  
+  :global([data-theme='dark']) .font-en { color: #38bdf8; }
+  :global([data-theme='dark']) .font-vi { color: #4ade80; }
+  :global([data-theme='dark']) .font-pronun { color: #94a3b8; }
+  :global([data-theme='dark']) .small-text { color: #fbbf24; }
+  :global([data-theme='dark']) .play-btn { color: #60a5fa; }
+  :global([data-theme='dark']) .play-btn:hover { color: #f87171; }
+  :global([data-theme='dark']) .ghost-btn { background: #334155; color: #f1f5f9; border-color: #475569; }
 </style>

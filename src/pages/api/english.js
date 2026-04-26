@@ -8,21 +8,10 @@ function json(data, status = 200) {
 }
 
 const WORD_TYPES = ['noun', 'verb', 'adjective', 'adverb', 'phrase', 'idiom'];
-const TENSES = [
-  'present_simple',
-  'present_continuous',
-  'present_perfect',
-  'past_simple',
-  'past_continuous',
-  'past_perfect',
-  'future_simple',
-  'future_continuous',
-  'future_perfect'
-];
 
 let schemaReadyPromise;
 
-function buildInsights(total, byTense, byType, matrix) {
+function buildInsights(total, byLabel, byType, matrix) {
   if (!total) {
     return [
       'No data yet. Add your first 3-5 words to activate smart suggestions.',
@@ -30,34 +19,19 @@ function buildInsights(total, byTense, byType, matrix) {
     ];
   }
 
-  const topTense = byTense[0];
+  const topLabel = byLabel[0];
   const topType = byType[0];
-  const underrepresented = [];
-
-  for (const tense of TENSES) {
-    for (const wordType of WORD_TYPES) {
-      const found = matrix.find((item) => item.tense === tense && item.word_type === wordType);
-      if (!found || found.total === 0) {
-        underrepresented.push({ tense, wordType, total: 0 });
-      }
-    }
-  }
 
   const insights = [];
 
-  if (topTense) {
-    const ratio = Math.round((topTense.total / total) * 100);
-    insights.push(`Strongest tense right now: ${topTense.tense} (${ratio}% of all words).`);
+  if (topLabel) {
+    const ratio = Math.round((topLabel.total / total) * 100);
+    insights.push(`Strongest topic right now: ${topLabel.label} (${ratio}% of all words).`);
   }
 
   if (topType) {
     const ratio = Math.round((topType.total / total) * 100);
     insights.push(`Most studied word type: ${topType.word_type} (${ratio}% of all words).`);
-  }
-
-  if (underrepresented.length > 0) {
-    const sample = underrepresented.slice(0, 3).map((item) => `${item.wordType} + ${item.tense}`);
-    insights.push(`Coverage gaps detected: ${sample.join(', ')}. Prioritize these combinations next.`);
   }
 
   return insights;
@@ -70,6 +44,7 @@ function ensureEnglishSchema() {
 
   if (!schemaReadyPromise) {
     schemaReadyPromise = (async () => {
+      // Bảng cũ vẫn giữ nguyên, không drop
       await sql`
         CREATE TABLE IF NOT EXISTS english_vocabulary (
           id BIGSERIAL PRIMARY KEY,
@@ -83,14 +58,15 @@ function ensureEnglishSchema() {
         );
       `;
 
+      // Thêm các cột mới (tùy chọn IF NOT EXISTS theo Postgres >= 9.6)
+      await sql`ALTER TABLE english_vocabulary ADD COLUMN IF NOT EXISTS label TEXT DEFAULT 'General';`;
+      await sql`ALTER TABLE english_vocabulary ADD COLUMN IF NOT EXISTS pronunciation TEXT;`;
+      await sql`ALTER TABLE english_vocabulary ADD COLUMN IF NOT EXISTS word_form TEXT;`;
+      await sql`ALTER TABLE english_vocabulary ADD COLUMN IF NOT EXISTS synonym TEXT;`;
+
       await sql`
         CREATE INDEX IF NOT EXISTS idx_english_vocab_created_at
         ON english_vocabulary (created_at DESC);
-      `;
-
-      await sql`
-        CREATE INDEX IF NOT EXISTS idx_english_vocab_word_type_tense
-        ON english_vocabulary (word_type, tense);
       `;
     })();
   }
@@ -116,28 +92,29 @@ export async function GET({ request }) {
     if (q) {
       const keyword = `%${q}%`;
       vocabulary = await sql`
-        SELECT id, word, meaning, word_type, tense, example_sentence, notes, created_at
+        SELECT id, word, meaning, word_type, label, pronunciation, word_form, synonym, notes, created_at
         FROM english_vocabulary
         WHERE word ILIKE ${keyword}
-          OR meaning ILIKE ${keyword}
-          OR notes ILIKE ${keyword}
-        ORDER BY created_at DESC
+           OR meaning ILIKE ${keyword}
+           OR notes ILIKE ${keyword}
+           OR label ILIKE ${keyword}
+        ORDER BY created_at ASC
         LIMIT ${limit}
       `;
     } else {
       vocabulary = await sql`
-        SELECT id, word, meaning, word_type, tense, example_sentence, notes, created_at
+        SELECT id, word, meaning, word_type, label, pronunciation, word_form, synonym, notes, created_at
         FROM english_vocabulary
-        ORDER BY created_at DESC
+        ORDER BY id ASC
         LIMIT ${limit}
       `;
     }
 
-    const byTense = await sql`
-      SELECT tense, COUNT(*)::INT AS total
+    const byLabel = await sql`
+      SELECT label, COUNT(*)::INT AS total
       FROM english_vocabulary
-      GROUP BY tense
-      ORDER BY total DESC, tense ASC
+      GROUP BY label
+      ORDER BY total DESC, label ASC
     `;
 
     const byType = await sql`
@@ -148,26 +125,27 @@ export async function GET({ request }) {
     `;
 
     const matrix = await sql`
-      SELECT tense, word_type, COUNT(*)::INT AS total
+      SELECT label, word_type, COUNT(*)::INT AS total
       FROM english_vocabulary
-      GROUP BY tense, word_type
-      ORDER BY tense ASC, word_type ASC
+      GROUP BY label, word_type
+      ORDER BY label ASC, word_type ASC
     `;
 
+    const labels = byLabel.map((i) => i.label);
     const total = Number(vocabulary.length);
-    const insights = buildInsights(total, byTense, byType, matrix);
+    const insights = buildInsights(total, byLabel, byType, matrix);
 
     return json({
       vocabulary,
       stats: {
         total,
-        byTense,
+        byLabel,
         byType,
         matrix,
         insights,
         dictionary: {
           wordTypes: WORD_TYPES,
-          tenses: TENSES
+          labels
         }
       }
     });
@@ -189,30 +167,31 @@ export async function POST({ request }) {
     const word = String(payload?.word || '').trim();
     const meaning = String(payload?.meaning || '').trim();
     const wordType = String(payload?.wordType || '').trim().toLowerCase();
-    const tense = String(payload?.tense || '').trim().toLowerCase();
-    const exampleSentence = String(payload?.exampleSentence || '').trim();
+    
+    // Field mới
+    const label = String(payload?.label || 'Contract').trim();
+    const pronunciation = String(payload?.pronunciation || '').trim();
+    const wordForm = String(payload?.wordForm || '').trim();
+    const synonym = String(payload?.synonym || '').trim();
     const notes = String(payload?.notes || '').trim();
 
-    if (!word || !meaning || !wordType || !tense) {
-      return json({ error: 'word, meaning, wordType, tense are required' }, 400);
+    if (!word || !meaning || !wordType) {
+      return json({ error: 'word, meaning, wordType are required' }, 400);
     }
 
     if (!WORD_TYPES.includes(wordType)) {
       return json({ error: `Invalid wordType. Allowed: ${WORD_TYPES.join(', ')}` }, 400);
     }
 
-    if (!TENSES.includes(tense)) {
-      return json({ error: `Invalid tense. Allowed: ${TENSES.join(', ')}` }, 400);
-    }
-
-    if (word.length > 120 || meaning.length > 500 || exampleSentence.length > 600 || notes.length > 800) {
+    if (word.length > 255 || meaning.length > 500) {
       return json({ error: 'Input too long' }, 400);
     }
 
+    // "tense" bắt buộc theo schema cũ, lưu tạm một giá trị tĩnh để không đổi DDL
     const inserted = await sql`
-      INSERT INTO english_vocabulary (word, meaning, word_type, tense, example_sentence, notes)
-      VALUES (${word}, ${meaning}, ${wordType}, ${tense}, ${exampleSentence || null}, ${notes || null})
-      RETURNING id, word, meaning, word_type, tense, example_sentence, notes, created_at
+      INSERT INTO english_vocabulary (word, meaning, word_type, label, pronunciation, word_form, synonym, notes, tense)
+      VALUES (${word}, ${meaning}, ${wordType}, ${label}, ${pronunciation}, ${wordForm}, ${synonym}, ${notes}, 'none')
+      RETURNING id, word, meaning, word_type, label, pronunciation, word_form, synonym, notes, created_at
     `;
 
     return json({ success: true, item: inserted[0] }, 201);
