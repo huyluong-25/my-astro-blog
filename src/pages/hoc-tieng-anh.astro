@@ -119,17 +119,17 @@ import Footer from '../components/Footer.astro';
 
     <script>
       const apiUrl = '/api/english';
-      const vocabForm = document.getElementById('vocabForm');
-      const formStatus = document.getElementById('formStatus');
-      const vocabTableBody = document.getElementById('vocabTableBody');
-      const summaryCards = document.getElementById('summaryCards');
-      const insightList = document.getElementById('insightList');
-      const searchInput = document.getElementById('searchInput');
-      const reloadBtn = document.getElementById('reloadBtn');
+      const vocabForm = document.getElementById('vocabForm') as HTMLFormElement;
+      const formStatus = document.getElementById('formStatus') as HTMLElement;
+      const vocabTableBody = document.getElementById('vocabTableBody') as HTMLElement;
+      const summaryCards = document.getElementById('summaryCards') as HTMLElement;
+      const insightList = document.getElementById('insightList') as HTMLElement;
+      const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+      const reloadBtn = document.getElementById('reloadBtn') as HTMLButtonElement;
 
       let synth = window.speechSynthesis;
 
-      window.speakWord = function(word) {
+      (window as any).speakWord = function(word: string) {
         if (!synth) {
           alert('Trình duyệt của bạn không hỗ trợ Text-to-Speech.');
           return;
@@ -141,7 +141,7 @@ import Footer from '../components/Footer.astro';
         synth.speak(utterThis);
       };
 
-      function escapeHtml(value) {
+      function escapeHtml(value: any) {
         return String(value || '')
           .replace(/&/g, '&amp;')
           .replace(/</g, '&lt;')
@@ -150,15 +150,15 @@ import Footer from '../components/Footer.astro';
           .replace(/'/g, '&#39;');
       }
 
-      function formatTextarea(value) {
+      function formatTextarea(value: any) {
         return escapeHtml(value).split('\n').join('<br/>');
       }
 
-      function formatLabel(value) {
-        return String(value || '').replaceAll('_', ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+      function formatLabel(value: any) {
+        return String(value || '').replaceAll('_', ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
       }
 
-      function renderSummary(stats) {
+      function renderSummary(stats: any) {
         const topLabel = stats.byLabel && stats.byLabel.length ? stats.byLabel[0] : null;
         const topType = stats.byType && stats.byType.length ? stats.byType[0] : null;
 
@@ -178,16 +178,16 @@ import Footer from '../components/Footer.astro';
         `;
       }
 
-      function renderInsights(stats) {
+      function renderInsights(stats: any) {
         const lines = Array.isArray(stats.insights) ? stats.insights : [];
         if (!lines.length) {
           insightList.innerHTML = '<li>Chưa có gợi ý nào.</li>';
           return;
         }
-        insightList.innerHTML = lines.map((line) => `<li>${escapeHtml(line)}</li>`).join('');
+        insightList.innerHTML = lines.map((line: string) => `<li>${escapeHtml(line)}</li>`).join('');
       }
 
-      function renderTable(vocabulary) {
+      function renderTable(vocabulary: any[]) {
         if (!Array.isArray(vocabulary) || vocabulary.length === 0) {
           vocabTableBody.innerHTML = '<tr><td colspan="10" style="text-align: center;">Chưa có dữ liệu từ vựng.</td></tr>';
           return;
@@ -215,7 +215,7 @@ import Footer from '../components/Footer.astro';
           .join('');
       }
 
-      async function fetchData(query = '') {
+      async function fetchData(query: string = '') {
         const url = query ? `${apiUrl}?q=${encodeURIComponent(query)}` : apiUrl;
         const response = await fetch(url);
         const data = await response.json();
@@ -229,7 +229,7 @@ import Footer from '../components/Footer.astro';
         renderTable(data.vocabulary);
       }
 
-      async function submitVocabulary(payload) {
+      async function submitVocabulary(payload: any) {
         const response = await fetch(apiUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -306,6 +306,7 @@ import Footer from '../components/Footer.astro';
     border: 1px solid rgba(2, 132, 199, 0.18);
     border-radius: 18px;
     padding: 1.2rem 1.4rem;
+    animation: fadeInUp 0.6s ease-out backwards;
   }
 
   .eyebrow {
@@ -326,6 +327,18 @@ import Footer from '../components/Footer.astro';
     border-radius: 16px;
     padding: 1.2rem;
     box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  }
+
+  .form-panel {
+    animation: fadeInUp 0.6s ease-out 0.1s backwards;
+  }
+
+  .stats-panel {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+  }
+
+  .list-panel {
+    animation: fadeInUp 0.6s ease-out 0.3s backwards;
   }
 
   .vocab-form {
@@ -373,26 +386,28 @@ import Footer from '../components/Footer.astro';
     border: 1px solid #cbd5e1;
   }
 
-  /* CUSTOM BẢNG (Giống y hệt Excel) */
+  /* CUSTOM BẢNG (Giao diện hiện đại) */
   .custom-table-scroll {
     overflow-x: auto;
     margin-top: 1rem;
-    border-radius: 8px;
-    border: 1px solid #a3d9b5; /* Màu viền cho tone xanh */
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
 
   .vocab-table {
     width: 100%;
     min-width: 1000px;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     background: #ffffff;
   }
 
   .vocab-table th, .vocab-table td {
-    padding: 10px 12px;
-    border-right: 1px dashed #bbf7d0;
-    border-bottom: 1px dashed #bbf7d0;
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    text-align: left;
+    vertical-align: middle;
   }
 
   .vocab-table th:last-child, .vocab-table td:last-child {
@@ -400,36 +415,46 @@ import Footer from '../components/Footer.astro';
   }
 
   .vocab-table th {
-    background-color: #a3d9b5; /* Xanh lá nhạt Excel */
-    color: #1b5e20;
+    background-color: #f8fafc;
+    color: #475569;
     text-transform: uppercase;
-    font-size: 0.85rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
     position: sticky;
     top: 0;
+    border-bottom: 2px solid #e2e8f0;
+    z-index: 10;
   }
 
-  .vocab-table tbody tr:nth-child(even) { background-color: #f0fdf4; } /* Hàng chẵn màu xanh lợt hơn nữa */
-  .vocab-table tbody tr:hover { background-color: #dcfce7; }
+  .vocab-table tbody tr {
+    transition: all 0.2s ease;
+  }
+  .vocab-table tbody tr:nth-child(even) { background-color: #fafaf9; }
+  .vocab-table tbody tr:hover { background-color: #f0f9ff; }
 
-  .font-en { font-weight: 700; color: #004085; }
-  .font-vi { font-weight: 700; color: #2e7d32; }
+  .font-en { font-weight: 700; color: #0f172a; }
+  .font-vi { font-weight: 600; color: #334155; }
   .font-pronun { color: #555; }
   .small-text { font-size: 0.85rem; line-height: 1.4; color: #b45309; }
 
-  .play-btn {
-    background: transparent;
-    border: none;
-    color: #0275d8;
-    font-weight: bold;
-    text-decoration: underline;
+  button.play-btn {
+    background: rgba(2, 132, 199, 0.1);
+    border: 1px solid rgba(2, 132, 199, 0.2);
+    color: #0284c7;
+    font-weight: 600;
+    text-decoration: none;
     cursor: pointer;
-    padding: 2px 5px;
-    font-size: 0.9rem;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    transition: all 0.2s;
   }
-  .play-btn:hover { color: #d9534f; }
+  button.play-btn:hover { 
+    background: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+  }
 
   .type-pill {
     display: inline-block;
@@ -533,27 +558,41 @@ import Footer from '../components/Footer.astro';
     color: #64748b;
   }
 
+  :global([data-theme='dark']) .custom-table-scroll {
+    border-color: #334155;
+  }
+
   :global([data-theme='dark']) .vocab-table {
     background: #1e293b;
   }
 
   :global([data-theme='dark']) .vocab-table th {
-    background-color: #14532d;
-    color: #bbf7d0;
+    background-color: #0f172a;
+    color: #94a3b8;
+    border-bottom-color: #334155;
   }
 
+  :global([data-theme='dark']) .vocab-table th,
   :global([data-theme='dark']) .vocab-table td {
-    border-color: #334155;
+    border-bottom: 1px solid #334155;
   }
 
   :global([data-theme='dark']) .vocab-table tbody tr:nth-child(even) { background-color: #0f172a; }
-  :global([data-theme='dark']) .vocab-table tbody tr:hover { background-color: #334155; }
+  :global([data-theme='dark']) .vocab-table tbody tr:hover { background-color: rgba(56, 189, 248, 0.1); }
   
-  :global([data-theme='dark']) .font-en { color: #38bdf8; }
-  :global([data-theme='dark']) .font-vi { color: #4ade80; }
+  :global([data-theme='dark']) .font-en { color: #f8fafc; }
+  :global([data-theme='dark']) .font-vi { color: #cbd5e1; }
   :global([data-theme='dark']) .font-pronun { color: #94a3b8; }
   :global([data-theme='dark']) .small-text { color: #fbbf24; }
-  :global([data-theme='dark']) .play-btn { color: #60a5fa; }
-  :global([data-theme='dark']) .play-btn:hover { color: #f87171; }
+  :global([data-theme='dark']) button.play-btn { 
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.3);
+    color: #38bdf8; 
+  }
+  :global([data-theme='dark']) button.play-btn:hover { 
+    background: #0ea5e9;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.4);
+  }
   :global([data-theme='dark']) .ghost-btn { background: #334155; color: #f1f5f9; border-color: #475569; }
 </style>

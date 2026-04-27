@@ -14,9 +14,8 @@ export default defineConfig({
 		host: true,
 		port: 8788,
 	},
-	preview: {
-		host: true,
-		port: 8788,
+	image: {
+		domains: ['images.unsplash.com']
 	},
 	integrations: [mdx(), sitemap()],
 });

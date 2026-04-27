@@ -24,5 +24,9 @@
     "sharp": "^0.34.3",
     "typed.js": "^3.0.0",
     "vanilla-tilt": "^1.8.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^5.9.3"
   }
 }
