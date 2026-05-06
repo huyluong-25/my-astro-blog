@@ -1,144 +1,726 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import { Image } from 'astro:assets';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import heroImage from '../assets/about-hero.jpg';
 ---
 
-<Layout
-	title="Về mình - Huy"
-	description="Dòng giới thiệu về bản thân, công việc và đam mê của mình."
-	pubDate={new Date('April 07 2026')}
-	heroImage={heroImage}>
-	<section class="about-content">
-		<p>
-			Chào mọi người! Mình là <strong>Huy</strong> (2004). Hiện mình là 
-			<strong>IT Support tại TiniGroup</strong>. Đây là nơi mình chia sẻ kiến thức IT 
-			và những sở thích cá nhân.
-		</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Về mình - Huy" description="Dòng giới thiệu về bản thân, công việc và đam mê của mình." />
+	</head>
+	<body>
+		<Header />
 
-		<h2>💻 Hành trình IT & Công nghệ</h2>
-		<p>
-			Mình yêu thích tìm hiểu về hệ thống mạng, bảo mật và các giải pháp ảo hóa như 
-			<strong>Proxmox</strong>. Việc tự động hóa quy trình với Docker và Jenkins cũng là mảng mình đang đào sâu.
-		</p>
-		
-		<blockquote class="custom-quote">
-			"IT không chỉ là sửa máy, đó là giải quyết vấn đề bằng tư duy logic."
-		</blockquote>
+		<!-- HERO -->
+		<section class="about-hero hero-banner" id="aboutHero">
+			<Image class="about-hero-img" src={heroImage} alt="About hero" width={1920} height={960} loading="eager" />
+			<div class="about-hero-overlay"></div>
+			<div class="about-hero-content">
+				<span class="hero-label">About</span>
+				<h1 class="hero-heading">Xin Chào, Mình Là Huy</h1>
+				<p class="hero-sub">IT Support · Badminton · Learner</p>
+			</div>
+		</section>
 
-		<h2>🏸 Cầu lông - Năng lượng mỗi ngày</h2>
-		<p>
-			Ngoài giờ làm, mình thường xuyên có mặt trên sân cầu lông. Những cú <strong>Smash</strong> 
-			uy lực giúp mình giải tỏa áp lực và duy trì sự nhạy bén.
-		</p>
+		<main>
+			<!-- INTRO -->
+			<section class="section" data-reveal>
+				<div class="intro-card">
+					<span class="intro-icon">💻</span>
+					<div>
+						<p>Chào mọi người! Mình là <strong>Huy</strong> (2004). Hiện mình là <strong>IT Support tại TiniGroup</strong>. Đây là nơi mình chia sẻ kiến thức IT và những sở thích cá nhân.</p>
+					</div>
+				</div>
+			</section>
 
-		<h2>📚 Mục tiêu cá nhân</h2>
-		<ul>
-			<li>Nâng cao kỹ năng quản trị hệ thống (System Admin).</li>
-			<li>Chinh phục chứng chỉ <strong>TOEIC</strong> để đọc hiểu tài liệu IT tốt hơn.</li>
-		</ul>
+			<hr class="section-divider" data-reveal />
 
-		<h2>🛠️ Kỹ năng chuyên môn</h2>
-		<div class="table-container">
-			<table>
-				<thead>
-					<tr>
-						<th>Lĩnh vực</th>
-						<th>Công nghệ / Kỹ năng</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><strong>Hệ thống</strong></td>
-						<td>Windows Server, Linux, Proxmox, VMware</td>
-					</tr>
-					<tr>
-						<td><strong>Mạng</strong></td>
-						<td>DNS, DHCP, Firewall, VPN, MikroTik</td>
-					</tr>
-					<tr>
-						<td><strong>DevOps</strong></td>
-						<td>Docker, Jenkins, Git, Nginx</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</section>
-</Layout>
+			<!-- IT JOURNEY -->
+			<section class="section" id="journey" data-reveal>
+				<div class="section-head">
+					<div>
+						<span class="section-label">Journey</span>
+						<h2>Hành Trình IT & Công Nghệ</h2>
+					</div>
+				</div>
+				<div class="timeline" data-stagger>
+					<div class="tl-item">
+						<div class="tl-dot"></div>
+						<div class="tl-card">
+							<h3>IT Support @ TiniGroup</h3>
+							<p>Quản trị hệ thống, xử lý sự cố, hỗ trợ kỹ thuật cho toàn bộ công ty.</p>
+						</div>
+					</div>
+					<div class="tl-item">
+						<div class="tl-dot"></div>
+						<div class="tl-card">
+							<h3>Proxmox & Ảo Hóa</h3>
+							<p>Tìm hiểu và triển khai các giải pháp ảo hóa, tối ưu tài nguyên hệ thống.</p>
+						</div>
+					</div>
+					<div class="tl-item">
+						<div class="tl-dot"></div>
+						<div class="tl-card">
+							<h3>Docker & Jenkins</h3>
+							<p>Tự động hóa quy trình với container và CI/CD pipeline.</p>
+						</div>
+					</div>
+				</div>
+			</section>
 
-<style is:global>
-	/* --- ABOUT PAGE SPECIFIC STYLES --- */
-	/* Only styles unique to About page. Shared prose styles are in global.css & BlogPost.astro */
+			<hr class="section-divider" data-reveal />
 
-	/* Custom blockquote with shimmer effect */
-	.custom-quote {
-		border-left: 5px solid #0284c7 !important;
-		background: linear-gradient(135deg, #f0f9ff 0%, #f1f5f9 100%);
-		padding: 1.2rem 1.8rem !important;
-		border-radius: 4px 15px 15px 4px;
-		margin: 1.8rem 0 !important;
-		font-style: italic;
-		color: #334155;
-		transition: all 0.3s ease;
+			<!-- SKILLS -->
+			<section class="section" id="skills" data-reveal>
+				<div class="section-head">
+					<div>
+						<span class="section-label">Skills</span>
+						<h2>Kỹ Năng Chuyên Môn</h2>
+					</div>
+				</div>
+				<div class="skills-grid" data-stagger>
+					<div class="skill-card">
+						<span class="skill-icon">🖥️</span>
+						<h3>Hệ Thống</h3>
+						<ul>
+							<li>Windows Server</li>
+							<li>Linux</li>
+							<li>Proxmox</li>
+							<li>VMware</li>
+						</ul>
+					</div>
+					<div class="skill-card">
+						<span class="skill-icon">🌐</span>
+						<h3>Mạng</h3>
+						<ul>
+							<li>DNS / DHCP</li>
+							<li>Firewall</li>
+							<li>VPN</li>
+							<li>MikroTik</li>
+						</ul>
+					</div>
+					<div class="skill-card">
+						<span class="skill-icon">⚙️</span>
+						<h3>DevOps</h3>
+						<ul>
+							<li>Docker</li>
+							<li>Jenkins</li>
+							<li>Git</li>
+							<li>Nginx</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<hr class="section-divider" data-reveal />
+
+			<!-- HOBBIES & GOALS -->
+			<section class="section" id="life" data-reveal>
+				<div class="section-head">
+					<div>
+						<span class="section-label">Life</span>
+						<h2>Sở Thích & Mục Tiêu</h2>
+					</div>
+				</div>
+				<div class="duo-grid" data-stagger>
+					<div class="duo-card">
+						<span class="duo-icon">🏸</span>
+						<h3>Cầu Lông</h3>
+						<p>Ngoài giờ làm, mình thường xuyên có mặt trên sân cầu lông. Những cú <strong>Smash</strong> uy lực giúp mình giải tỏa áp lực và duy trì sự nhạy bén.</p>
+					</div>
+					<div class="duo-card">
+						<span class="duo-icon">📚</span>
+						<h3>Mục Tiêu</h3>
+						<ul>
+							<li>Nâng cao kỹ năng quản trị hệ thống (System Admin).</li>
+							<li>Chinh phục chứng chỉ <strong>TOEIC</strong> để đọc hiểu tài liệu IT tốt hơn.</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- QUOTE -->
+			<section class="section" data-reveal>
+				<blockquote class="about-quote">
+					"IT không chỉ là sửa máy, đó là giải quyết vấn đề bằng tư duy logic."
+				</blockquote>
+			</section>
+
+			<!-- STATS -->
+			<section class="stats-bar" data-reveal>
+				<div class="stat">
+					<span class="stat-val">2004</span>
+					<span class="stat-lbl">Born</span>
+				</div>
+				<div class="stat-sep"></div>
+				<div class="stat">
+					<span class="stat-val">TiniGroup</span>
+					<span class="stat-lbl">Company</span>
+				</div>
+				<div class="stat-sep"></div>
+				<div class="stat">
+					<span class="stat-val">🏸</span>
+					<span class="stat-lbl">Passion</span>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+
+		<script is:inline>
+			(function() {
+				function initReveal() {
+					var reveals = document.querySelectorAll('[data-reveal]');
+					var staggers = document.querySelectorAll('[data-stagger]');
+					if (!reveals.length) return;
+
+					var observer = new IntersectionObserver(function(entries) {
+						entries.forEach(function(entry) {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('revealed');
+								observer.unobserve(entry.target);
+							}
+						});
+					}, { threshold: 0.05 });
+
+					reveals.forEach(function(el) { observer.observe(el); });
+
+					staggers.forEach(function(grid) {
+						var kids = grid.children;
+						for (var i = 0; i < kids.length; i++) {
+							kids[i].style.transitionDelay = (i * 120) + 'ms';
+							observer.observe(kids[i]);
+						}
+					});
+				}
+
+				if (document.readyState === 'complete') {
+					setTimeout(initReveal, 50);
+				} else {
+					window.addEventListener('load', function() { setTimeout(initReveal, 50); });
+				}
+				document.addEventListener('astro:page-load', function() { setTimeout(initReveal, 50); });
+			})();
+		</script>
+	</body>
+</html>
+
+<style>
+	/* ===== PAGE BACKGROUND ===== */
+	body { background: #fafbfc; transition: background 0.3s; }
+	[data-theme='dark'] body { background: #0c1222; }
+
+	/* ===== HERO ===== */
+	.about-hero {
 		position: relative;
+		width: 100%;
+		height: 60vh;
+		min-height: 380px;
+		max-height: 700px;
 		overflow: hidden;
+		background: #000;
 	}
 
-	.custom-quote::before {
-		content: '';
+	.about-hero-img {
 		position: absolute;
-		top: 0;
-		left: -100%;
+		inset: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+		object-fit: cover;
+		border-radius: 0 !important;
+		box-shadow: none !important;
+	}
+
+	.about-hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
+		z-index: 1;
+	}
+
+	.about-hero-content {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 0 2rem;
+	}
+
+	.hero-label {
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 4px;
+		color: rgba(255,255,255,0.7);
+		margin-bottom: 0.8rem;
+		opacity: 0;
+		transform: translateY(18px);
+		animation: heroFadeIn 1s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+	}
+
+	.hero-heading {
+		font-family: 'Inter', system-ui, sans-serif;
+		font-size: clamp(2rem, 5vw, 3.8rem);
+		font-weight: 900;
+		color: #fff;
+		letter-spacing: 4px;
+		text-transform: uppercase;
+		margin: 0 0 0.8rem;
+		text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+		opacity: 0;
+		transform: translateY(28px) scale(0.97);
+		animation: heroFadeIn 1s cubic-bezier(0.16,1,0.3,1) 0.25s forwards;
+	}
+
+	.hero-sub {
+		font-size: clamp(0.9rem, 2vw, 1.2rem);
+		color: rgba(255,255,255,0.85);
+		letter-spacing: 2px;
+		margin: 0;
+		text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+		opacity: 0;
+		transform: translateY(18px);
+		animation: heroFadeIn 1s cubic-bezier(0.16,1,0.3,1) 0.45s forwards;
+	}
+
+	@keyframes heroFadeIn {
+		to { opacity: 1; transform: translateY(0) scale(1); }
+	}
+
+	/* ===== MAIN ===== */
+	main {
+		width: 100%;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 5rem 2rem 3rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	/* ===== SECTION ===== */
+	.section { margin-bottom: 4rem; }
+
+	.section-head {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		gap: 1rem;
+	}
+
+	.section-label {
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		color: #0284c7;
+		margin-bottom: 0.3rem;
+	}
+	[data-theme='dark'] .section-label { color: #38bdf8; }
+
+	.section-head h2 {
+		font-size: 1.8rem;
+		font-weight: 800;
+		color: #0f172a;
+		margin: 0;
+		line-height: 1.2;
+		transition: color 0.3s;
+	}
+	[data-theme='dark'] .section-head h2 { color: #f1f5f9; }
+
+	/* ===== DIVIDER ===== */
+	.section-divider {
+		border: none;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+		margin: 0 0 4rem;
+	}
+	[data-theme='dark'] .section-divider {
+		background: linear-gradient(90deg, transparent, #1e3048, transparent);
+	}
+
+	/* ===== INTRO CARD ===== */
+	.intro-card {
+		display: flex;
+		align-items: flex-start;
+		gap: 1.5rem;
+		padding: 2rem 2.5rem;
+		border-radius: 20px;
+		background: #fff;
+		border: 1px solid #e8ecf1;
+		transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+	}
+	.intro-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+	}
+	[data-theme='dark'] .intro-card {
+		background: #162032;
+		border-color: #1e3048;
+	}
+	[data-theme='dark'] .intro-card:hover {
+		box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+	}
+	.intro-icon {
+		font-size: 2.5rem;
+		flex-shrink: 0;
+		line-height: 1;
+	}
+	.intro-card p {
+		margin: 0;
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: #334155;
+		transition: color 0.3s;
+	}
+	[data-theme='dark'] .intro-card p { color: #cbd5e1; }
+	.intro-card strong { color: #0f172a; transition: color 0.3s; }
+	[data-theme='dark'] .intro-card strong { color: #f1f5f9; }
+
+	/* ===== TIMELINE ===== */
+	.timeline {
+		position: relative;
+		padding-left: 2.5rem;
+	}
+	.timeline::before {
+		content: '';
+		position: absolute;
+		left: 9px;
+		top: 8px;
+		bottom: 8px;
+		width: 2px;
+		background: linear-gradient(180deg, #0284c7, #38bdf8);
+		border-radius: 2px;
+	}
+	[data-theme='dark'] .timeline::before {
+		background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+	}
+
+	.tl-item {
+		position: relative;
+		margin-bottom: 1.5rem;
+	}
+	.tl-item:last-child { margin-bottom: 0; }
+
+	.tl-dot {
+		position: absolute;
+		left: -2.5rem;
+		top: 1.2rem;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #0284c7, #0ea5e9);
+		border: 3px solid #fff;
+		box-shadow: 0 0 0 3px rgba(2,132,199,0.2);
+		z-index: 1;
+		transition: transform 0.3s;
+	}
+	[data-theme='dark'] .tl-dot {
+		border-color: #0c1222;
+		box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+	}
+	.tl-item:hover .tl-dot { transform: scale(1.25); }
+
+	.tl-card {
+		padding: 1.3rem 1.5rem;
+		border-radius: 14px;
+		background: #fff;
+		border: 1px solid #e8ecf1;
+		transition: all 0.35s cubic-bezier(0.165,0.84,0.44,1);
+	}
+	.tl-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+		border-color: rgba(2,132,199,0.2);
+	}
+	[data-theme='dark'] .tl-card { background: #162032; border-color: #1e3048; }
+	[data-theme='dark'] .tl-card:hover {
+		box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+		border-color: rgba(56,189,248,0.2);
+	}
+
+	.tl-card h3 {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: #0f172a;
+		margin: 0 0 0.4rem;
+		transition: color 0.3s;
+	}
+	[data-theme='dark'] .tl-card h3 { color: #f1f5f9; }
+
+	.tl-card p {
+		font-size: 0.9rem;
+		color: #64748b;
+		margin: 0;
+		line-height: 1.55;
+	}
+	[data-theme='dark'] .tl-card p { color: #94a3b8; }
+
+	/* ===== SKILLS GRID ===== */
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.skill-card {
+		padding: 1.8rem 1.5rem;
+		border-radius: 16px;
+		background: #fff;
+		border: 1px solid #e8ecf1;
+		text-align: center;
+		transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+	}
+	.skill-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+		border-color: rgba(2,132,199,0.25);
+	}
+	[data-theme='dark'] .skill-card { background: #162032; border-color: #1e3048; }
+	[data-theme='dark'] .skill-card:hover {
+		box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+		border-color: rgba(56,189,248,0.25);
+	}
+
+	.skill-icon {
+		font-size: 2.2rem;
+		display: block;
+		margin-bottom: 0.8rem;
+		transition: transform 0.3s;
+	}
+	.skill-card:hover .skill-icon { transform: scale(1.15) rotate(-5deg); }
+
+	.skill-card h3 {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: #0f172a;
+		margin: 0 0 0.8rem;
+		transition: color 0.3s;
+	}
+	[data-theme='dark'] .skill-card h3 { color: #f1f5f9; }
+
+	.skill-card ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.skill-card li {
+		font-size: 0.88rem;
+		color: #64748b;
+		padding: 0.3rem 0;
+		border-bottom: 1px solid #f1f5f9;
+		transition: color 0.3s, border-color 0.3s;
+	}
+	.skill-card li:last-child { border-bottom: none; }
+	[data-theme='dark'] .skill-card li { color: #94a3b8; border-bottom-color: #1e3048; }
+
+	/* ===== DUO GRID ===== */
+	.duo-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5rem;
+	}
+
+	.duo-card {
+		padding: 2rem 1.8rem;
+		border-radius: 16px;
+		background: #fff;
+		border: 1px solid #e8ecf1;
+		transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+	}
+	.duo-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+		border-color: rgba(2,132,199,0.2);
+	}
+	[data-theme='dark'] .duo-card { background: #162032; border-color: #1e3048; }
+	[data-theme='dark'] .duo-card:hover {
+		box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+		border-color: rgba(56,189,248,0.2);
+	}
+
+	.duo-icon {
+		font-size: 2.2rem;
+		display: block;
+		margin-bottom: 0.6rem;
+	}
+
+	.duo-card h3 {
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: #0f172a;
+		margin: 0 0 0.6rem;
+		transition: color 0.3s;
+	}
+	[data-theme='dark'] .duo-card h3 { color: #f1f5f9; }
+
+	.duo-card p {
+		font-size: 0.92rem;
+		color: #64748b;
+		margin: 0;
+		line-height: 1.6;
+	}
+	[data-theme='dark'] .duo-card p { color: #94a3b8; }
+
+	.duo-card ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.duo-card li {
+		font-size: 0.92rem;
+		color: #64748b;
+		padding: 0.4rem 0;
+		padding-left: 1.2rem;
+		position: relative;
+		line-height: 1.55;
+		transition: color 0.3s;
+	}
+	.duo-card li::before {
+		content: '→';
+		position: absolute;
+		left: 0;
+		color: #0284c7;
+		font-weight: 700;
+	}
+	[data-theme='dark'] .duo-card li { color: #94a3b8; }
+	[data-theme='dark'] .duo-card li::before { color: #38bdf8; }
+	.duo-card strong { color: #0f172a; transition: color 0.3s; }
+	[data-theme='dark'] .duo-card strong { color: #f1f5f9; }
+
+	/* ===== QUOTE ===== */
+	.about-quote {
+		border-left: 5px solid #0284c7;
+		background: linear-gradient(135deg, #f0f9ff 0%, #f1f5f9 100%);
+		padding: 1.5rem 2rem;
+		border-radius: 4px 16px 16px 4px;
+		margin: 0;
+		font-style: italic;
+		font-size: 1.1rem;
+		color: #334155;
+		text-align: center;
+		position: relative;
+		overflow: hidden;
+		transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+	}
+	.about-quote:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 30px rgba(2,132,199,0.12);
+	}
+	.about-quote::before {
+		content: '';
+		position: absolute;
+		top: 0; left: -100%;
+		width: 100%; height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
 		transition: left 0.5s ease;
 	}
-
-	.custom-quote:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 12px 30px rgba(2, 132, 199, 0.15);
-		border-left-color: #0369a1;
-	}
-
-	.custom-quote:hover::before {
-		left: 100%;
-	}
-
-	[data-theme='dark'] .custom-quote {
-		background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.5));
+	.about-quote:hover::before { left: 100%; }
+	[data-theme='dark'] .about-quote {
+		background: linear-gradient(135deg, rgba(30,41,59,0.7), rgba(30,41,59,0.5));
 		border-left-color: #38bdf8;
 		color: #cbd5e1;
 	}
-
-	[data-theme='dark'] .custom-quote:hover {
-		box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
-		border-left-color: #0ea5e9;
+	[data-theme='dark'] .about-quote:hover {
+		box-shadow: 0 12px 30px rgba(56,189,248,0.12);
 	}
 
-	/* About page table container */
-	.table-container {
-		margin-top: 1.5rem;
-		overflow-x: auto;
+	/* ===== STATS BAR ===== */
+	.stats-bar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2.5rem;
+		padding: 3rem 0;
+		margin-top: 1rem;
+	}
+	.stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+	.stat-val {
+		font-size: 1.6rem;
+		font-weight: 900;
+		color: #0f172a;
+		line-height: 1;
+		transition: color 0.3s;
+	}
+	[data-theme='dark'] .stat-val { color: #f1f5f9; }
+	.stat-lbl {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: #94a3b8;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+	}
+	.stat-sep {
+		width: 1px;
+		height: 40px;
+		background: #e2e8f0;
+		transition: background 0.3s;
+	}
+	[data-theme='dark'] .stat-sep { background: #1e3048; }
+
+	/* ===== RESPONSIVE ===== */
+	@media (max-width: 900px) {
+		.skills-grid { grid-template-columns: repeat(2, 1fr); }
 	}
 
-	.table-container table {
-		border: 1px solid #e2e8f0;
-		border-radius: 10px;
-		overflow: hidden;
-		border-spacing: 0;
+	@media (max-width: 640px) {
+		main { padding: 3rem 1.2rem 2rem; }
+		.section-head h2 { font-size: 1.4rem; }
+		.skills-grid { grid-template-columns: 1fr; }
+		.duo-grid { grid-template-columns: 1fr; }
+		.intro-card { flex-direction: column; padding: 1.5rem; }
+		.stats-bar { gap: 1.5rem; }
+		.stat-val { font-size: 1.3rem; }
+		.about-hero { height: 50vh; min-height: 320px; }
 	}
 
-	.table-container tbody tr {
-		transition: all 0.3s ease;
+	@media (max-width: 420px) {
+		main { padding: 2.5rem 1rem 1.5rem; }
+		.section-head h2 { font-size: 1.2rem; }
+		.about-hero { height: 45vh; }
+	}
+</style>
+
+<style is:global>
+	/* Override global.css main width for About page */
+	body:has(.about-hero) main {
+		width: 100% !important;
+		max-width: 1100px !important;
+		padding: 5rem 2rem 3rem !important;
 	}
 
-	.table-container tbody tr:hover {
-		background-color: rgba(2, 132, 199, 0.08);
-		box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+	/* ===== SCROLL REVEAL ===== */
+	[data-reveal],
+	[data-stagger] > * {
+		opacity: 0;
+		transform: translateY(32px);
+		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+		            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+		will-change: opacity, transform;
 	}
 
-	[data-theme='dark'] .table-container tbody tr:hover {
-		background-color: rgba(56, 189, 248, 0.1);
-		box-shadow: 0 4px 12px rgba(56, 189, 248, 0.12);
+	[data-reveal].revealed,
+	[data-stagger] > .revealed {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+
+	hr[data-reveal] {
+		transform: scaleX(0);
+		transform-origin: center;
+	}
+
+	hr[data-reveal].revealed {
+		opacity: 1 !important;
+		transform: scaleX(1) !important;
 	}
 </style>
