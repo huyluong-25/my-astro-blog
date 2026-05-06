@@ -3,6 +3,10 @@
   Optimized for Arial & Liquid Glass Hover Effects
 */
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --accent: #0284c7;
     --accent-dark: #0369a1;
