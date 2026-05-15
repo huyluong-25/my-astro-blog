@@ -142,6 +142,45 @@ const hasCommentSlug = typeof slug === 'string' && slug.trim().length > 0;
 				box-shadow: 0 8px 20px rgba(56, 189, 248, 0.1);
 			}
 
+			/* Mobile responsive */
+			@media (max-width: 720px) {
+				.prose {
+					padding: 0.6em 0.3em;
+				}
+
+				.title h1 {
+					font-size: 1.5em;
+				}
+
+				.prose h2 {
+					font-size: 1.25em;
+					margin-top: 1.5rem !important;
+				}
+
+				/* Bảng tự cuộn ngang */
+				.prose table {
+					display: block;
+					overflow-x: auto;
+					-webkit-overflow-scrolling: touch;
+				}
+
+				/* Blockquote hover off on mobile */
+				.prose blockquote:hover {
+					transform: none;
+					box-shadow: none;
+				}
+			}
+
+			@media (max-width: 420px) {
+				.title h1 {
+					font-size: 1.3em;
+				}
+
+				.prose {
+					padding: 0.4em 0.1em;
+				}
+			}
+
 		</style>
 	</head>
 

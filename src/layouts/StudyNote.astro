@@ -242,12 +242,76 @@ const { title, description, pubDate } = Astro.props;
       /* Responsive */
       @media (max-width: 760px) {
         .prose {
-          padding: 0.8em 0.6em 1.4em;
+          padding: 0.8em 0.5em 1.4em;
           line-height: 1.68;
         }
 
         .breadcrumb {
           margin-top: 1rem;
+          padding: 0 0.5em;
+        }
+
+        .title h1 {
+          font-size: 1.4em;
+        }
+
+        .title .desc-badge {
+          font-size: 0.85rem;
+          padding: 5px 12px;
+        }
+
+        /* Bảng trên mobile - cuộn ngang mượt */
+        .prose table {
+          display: block;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          font-size: 0.88rem;
+          white-space: nowrap;
+        }
+
+        .prose th,
+        .prose td {
+          padding: 0.4rem 0.5rem;
+          white-space: normal;
+          min-width: 70px;
+        }
+
+        /* Blockquote gọn hơn */
+        .prose blockquote {
+          padding: 0.5rem 0.7rem;
+          margin: 0.8rem 0;
+        }
+
+        /* List gọn hơn */
+        .prose ul,
+        .prose ol {
+          padding-left: 0.8rem;
+        }
+
+        .prose li {
+          margin: 0.2rem 0;
+          font-size: 0.95rem;
+        }
+
+        /* Heading spacing */
+        .prose h2 {
+          font-size: 1.25em;
+          margin-top: 1.5rem;
+        }
+
+        .prose h3 {
+          font-size: 1.1em;
+          margin-top: 1rem;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .prose {
+          padding: 0.5em 0.3em 1em;
+        }
+
+        .title h1 {
+          font-size: 1.2em;
         }
       }
 

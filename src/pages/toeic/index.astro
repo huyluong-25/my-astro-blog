@@ -19,7 +19,9 @@ const notes = (await getCollection('toeic')).sort((a, b) => {
     <BaseHead title="Thư Viện Ngữ Pháp TOEIC" description="Kho bài học TOEIC theo từng chủ đề và từng thì." />
     <style>
       main {
-        width: 960px;
+        width: calc(100% - 2em);
+        max-width: 960px;
+        margin: 0 auto;
       }
 
       /* Hero section */

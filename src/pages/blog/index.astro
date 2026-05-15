@@ -20,7 +20,9 @@ Astro.response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300, s
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: calc(100% - 2em);
+				max-width: 960px;
+				margin: 0 auto;
 			}
 			ul {
 				display: grid;

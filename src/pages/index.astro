@@ -173,6 +173,7 @@ const toeicNotes = allToeicNotes
 		padding: 5rem 2rem 3rem;
 		position: relative;
 		z-index: 1;
+		overflow-x: hidden;
 	}
 
 	/* ===== SECTION ===== */
@@ -481,11 +482,18 @@ const toeicNotes = allToeicNotes
 
 	@media (max-width: 640px) {
 		main {
-			padding: 3rem 1.2rem 2rem;
+			padding: 3rem 1rem 2rem;
+			overflow-x: hidden;
+		}
+
+		.section-head {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
 		}
 
 		.section-head h2 {
-			font-size: 1.4rem;
+			font-size: 1.3rem;
 		}
 
 		.posts-grid {
@@ -493,8 +501,29 @@ const toeicNotes = allToeicNotes
 			gap: 1rem;
 		}
 
+		.post-body {
+			padding: 1rem;
+		}
+
+		.post-title {
+			font-size: 1rem;
+		}
+
+		.post-desc {
+			font-size: 0.85rem;
+		}
+
 		.toeic-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.toeic-card {
+			padding: 0.85rem 1rem;
+		}
+
+		.toeic-title {
+			white-space: normal;
+			font-size: 0.88rem;
 		}
 
 		.stats-bar {
@@ -504,15 +533,26 @@ const toeicNotes = allToeicNotes
 		.stat-val {
 			font-size: 1.5rem;
 		}
+
+		/* Tắt hover trên mobile */
+		.post-card:hover {
+			transform: none;
+			box-shadow: none;
+		}
+
+		.toeic-card:hover {
+			transform: none;
+			box-shadow: none;
+		}
 	}
 
 	@media (max-width: 420px) {
 		main {
-			padding: 2.5rem 1rem 1.5rem;
+			padding: 2rem 0.8rem 1.5rem;
 		}
 
 		.section-head h2 {
-			font-size: 1.2rem;
+			font-size: 1.15rem;
 		}
 	}
 </style>
