@@ -1,0 +1,164 @@
+---
+// HeroBanner.astro – Clean cinematic video hero
+interface Slide {
+  heading: string;
+  subheading: string;
+}
+
+const slides: Slide[] = [
+  {
+    heading: 'HuyHandsome',
+    subheading: 'Building reliable systems & passionate about badminton',
+  },
+  {
+    heading: 'IT Support',
+    subheading: 'System optimization, automation & troubleshooting at TiniGroup',
+  },
+  {
+    heading: 'Explore & Learn',
+    subheading: 'Blog, TOEIC Grammar, English vocabulary & more',
+  },
+];
+---
+
+<section class="hero-banner" id="heroBanner" aria-label="Hero banner">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="/A_cinematic_K_hero_banner_vid.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    {slides.map((slide, i) => (
+      <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+        <h1 class="hero-heading">{slide.heading}</h1>
+        <p class="hero-subheading">{slide.subheading}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const banner = document.getElementById('heroBanner');
+    if (!banner) return;
+    const slides = banner.querySelectorAll<HTMLElement>('.hero-slide');
+    let current = 0;
+
+    function goTo(i: number) {
+      slides[current].classList.remove('active');
+      current = (i + slides.length) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    setInterval(() => goTo(current + 1), 5000);
+
+    // Touch swipe
+    let tx = 0;
+    banner.addEventListener('touchstart', (e: TouchEvent) => { tx = e.touches[0].clientX; }, { passive: true });
+    banner.addEventListener('touchend', (e: TouchEvent) => {
+      const d = e.changedTouches[0].clientX - tx;
+      if (Math.abs(d) > 50) d > 0 ? goTo(current - 1) : goTo(current + 1);
+    }, { passive: true });
+  });
+</script>
+
+<style>
+  .hero-banner {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+    max-height: 1000px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+
+  .hero-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hero-heading {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    margin: 0 0 1rem;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .hero-slide.active .hero-heading {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .hero-subheading {
+    font-size: clamp(0.95rem, 2vw, 1.3rem);
+    color: rgba(255,255,255,0.85);
+    max-width: 700px;
+    line-height: 1.7;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  }
+
+  .hero-slide.active .hero-subheading {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .hero-banner { height: 70vh; min-height: 400px; }
+    .hero-heading { letter-spacing: 3px; }
+    .hero-subheading { letter-spacing: 1px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-banner { height: 60vh; min-height: 350px; }
+  }
+</style>

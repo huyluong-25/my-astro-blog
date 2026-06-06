@@ -1,0 +1,9 @@
+lệnh UP code lên Git
+git add .
+git commit -m "Thay ao moi cho blog"
+git push
+
+Lệnh up file docker
+git add Dockerfile
+git commit -m "Bo sung file Dockerfile"
+git push

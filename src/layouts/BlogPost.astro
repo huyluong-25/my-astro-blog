@@ -1,0 +1,216 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import Comments from '../components/Comments.astro';
+
+type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
+
+const { title, description, pubDate, updatedDate, heroImage, slug } = Astro.props;
+const hasCommentSlug = typeof slug === 'string' && slug.trim().length > 0;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+				animation: fadeIn 0.8s ease-out;
+				overflow: hidden;
+				border-radius: 12px;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				transition: transform 0.5s ease;
+			}
+
+			.hero-image:hover img {
+				transform: scale(1.02);
+			}
+
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: #334155;
+				transition: color 0.3s;
+				animation: fadeInUp 0.8s ease-out 0.1s backwards;
+			}
+			[data-theme='dark'] .prose {
+				color: rgb(var(--text-secondary));
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+				transition: color 0.3s;
+				animation: fadeInUp 0.8s ease-out 0.2s backwards;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+				color: #0f172a;
+				transition: color 0.3s;
+				font-weight: 700;
+			}
+			[data-theme='dark'] .title h1 {
+				color: #f1f5f9;
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: #64748b;
+				transition: color 0.3s;
+				font-size: 0.95rem;
+			}
+			[data-theme='dark'] .date {
+				color: rgb(var(--text-secondary));
+			}
+			.last-updated-on {
+				font-style: italic;
+				transition: color 0.3s;
+				font-size: 0.9rem;
+			}
+			[data-theme='dark'] .last-updated-on {
+				color: rgb(var(--text-secondary));
+			}
+			hr {
+				border: none;
+				border-top: 2px solid #e2e8f0;
+				transition: border-color 0.3s;
+				margin: 2em 0;
+			}
+			[data-theme='dark'] hr {
+				border-top-color: #334155;
+			}
+
+			/* Prose content animations */
+			.prose h2 {
+				animation: fadeInUp 0.8s ease-out forwards;
+				position: relative;
+				padding-bottom: 0.8rem;
+				margin-top: 2rem !important;
+			}
+
+			.prose h2::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 0;
+				height: 2px;
+				background: linear-gradient(90deg, #0284c7, #38bdf8);
+				transition: width 0.5s ease;
+			}
+
+			.prose h2:hover::after {
+				width: 100%;
+			}
+
+			.prose p {
+				animation: fadeInUp 0.8s ease-out forwards;
+			}
+
+			.prose ul,
+			.prose ol {
+				animation: fadeInUp 0.8s ease-out forwards;
+			}
+
+			.prose blockquote {
+				animation: fadeInUp 0.8s ease-out forwards;
+				transition: all 0.3s ease;
+			}
+
+			.prose blockquote:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 8px 20px rgba(2, 132, 199, 0.1);
+			}
+
+			[data-theme='dark'] .prose blockquote:hover {
+				box-shadow: 0 8px 20px rgba(56, 189, 248, 0.1);
+			}
+
+			/* Mobile responsive */
+			@media (max-width: 720px) {
+				.prose {
+					padding: 0.6em 0.3em;
+				}
+
+				.title h1 {
+					font-size: 1.5em;
+				}
+
+				.prose h2 {
+					font-size: 1.25em;
+					margin-top: 1.5rem !important;
+				}
+
+				/* Bảng tự cuộn ngang */
+				.prose table {
+					display: block;
+					overflow-x: auto;
+					-webkit-overflow-scrolling: touch;
+				}
+
+				/* Blockquote hover off on mobile */
+				.prose blockquote:hover {
+					transform: none;
+					box-shadow: none;
+				}
+			}
+
+			@media (max-width: 420px) {
+				.title h1 {
+					font-size: 1.3em;
+				}
+
+				.prose {
+					padding: 0.4em 0.1em;
+				}
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+						</div>
+						<h1>{title}</h1>
+						<hr />
+					</div>
+					<slot />
+				</div>
+				{hasCommentSlug && <Comments slug={slug} />}
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

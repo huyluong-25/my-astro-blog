@@ -1,0 +1,586 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import HeroBanner from '../components/HeroBanner.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 6);
+
+const allToeicNotes = await getCollection('toeic');
+const toeicNotes = allToeicNotes
+	.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+	.slice(0, 6);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<HeroBanner />
+
+		<main>
+			<!-- Latest Blog Posts -->
+			<section class="section" id="latest-posts" data-reveal>
+				<div class="section-head">
+					<div>
+						<span class="section-label">Latest</span>
+						<h2>Bài Viết Mới Nhất</h2>
+					</div>
+					<a href="/blog" class="view-all">Xem tất cả
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+					</a>
+				</div>
+				<div class="posts-grid" data-stagger>
+					{posts.map((post) => (
+						<a href={`/blog/${post.id}/`} class="post-card" data-astro-prefetch="hover">
+							<div class="post-thumb">
+								{post.data.heroImage && (
+									<Image
+										width={600}
+										height={340}
+										src={post.data.heroImage}
+										alt={post.data.title}
+										loading="lazy"
+										decoding="async"
+									/>
+								)}
+							</div>
+							<div class="post-body">
+								<time class="post-date"><FormattedDate date={post.data.pubDate} /></time>
+								<h3 class="post-title">{post.data.title}</h3>
+								<p class="post-desc">{post.data.description}</p>
+							</div>
+						</a>
+					))}
+				</div>
+			</section>
+
+			<!-- Divider -->
+			<hr class="section-divider" data-reveal />
+
+			<!-- TOEIC Quick Access -->
+			<section class="section" id="toeic-notes" data-reveal>
+				<div class="section-head">
+					<div>
+						<span class="section-label">Study</span>
+						<h2>TOEIC Grammar Notes</h2>
+					</div>
+					<a href="/toeic" class="view-all">Xem tất cả
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+					</a>
+				</div>
+				<div class="toeic-grid" data-stagger>
+					{toeicNotes.map((note, index) => (
+						<a href={`/toeic/${note.id}/`} class="toeic-card" data-astro-prefetch="hover">
+							<span class="toeic-num">{String(index + 1).padStart(2, '0')}</span>
+							<span class="toeic-title">{note.data.title}</span>
+							<svg class="toeic-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+						</a>
+					))}
+				</div>
+			</section>
+
+			<!-- Quick Stats -->
+			<section class="stats-bar" data-reveal>
+				<div class="stat">
+					<span class="stat-val">{allPosts.length}</span>
+					<span class="stat-lbl">Blog Posts</span>
+				</div>
+				<div class="stat-sep"></div>
+				<div class="stat">
+					<span class="stat-val">{allToeicNotes.length}</span>
+					<span class="stat-lbl">TOEIC Lessons</span>
+				</div>
+				<div class="stat-sep"></div>
+				<div class="stat">
+					<span class="stat-val">∞</span>
+					<span class="stat-lbl">Passion</span>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+
+		<script is:inline>
+			(function() {
+				function initReveal() {
+					var reveals = document.querySelectorAll('[data-reveal]');
+					var staggers = document.querySelectorAll('[data-stagger]');
+					if (!reveals.length) return;
+
+					var observer = new IntersectionObserver(function(entries) {
+						entries.forEach(function(entry) {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('revealed');
+								observer.unobserve(entry.target);
+							}
+						});
+					}, { threshold: 0.05 });
+
+					reveals.forEach(function(el) { observer.observe(el); });
+
+					staggers.forEach(function(grid) {
+						var kids = grid.children;
+						for (var i = 0; i < kids.length; i++) {
+							kids[i].style.transitionDelay = (i * 100) + 'ms';
+							observer.observe(kids[i]);
+						}
+					});
+				}
+
+				// Run on initial load
+				if (document.readyState === 'complete') {
+					setTimeout(initReveal, 50);
+				} else {
+					window.addEventListener('load', function() { setTimeout(initReveal, 50); });
+				}
+
+				// Also run on Astro page transitions
+				document.addEventListener('astro:page-load', function() {
+					setTimeout(initReveal, 50);
+				});
+			})();
+		</script>
+	</body>
+</html>
+
+<style>
+	/* ===== PAGE BACKGROUND ===== */
+	body {
+		background: #fafbfc;
+		transition: background 0.3s;
+	}
+
+	[data-theme='dark'] body {
+		background: #0c1222;
+	}
+
+	/* ===== MAIN ===== */
+	main {
+		width: 100%;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 5rem 2rem 3rem;
+		position: relative;
+		z-index: 1;
+		overflow-x: hidden;
+	}
+
+	/* ===== SECTION ===== */
+	.section {
+		margin-bottom: 4rem;
+	}
+
+	.section-head {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		gap: 1rem;
+	}
+
+	.section-label {
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		color: #0284c7;
+		margin-bottom: 0.3rem;
+	}
+
+	[data-theme='dark'] .section-label {
+		color: #38bdf8;
+	}
+
+	.section-head h2 {
+		font-size: 1.8rem;
+		font-weight: 800;
+		color: #0f172a;
+		margin: 0;
+		line-height: 1.2;
+		transition: color 0.3s;
+	}
+
+	[data-theme='dark'] .section-head h2 {
+		color: #f1f5f9;
+	}
+
+	.view-all {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		font-size: 0.88rem;
+		font-weight: 600;
+		color: #0284c7;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: all 0.3s;
+	}
+
+	.view-all:hover {
+		gap: 8px;
+	}
+
+	[data-theme='dark'] .view-all {
+		color: #38bdf8;
+	}
+
+	/* ===== BLOG POSTS GRID ===== */
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.post-card {
+		text-decoration: none;
+		border-radius: 16px;
+		overflow: hidden;
+		background: #fff;
+		border: 1px solid #e8ecf1;
+		transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+	}
+
+	.post-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+		border-color: rgba(2,132,199,0.2);
+	}
+
+	[data-theme='dark'] .post-card {
+		background: #162032;
+		border-color: #1e3048;
+	}
+
+	[data-theme='dark'] .post-card:hover {
+		box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+		border-color: rgba(56,189,248,0.2);
+	}
+
+	.post-thumb {
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+	}
+
+	.post-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.6s ease;
+		box-shadow: none;
+	}
+
+	.post-card:hover .post-thumb img {
+		transform: scale(1.06);
+	}
+
+	.post-body {
+		padding: 1.2rem 1.3rem 1.4rem;
+	}
+
+	.post-date {
+		font-size: 0.78rem;
+		color: #94a3b8;
+		margin: 0 0 0.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.post-title {
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: #0f172a;
+		margin: 0 0 0.5rem;
+		line-height: 1.4;
+		transition: color 0.3s;
+	}
+
+	[data-theme='dark'] .post-title {
+		color: #f1f5f9;
+	}
+
+	.post-desc {
+		font-size: 0.88rem;
+		color: #64748b;
+		margin: 0;
+		line-height: 1.55;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	[data-theme='dark'] .post-desc {
+		color: #94a3b8;
+	}
+
+	/* ===== DIVIDER ===== */
+	.section-divider {
+		border: none;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+		margin: 0 0 4rem;
+	}
+
+	[data-theme='dark'] .section-divider {
+		background: linear-gradient(90deg, transparent, #1e3048, transparent);
+	}
+
+	/* ===== TOEIC GRID ===== */
+	.toeic-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.75rem;
+	}
+
+	.toeic-card {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem 1.2rem;
+		border-radius: 12px;
+		background: #fff;
+		border: 1px solid #e8ecf1;
+		text-decoration: none;
+		transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+	}
+
+	.toeic-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 12px 28px rgba(0,0,0,0.06);
+		border-color: rgba(2,132,199,0.2);
+	}
+
+	[data-theme='dark'] .toeic-card {
+		background: #162032;
+		border-color: #1e3048;
+	}
+
+	[data-theme='dark'] .toeic-card:hover {
+		box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+		border-color: rgba(56,189,248,0.2);
+	}
+
+	.toeic-num {
+		font-size: 0.82rem;
+		font-weight: 800;
+		color: #fff;
+		background: linear-gradient(135deg, #0284c7, #0ea5e9);
+		width: 34px;
+		height: 34px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		transition: transform 0.3s;
+	}
+
+	.toeic-card:hover .toeic-num {
+		transform: scale(1.1) rotate(-3deg);
+	}
+
+	.toeic-title {
+		flex: 1;
+		font-size: 0.92rem;
+		font-weight: 600;
+		color: #0f172a;
+		line-height: 1.35;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		transition: color 0.3s;
+	}
+
+	[data-theme='dark'] .toeic-title {
+		color: #f1f5f9;
+	}
+
+	.toeic-arrow {
+		color: #cbd5e1;
+		flex-shrink: 0;
+		transition: all 0.3s;
+	}
+
+	.toeic-card:hover .toeic-arrow {
+		color: #0284c7;
+		transform: translateX(3px);
+	}
+
+	[data-theme='dark'] .toeic-card:hover .toeic-arrow {
+		color: #38bdf8;
+	}
+
+	/* ===== STATS BAR ===== */
+	.stats-bar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2.5rem;
+		padding: 3rem 0;
+		margin-top: 1rem;
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.stat-val {
+		font-size: 2rem;
+		font-weight: 900;
+		color: #0f172a;
+		line-height: 1;
+		transition: color 0.3s;
+	}
+
+	[data-theme='dark'] .stat-val {
+		color: #f1f5f9;
+	}
+
+	.stat-lbl {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: #94a3b8;
+		text-transform: uppercase;
+		letter-spacing: 1.5px;
+	}
+
+	.stat-sep {
+		width: 1px;
+		height: 40px;
+		background: #e2e8f0;
+		transition: background 0.3s;
+	}
+
+	[data-theme='dark'] .stat-sep {
+		background: #1e3048;
+	}
+
+	/* (scroll reveal styles moved to is:global block) */
+
+	/* ===== RESPONSIVE ===== */
+	@media (max-width: 900px) {
+		.posts-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 640px) {
+		main {
+			padding: 3rem 1rem 2rem;
+			overflow-x: hidden;
+		}
+
+		.section-head {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+
+		.section-head h2 {
+			font-size: 1.3rem;
+		}
+
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.post-body {
+			padding: 1rem;
+		}
+
+		.post-title {
+			font-size: 1rem;
+		}
+
+		.post-desc {
+			font-size: 0.85rem;
+		}
+
+		.toeic-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.toeic-card {
+			padding: 0.85rem 1rem;
+		}
+
+		.toeic-title {
+			white-space: normal;
+			font-size: 0.88rem;
+		}
+
+		.stats-bar {
+			gap: 1.5rem;
+		}
+
+		.stat-val {
+			font-size: 1.5rem;
+		}
+
+		/* Tắt hover trên mobile */
+		.post-card:hover {
+			transform: none;
+			box-shadow: none;
+		}
+
+		.toeic-card:hover {
+			transform: none;
+			box-shadow: none;
+		}
+	}
+
+	@media (max-width: 420px) {
+		main {
+			padding: 2rem 0.8rem 1.5rem;
+		}
+
+		.section-head h2 {
+			font-size: 1.15rem;
+		}
+	}
+</style>
+
+<style is:global>
+	/* ===== SCROLL REVEAL (unscoped) ===== */
+	[data-reveal],
+	[data-stagger] > * {
+		opacity: 0;
+		transform: translateY(32px);
+		transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+		            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+		will-change: opacity, transform;
+	}
+
+	[data-reveal].revealed,
+	[data-stagger] > .revealed {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+
+	hr[data-reveal] {
+		transform: scaleX(0);
+		transform-origin: center;
+	}
+
+	hr[data-reveal].revealed {
+		opacity: 1 !important;
+		transform: scaleX(1) !important;
+	}
+</style>

@@ -1,0 +1,693 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <BaseHead
+      title="Sổ Tay Từ Vựng TOEIC"
+      description="Ghi chép từ vựng TOEIC với đầy đủ phiên âm, từ loại, đồng nghĩa theo đúng chuẩn bảng."
+    />
+  </head>
+  <body>
+    <Header />
+
+    <main class="english-page">
+      <section class="hero">
+        <p class="eyebrow">TOEIC Vocabulary System</p>
+        <h1>Smart Vocabulary Notebook</h1>
+        <p class="sub">
+          Ghi chú từ vựng mới theo đúng chuẩn, đầy đủ hệ thống gia đình từ (word family), đồng nghĩa và các ví dụ để nhớ lâu hơn.
+        </p>
+      </section>
+
+      <section class="panel form-panel">
+        <h2>Thêm Từ Vựng Mới</h2>
+        <form id="vocabForm" class="vocab-form">
+          <label>
+            Nhãn (Chủ đề)
+            <input name="label" type="text" maxlength="50" placeholder="Vd: Contract" required />
+          </label>
+          <label>
+            Loại từ
+            <select name="wordType" required>
+              <option value="noun">Noun</option>
+              <option value="verb">Verb</option>
+              <option value="adjective">Adjective</option>
+              <option value="adverb">Adverb</option>
+              <option value="phrase">Phrase</option>
+              <option value="idiom">Idiom</option>
+            </select>
+          </label>
+          <label>
+            Tiếng Anh
+            <input name="word" type="text" maxlength="120" placeholder="Vd: agreement" required />
+          </label>
+          <label>
+            Phiên âm
+            <input name="pronunciation" type="text" maxlength="100" placeholder="Vd: /əˈɡriːmənt/" />
+          </label>
+          <label class="wide">
+            Phiên dịch
+            <input name="meaning" type="text" maxlength="500" placeholder="Vd: hiệp định, thỏa thuận" required />
+          </label>
+          <label>
+            Word form
+            <textarea name="wordForm" rows="3" placeholder="- agree (v): đồng ý"></textarea>
+          </label>
+          <label>
+            Đồng nghĩa
+            <textarea name="synonym" rows="3" placeholder="contract (n)"></textarea>
+          </label>
+          <label class="wide">
+            Ghi chú
+            <textarea name="notes" rows="3" placeholder="- a provision in the contract"></textarea>
+          </label>
+
+          <button type="submit">Lưu Từ Vựng</button>
+          <p id="formStatus" class="status"></p>
+        </form>
+      </section>
+
+      <section class="panel stats-panel">
+        <div class="stats-header">
+          <h2>Thống kê tiến độ</h2>
+          <button id="reloadBtn" type="button" class="ghost-btn">Tải lại dữ liệu</button>
+        </div>
+
+        <div class="stats-grid" id="summaryCards"></div>
+
+        <div class="insights-box">
+          <h3>Gợi Ý Học Tập</h3>
+          <ul id="insightList"></ul>
+        </div>
+      </section>
+
+      <section class="panel list-panel">
+        <div class="stats-header">
+          <h2>Danh Sách Từ Vựng</h2>
+          <input id="searchInput" type="search" placeholder="Tìm kiếm từ, nghĩa, chủ đề..." />
+        </div>
+        <div class="table-wrap custom-table-scroll">
+          <table class="vocab-table">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Nhãn</th>
+                <th>Loại từ</th>
+                <th>Tiếng anh</th>
+                <th>Phiên âm</th>
+                <th>Phiên dịch</th>
+                <th>Phát âm</th>
+                <th>Word form</th>
+                <th>Đồng nghĩa</th>
+                <th>Ghi chú</th>
+              </tr>
+            </thead>
+            <tbody id="vocabTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+
+    </main>
+
+    <Footer />
+
+    <script>
+      const apiUrl = '/api/english';
+      const vocabForm = document.getElementById('vocabForm') as HTMLFormElement;
+      const formStatus = document.getElementById('formStatus') as HTMLElement;
+      const vocabTableBody = document.getElementById('vocabTableBody') as HTMLElement;
+      const summaryCards = document.getElementById('summaryCards') as HTMLElement;
+      const insightList = document.getElementById('insightList') as HTMLElement;
+      const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+      const reloadBtn = document.getElementById('reloadBtn') as HTMLButtonElement;
+
+      let synth = window.speechSynthesis;
+
+      (window as any).speakWord = function(word: string) {
+        if (!synth) {
+          alert('Trình duyệt của bạn không hỗ trợ Text-to-Speech.');
+          return;
+        }
+        // Chọn giọng đọc tiếng Anh mặc định
+        const utterThis = new SpeechSynthesisUtterance(word);
+        utterThis.lang = 'en-US';
+        utterThis.rate = 0.9; // Đọc chậm một chút cho dễ nghe
+        synth.speak(utterThis);
+      };
+
+      function escapeHtml(value: any) {
+        return String(value || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function formatTextarea(value: any) {
+        return escapeHtml(value).split('\n').join('<br/>');
+      }
+
+      function formatLabel(value: any) {
+        return String(value || '').replaceAll('_', ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+      }
+
+      function renderSummary(stats: any) {
+        const topLabel = stats.byLabel && stats.byLabel.length ? stats.byLabel[0] : null;
+        const topType = stats.byType && stats.byType.length ? stats.byType[0] : null;
+
+        summaryCards.innerHTML = `
+          <article class="card">
+            <p class="card-label">Tổng Số Từ</p>
+            <p class="card-value">${stats.total}</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Chủ Đề Dẫn Đầu</p>
+            <p class="card-value">${topLabel ? formatLabel(topLabel.label) : '-'}</p>
+          </article>
+          <article class="card">
+            <p class="card-label">Từ Loại Phổ Biến</p>
+            <p class="card-value">${topType ? formatLabel(topType.word_type) : '-'}</p>
+          </article>
+        `;
+      }
+
+      function renderInsights(stats: any) {
+        const lines = Array.isArray(stats.insights) ? stats.insights : [];
+        if (!lines.length) {
+          insightList.innerHTML = '<li>Chưa có gợi ý nào.</li>';
+          return;
+        }
+        insightList.innerHTML = lines.map((line: string) => `<li>${escapeHtml(line)}</li>`).join('');
+      }
+
+      function renderTable(vocabulary: any[]) {
+        if (!Array.isArray(vocabulary) || vocabulary.length === 0) {
+          vocabTableBody.innerHTML = '<tr><td colspan="10" style="text-align: center;">Chưa có dữ liệu từ vựng.</td></tr>';
+          return;
+        }
+
+        vocabTableBody.innerHTML = vocabulary
+          .map(
+            (item, index) => `
+              <tr>
+                <td style="text-align:center;">${index + 1}</td>
+                <td><span class="label-chip">${escapeHtml(item.label || '-')}</span></td>
+                <td style="text-align:center;"><span class="type-pill type-${item.word_type}">${escapeHtml(formatLabel(item.word_type))}</span></td>
+                <td class="font-en">${escapeHtml(item.word)}</td>
+                <td class="font-pronun">${escapeHtml(item.pronunciation || '')}</td>
+                <td class="font-vi">${escapeHtml(item.meaning)}</td>
+                <td style="text-align:center;">
+                  <button class="play-btn" onclick="speakWord('${escapeHtml(item.word.replace(/'/g, "\\'"))}')">Play</button>
+                </td>
+                <td class="small-text">${formatTextarea(item.word_form || '')}</td>
+                <td class="small-text"><strong>${formatTextarea(item.synonym || '')}</strong></td>
+                <td class="small-text">${formatTextarea(item.notes || '')}</td>
+              </tr>
+            `
+          )
+          .join('');
+      }
+
+      async function fetchData(query: string = '') {
+        const url = query ? `${apiUrl}?q=${encodeURIComponent(query)}` : apiUrl;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Lỗi không tải được dữ liệu');
+        }
+
+        renderSummary(data.stats);
+        renderInsights(data.stats);
+        renderTable(data.vocabulary);
+      }
+
+      async function submitVocabulary(payload: any) {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || 'Lỗi khi lưu từ vựng');
+        }
+      }
+
+      vocabForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(vocabForm);
+        const payload = {
+          word: String(formData.get('word') || ''),
+          meaning: String(formData.get('meaning') || ''),
+          wordType: String(formData.get('wordType') || ''),
+          label: String(formData.get('label') || ''),
+          pronunciation: String(formData.get('pronunciation') || ''),
+          wordForm: String(formData.get('wordForm') || ''),
+          synonym: String(formData.get('synonym') || ''),
+          notes: String(formData.get('notes') || '')
+        };
+
+        try {
+          formStatus.textContent = 'Đang lưu...';
+          await submitVocabulary(payload);
+          formStatus.textContent = 'Lưu thành công!';
+          vocabForm.reset();
+          await fetchData(searchInput.value.trim());
+        } catch (error) {
+          formStatus.textContent = error instanceof Error ? error.message : 'Có lỗi xảy ra';
+          formStatus.style.color = '#dc2626';
+        }
+      });
+
+      searchInput.addEventListener('input', async () => {
+        try {
+          await fetchData(searchInput.value.trim());
+        } catch (error) {
+          formStatus.textContent = error instanceof Error ? error.message : 'Có lỗi xảy ra';
+        }
+      });
+
+      reloadBtn.addEventListener('click', async () => {
+        try {
+          await fetchData(searchInput.value.trim());
+        } catch (error) {
+          formStatus.textContent = error instanceof Error ? error.message : 'Có lỗi xảy ra';
+        }
+      });
+
+      fetchData().catch((error) => {
+        formStatus.textContent = error instanceof Error ? error.message : 'Không kết nối được server';
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .english-page {
+    width: min(1200px, calc(100% - 2rem));
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero {
+    background: linear-gradient(120deg, rgba(2, 132, 199, 0.1), rgba(56, 189, 248, 0.08));
+    border: 1px solid rgba(2, 132, 199, 0.18);
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #0369a1;
+    margin: 0;
+  }
+
+  .hero h1 { margin: 0.3rem 0 0.5rem; font-size: clamp(1.5rem, 3vw, 2.2rem); color: #0f172a; }
+  .sub { margin: 0; color: #334155; }
+
+  .panel {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  }
+
+  .form-panel {
+    animation: fadeInUp 0.6s ease-out 0.1s backwards;
+  }
+
+  .stats-panel {
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+  }
+
+  .list-panel {
+    animation: fadeInUp 0.6s ease-out 0.3s backwards;
+  }
+
+  .vocab-form {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .vocab-form label { display: grid; gap: 0.4rem; font-size: 0.95rem; color: #334155; font-weight: 500; }
+  .vocab-form .wide { grid-column: 1 / -1; }
+
+  input, select, textarea, button {
+    font: inherit;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    background: #fff;
+    color: #0f172a;
+    transition: border-color 0.2s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+  }
+
+  button {
+    border: none;
+    background: linear-gradient(120deg, #0284c7, #0ea5e9);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    width: fit-content;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+  }
+
+  button:hover { opacity: 0.9; }
+
+  .ghost-btn {
+    background: #f1f5f9;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+  }
+
+  /* CUSTOM BẢNG (Giao diện hiện đại) */
+  .custom-table-scroll {
+    overflow-x: auto;
+    margin-top: 1rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .vocab-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: #ffffff;
+  }
+
+  .vocab-table th, .vocab-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .vocab-table th:last-child, .vocab-table td:last-child {
+    border-right: none;
+  }
+
+  .vocab-table th {
+    background-color: #f8fafc;
+    color: #475569;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    position: sticky;
+    top: 0;
+    border-bottom: 2px solid #e2e8f0;
+    z-index: 10;
+  }
+
+  .vocab-table tbody tr {
+    transition: all 0.2s ease;
+  }
+  .vocab-table tbody tr:nth-child(even) { background-color: #fafaf9; }
+  .vocab-table tbody tr:hover { background-color: #f0f9ff; }
+
+  .font-en { font-weight: 700; color: #0f172a; }
+  .font-vi { font-weight: 600; color: #334155; }
+  .font-pronun { color: #555; }
+  .small-text { font-size: 0.85rem; line-height: 1.4; color: #b45309; }
+
+  button.play-btn {
+    background: rgba(2, 132, 199, 0.1);
+    border: 1px solid rgba(2, 132, 199, 0.2);
+    color: #0284c7;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  button.play-btn:hover { 
+    background: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+  }
+
+  .type-pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .type-noun { background: #d1fae5; color: #065f46; }
+  .type-verb { background: #fee2e2; color: #991b1b; }
+  .type-adjective { background: #e0f2fe; color: #0369a1; }
+  .type-adverb { background: #fef3c7; color: #92400e; }
+  .type-phrase, .type-idiom { background: #f3e8ff; color: #6b21a8; }
+
+  .label-chip {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    color: #334155;
+    white-space: nowrap;
+  }
+
+  /* Thống kê */
+  .stats-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .stats-grid {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .card-label { margin: 0; font-size: 0.8rem; color: #64748b; text-transform: uppercase; font-weight: 600; }
+  .card-value { margin: 0.3rem 0 0; font-size: 1.3rem; font-weight: 800; color: #0f172a; }
+
+  .insights-box {
+    margin-top: 1rem;
+    background: #f8fafc;
+    border: 1px dashed #94a3b8;
+    border-radius: 12px;
+    padding: 1rem;
+  }
+
+  .insights-box h3 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+  .insights-box ul { margin: 0; padding-left: 1.2rem; color: #334155; }
+
+  .status { grid-column: 1 / -1; margin: 0; color: #0f766e; font-size: 0.95rem; }
+
+
+
+  /* Responsive Constraints */
+  @media (max-width: 900px) {
+    .vocab-form { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 720px) {
+    .english-page {
+      width: calc(100% - 1rem);
+      padding-top: 1.5rem;
+      padding-bottom: 2rem;
+      gap: 1rem;
+    }
+
+    .hero {
+      padding: 1rem;
+      border-radius: 14px;
+    }
+
+    .hero h1 {
+      font-size: 1.4rem;
+    }
+
+    .sub {
+      font-size: 0.9rem;
+    }
+
+    .panel {
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    .stats-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .stats-header h2 {
+      font-size: 1.2rem;
+    }
+
+    #searchInput {
+      width: 100%;
+    }
+
+    /* Bảng từ vựng trên mobile - cuộn ngang mượt */
+    .custom-table-scroll {
+      border-radius: 10px;
+    }
+
+    .vocab-table {
+      min-width: 800px;
+      font-size: 0.85rem;
+    }
+
+    .vocab-table th, .vocab-table td {
+      padding: 10px 8px;
+    }
+
+    /* Stats cards */
+    .card {
+      padding: 0.8rem;
+    }
+
+    .card-value {
+      font-size: 1.1rem;
+    }
+
+    /* Form */
+    .vocab-form label {
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      padding: 0.5rem 0.65rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .english-page {
+      width: calc(100% - 0.5rem);
+    }
+
+    .hero h1 {
+      font-size: 1.2rem;
+    }
+
+    .vocab-table {
+      min-width: 700px;
+      font-size: 0.8rem;
+    }
+
+    .vocab-table th, .vocab-table td {
+      padding: 8px 6px;
+    }
+  }
+
+  /* TỐI ƯU DARK MODE TÍCH HỢP */
+  :global([data-theme='dark']) .hero {
+    background: linear-gradient(120deg, rgba(2, 132, 199, 0.18), rgba(14, 165, 233, 0.12));
+    border-color: rgba(56, 189, 248, 0.35);
+  }
+
+  :global([data-theme='dark']) .hero h1,
+  :global([data-theme='dark']) .sub,
+  :global([data-theme='dark']) .vocab-form label,
+  :global([data-theme='dark']) .card-value,
+  :global([data-theme='dark']) .insights-box h3,
+  :global([data-theme='dark']) .insights-box li {
+    color: #e2e8f0;
+  }
+
+  :global([data-theme='dark']) .panel,
+  :global([data-theme='dark']) .card,
+  :global([data-theme='dark']) .insights-box,
+  :global([data-theme='dark']) input,
+  :global([data-theme='dark']) select,
+  :global([data-theme='dark']) textarea {
+    background: rgba(15, 23, 42, 0.92);
+    border-color: #334155;
+    color: #e2e8f0;
+  }
+
+  :global([data-theme='dark']) input::placeholder,
+  :global([data-theme='dark']) textarea::placeholder {
+    color: #64748b;
+  }
+
+  :global([data-theme='dark']) .custom-table-scroll {
+    border-color: #334155;
+  }
+
+  :global([data-theme='dark']) .vocab-table {
+    background: #1e293b;
+  }
+
+  :global([data-theme='dark']) .vocab-table th {
+    background-color: #0f172a;
+    color: #94a3b8;
+    border-bottom-color: #334155;
+  }
+
+  :global([data-theme='dark']) .vocab-table th,
+  :global([data-theme='dark']) .vocab-table td {
+    border-bottom: 1px solid #334155;
+    border-right: 1px solid #334155;
+  }
+
+  :global([data-theme='dark']) .vocab-table tbody tr:nth-child(even) { background-color: #0f172a; }
+  :global([data-theme='dark']) .vocab-table tbody tr:hover { background-color: rgba(56, 189, 248, 0.1); }
+  
+  :global([data-theme='dark']) .font-en { color: #f8fafc; }
+  :global([data-theme='dark']) .font-vi { color: #cbd5e1; }
+  :global([data-theme='dark']) .font-pronun { color: #94a3b8; }
+  :global([data-theme='dark']) .small-text { color: #fbbf24; }
+  :global([data-theme='dark']) button.play-btn { 
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.3);
+    color: #38bdf8; 
+  }
+  :global([data-theme='dark']) button.play-btn:hover { 
+    background: #0ea5e9;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.4);
+  }
+  :global([data-theme='dark']) .ghost-btn { background: #334155; color: #f1f5f9; border-color: #475569; }
+</style>
