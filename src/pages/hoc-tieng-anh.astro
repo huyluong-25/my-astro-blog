@@ -118,7 +118,46 @@ import Footer from '../components/Footer.astro';
     <Footer />
 
     <script>
-      const apiUrl = '/api/english';
+      const STORAGE_KEY = 'toeic_vocab';
+      const DEFAULT_VOCAB = [
+        {
+          id: 1,
+          word: 'agreement',
+          meaning: 'sự đồng ý, hiệp định, hợp đồng',
+          word_type: 'noun',
+          label: 'Contract',
+          pronunciation: '/əˈɡriː.mənt/',
+          word_form: '- agree (v): đồng ý\n- agreeable (adj): dễ chịu, tán thành',
+          synonym: 'contract, treaty, consensus',
+          notes: 'According to the agreement, the project must be completed by December.',
+          created_at: new Date(Date.now() - 86400000 * 5).toISOString()
+        },
+        {
+          id: 2,
+          word: 'negotiate',
+          meaning: 'đàm phán, thương lượng',
+          word_type: 'verb',
+          label: 'Contract',
+          pronunciation: '/nəˈɡoʊ.ʃi.eɪt/',
+          word_form: '- negotiation (n): sự đàm phán\n- negotiator (n): người đàm phán',
+          synonym: 'bargain, debate, discuss',
+          notes: 'We need to negotiate a new contract with our suppliers.',
+          created_at: new Date(Date.now() - 86400000 * 3).toISOString()
+        },
+        {
+          id: 3,
+          word: 'obligatory',
+          meaning: 'bắt buộc, cưỡng bách',
+          word_type: 'adjective',
+          label: 'Contract',
+          pronunciation: '/əˈblɪɡ.ə.tɔːr.i/',
+          word_form: '- obligate (v): bắt buộc\n- obligation (n): nghĩa vụ, bổn phận',
+          synonym: 'compulsory, mandatory, required',
+          notes: 'It is obligatory for all employees to attend the training session.',
+          created_at: new Date(Date.now() - 86400000 * 1).toISOString()
+        }
+      ];
+
       const vocabForm = document.getElementById('vocabForm') as HTMLFormElement;
       const formStatus = document.getElementById('formStatus') as HTMLElement;
       const vocabTableBody = document.getElementById('vocabTableBody') as HTMLElement;
@@ -134,10 +173,9 @@ import Footer from '../components/Footer.astro';
           alert('Trình duyệt của bạn không hỗ trợ Text-to-Speech.');
           return;
         }
-        // Chọn giọng đọc tiếng Anh mặc định
         const utterThis = new SpeechSynthesisUtterance(word);
         utterThis.lang = 'en-US';
-        utterThis.rate = 0.9; // Đọc chậm một chút cho dễ nghe
+        utterThis.rate = 0.9;
         synth.speak(utterThis);
       };
 
@@ -215,14 +253,105 @@ import Footer from '../components/Footer.astro';
           .join('');
       }
 
-      async function fetchData(query: string = '') {
-        const url = query ? `${apiUrl}?q=${encodeURIComponent(query)}` : apiUrl;
-        const response = await fetch(url);
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Lỗi không tải được dữ liệu');
+      function getVocabList() {
+        if (typeof window === 'undefined') return [];
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_VOCAB));
+          return DEFAULT_VOCAB;
         }
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error('Failed to parse vocab list', e);
+          return [];
+        }
+      }
+
+      function saveVocabList(list: any[]) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        }
+      }
+
+      async function fetchData(query: string = '') {
+        let list = getVocabList();
+
+        if (query) {
+          const keyword = query.toLowerCase().trim();
+          list = list.filter((item: any) =>
+            (item.word || '').toLowerCase().includes(keyword) ||
+            (item.meaning || '').toLowerCase().includes(keyword) ||
+            (item.notes || '').toLowerCase().includes(keyword) ||
+            (item.label || '').toLowerCase().includes(keyword)
+          );
+        }
+
+        const total = list.length;
+        const labelCounts: Record<string, number> = {};
+        const typeCounts: Record<string, number> = {};
+        const matrixCounts: Record<string, number> = {};
+
+        list.forEach((item: any) => {
+          const label = item.label || 'General';
+          const type = item.word_type || 'noun';
+
+          labelCounts[label] = (labelCounts[label] || 0) + 1;
+          typeCounts[type] = (typeCounts[type] || 0) + 1;
+
+          const matrixKey = `${label}:${type}`;
+          matrixCounts[matrixKey] = (matrixCounts[matrixKey] || 0) + 1;
+        });
+
+        const byLabel = Object.entries(labelCounts)
+          .map(([label, count]) => ({ label, total: count }))
+          .sort((a, b) => b.total - a.total || a.label.localeCompare(b.label));
+
+        const byType = Object.entries(typeCounts)
+          .map(([word_type, count]) => ({ word_type, total: count }))
+          .sort((a, b) => b.total - a.total || a.word_type.localeCompare(b.word_type));
+
+        const matrix = Object.entries(matrixCounts).map(([key, count]) => {
+          const [label, word_type] = key.split(':');
+          return { label, word_type, total: count };
+        });
+
+        const WORD_TYPES = ['noun', 'verb', 'adjective', 'adverb', 'phrase', 'idiom'];
+        const labels = byLabel.map((i: any) => i.label);
+
+        const insights: string[] = [];
+        if (total > 0) {
+          const topLabel = byLabel[0];
+          const topType = byType[0];
+
+          if (topLabel) {
+            const ratio = Math.round((topLabel.total / total) * 100);
+            insights.push(`Strongest topic right now: ${topLabel.label} (${ratio}% of all words).`);
+          }
+
+          if (topType) {
+            const ratio = Math.round((topType.total / total) * 100);
+            insights.push(`Most studied word type: ${topType.word_type} (${ratio}% of all words).`);
+          }
+        } else {
+          insights.push('No data yet. Add your first 3-5 words to activate smart suggestions.');
+          insights.push('Tip: add at least 1 verb and 1 noun per study session to keep balanced progress.');
+        }
+
+        const data = {
+          vocabulary: list,
+          stats: {
+            total,
+            byLabel,
+            byType,
+            matrix,
+            insights,
+            dictionary: {
+              wordTypes: WORD_TYPES,
+              labels
+            }
+          }
+        };
 
         renderSummary(data.stats);
         renderInsights(data.stats);
@@ -230,16 +359,23 @@ import Footer from '../components/Footer.astro';
       }
 
       async function submitVocabulary(payload: any) {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        const list = getVocabList();
 
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error(data.error || 'Lỗi khi lưu từ vựng');
-        }
+        const newItem = {
+          id: list.length > 0 ? Math.max(...list.map((i: any) => i.id)) + 1 : 1,
+          word: payload.word,
+          meaning: payload.meaning,
+          word_type: payload.wordType,
+          label: payload.label || 'General',
+          pronunciation: payload.pronunciation,
+          word_form: payload.wordForm,
+          synonym: payload.synonym,
+          notes: payload.notes,
+          created_at: new Date().toISOString()
+        };
+
+        list.push(newItem);
+        saveVocabList(list);
       }
 
       vocabForm.addEventListener('submit', async (event) => {
@@ -260,6 +396,7 @@ import Footer from '../components/Footer.astro';
           formStatus.textContent = 'Đang lưu...';
           await submitVocabulary(payload);
           formStatus.textContent = 'Lưu thành công!';
+          formStatus.style.color = '#0f766e';
           vocabForm.reset();
           await fetchData(searchInput.value.trim());
         } catch (error) {
@@ -285,7 +422,7 @@ import Footer from '../components/Footer.astro';
       });
 
       fetchData().catch((error) => {
-        formStatus.textContent = error instanceof Error ? error.message : 'Không kết nối được server';
+        formStatus.textContent = error instanceof Error ? error.message : 'Không khởi động được ứng dụng';
       });
     </script>
   </body>
