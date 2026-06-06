@@ -91,7 +91,7 @@ Bài tập trong ảnh:
 > *   B. Some
 
 **Mẹo loại trừ đáp án nhanh:**
-1.  **Bước 1: Nhìn động từ phía sau.** Động từ là `is waiting` $\rightarrow$ Động từ số ít. Chủ ngữ chắc chắn phải là số ít.
+1.  **Bước 1: Nhìn động từ phía sau.** Động từ là `is waiting` → Động từ số ít. Chủ ngữ chắc chắn phải là số ít.
 2.  **Bước 2: Phân biệt "Some" và "Someone":**
     *   **B. Some** là từ hạn định (Determiner). Nó phải đi cùng với một danh từ số nhiều (VD: *Some people are...*) hoặc danh từ không đếm được. Khi đứng một mình làm chủ ngữ đại diện, nó đi kèm với động từ số nhiều. Do đó, loại *Some*.
     *   **A. Someone** là đại từ bất định chỉ người ở dạng số ít, đứng độc lập làm chủ ngữ và hoàn toàn đi được với động từ số ít `is`.
@@ -115,12 +115,12 @@ graph TD
 ```
 
 ### Chi tiết các mẹo:
-*   **Mẹo 1: Tránh bẫy Từ hạn định (Determiner):** Nếu ngay sau chỗ trống là một danh từ $\rightarrow$ **Loại ngay** tất cả các đại từ bất định kết thúc bằng `-one, -body, -thing, -where` (vì chúng đứng độc lập thay thế cho danh từ, không đứng trước bổ nghĩa cho danh từ khác).
-*   **Mẹo 2: Loại trừ bằng Động từ:** Nếu động từ đi kèm ở dạng số nhiều (`are, were, have, động từ nguyên mẫu`) $\rightarrow$ **Loại ngay** đại từ bất định làm chủ ngữ trực tiếp.
+*   **Mẹo 1: Tránh bẫy Từ hạn định (Determiner):** Nếu ngay sau chỗ trống là một danh từ → **Loại ngay** tất cả các đại từ bất định kết thúc bằng `-one, -body, -thing, -where` (vì chúng đứng độc lập thay thế cho danh từ, không đứng trước bổ nghĩa cho danh từ khác).
+*   **Mẹo 2: Loại trừ bằng Động từ:** Nếu động từ đi kèm ở dạng số nhiều (`are, were, have, động từ nguyên mẫu`) → **Loại ngay** đại từ bất định làm chủ ngữ trực tiếp.
 *   **Mẹo 3: Chọn hậu tố dựa trên ngữ cảnh:** Đọc lướt động từ và các từ xung quanh để xem câu đang nói về con người (`-one/-body`), sự vật/sự việc (`-thing`), hay nơi chốn (`-where`).
 *   **Mẹo 4: Chọn tiền tố dựa trên dạng câu:**
-    *   Thấy từ phủ định (`not`, `hardly`, `without`) $\rightarrow$ Ưu tiên chọn các đuôi bắt đầu bằng `any-`.
-    *   Câu bình thường khẳng định $\rightarrow$ Chọn `some-` hoặc `every-` tùy theo nghĩa.
+    *   Thấy từ phủ định (`not`, `hardly`, `without`) → Ưu tiên chọn các đuôi bắt đầu bằng `any-`.
+    *   Câu bình thường khẳng định → Chọn `some-` hoặc `every-` tùy theo nghĩa.
 
 ---
 
@@ -163,34 +163,34 @@ graph TD
 ### Đáp án và giải thích chi tiết
 
 **1. B – someone**
-- **Giải thích:** Đứng sau giới từ `for` làm tân ngữ và chỉ người $\rightarrow$ dùng đại từ bất định chỉ người. Ngữ cảnh khẳng định $\rightarrow$ chọn **someone** (tìm ai đó giúp viết thông cáo báo chí). Phương án C sai trật tự từ nếu chỉ cần tân ngữ thường, phương án D (*some*) cần đi kèm danh từ.
+- **Giải thích:** Đứng sau giới từ `for` làm tân ngữ và chỉ người → dùng đại từ bất định chỉ người. Ngữ cảnh khẳng định → chọn **someone** (tìm ai đó giúp viết thông cáo báo chí). Phương án C sai trật tự từ nếu chỉ cần tân ngữ thường, phương án D (*some*) cần đi kèm danh từ.
 
 **2. B – everywhere**
-- **Giải thích:** Căn cứ vào vế sau "but we couldn't find it anywhere" (nhưng không tìm thấy ở bất cứ đâu) $\rightarrow$ Vế trước phải là "Chúng tôi đã tìm kiếm **mọi nơi**". Do đó chọn **everywhere**.
+- **Giải thích:** Căn cứ vào vế sau "but we couldn't find it anywhere" (nhưng không tìm thấy ở bất cứ đâu) → Vế trước phải là "Chúng tôi đã tìm kiếm **mọi nơi**". Do đó chọn **everywhere**.
 
 **3. A – anything**
-- **Giải thích:** Đây là câu hỏi nghi vấn `(?)` $\rightarrow$ Ưu tiên tiền tố `any-`. Ngữ cảnh chỉ sự việc/vật $\rightarrow$ chọn **anything** (Có cái gì cần giải quyết trước khi hoãn họp không?).
+- **Giải thích:** Đây là câu hỏi nghi vấn `(?)` → Ưu tiên tiền tố `any-`. Ngữ cảnh chỉ sự việc/vật → chọn **anything** (Có cái gì cần giải quyết trước khi hoãn họp không?).
 
 **4. C – someone**
-- **Giải thích:** Đứng trước động từ số ít `was waiting` $\rightarrow$ loại *some* và *any* (không đứng làm chủ ngữ đơn độc trước động từ số ít chỉ người cụ thể trong câu khẳng định). Ngữ cảnh khẳng định chỉ người $\rightarrow$ chọn **someone**.
+- **Giải thích:** Đứng trước động từ số ít `was waiting` → loại *some* và *any* (không đứng làm chủ ngữ đơn độc trước động từ số ít chỉ người cụ thể trong câu khẳng định). Ngữ cảnh khẳng định chỉ người → chọn **someone**.
 
 **5. B – anyone**
-- **Giải thích:** Câu chứa trạng từ phủ định `not` (`has not hired`) $\rightarrow$ chọn tiền tố `any-`. Ở đây chỉ người $\rightarrow$ chọn **anyone** (chưa tuyển bất kỳ ai mới).
+- **Giải thích:** Câu chứa trạng từ phủ định `not` (`has not hired`) → chọn tiền tố `any-`. Ở đây chỉ người → chọn **anyone** (chưa tuyển bất kỳ ai mới).
 
 **6. A – something**
-- **Giải thích:** Đứng sau động từ `buy` làm tân ngữ chỉ vật trong câu khẳng định $\rightarrow$ chọn **something** (cần mua cái gì đó).
+- **Giải thích:** Đứng sau động từ `buy` làm tân ngữ chỉ vật trong câu khẳng định → chọn **something** (cần mua cái gì đó).
 
 **7. A – Anyone**
 - **Giải thích:** Cấu trúc cực kỳ phổ biến trong TOEIC: `Anyone who + V (số ít) ...` (Bất kỳ ai người mà...). *Someone* chỉ một người cụ thể hơn, *Everyone* mang nghĩa tất cả nhưng ít đi với cấu trúc điều kiện giả định *who wishes to...* bằng *Anyone*.
 
 **8. C – no one**
-- **Giải thích:** Vế trước cho biết "phòng họp hoàn toàn trống rỗng" (completely empty) $\rightarrow$ nghĩa vế sau phải là "không có ai ở đó cả". Vì động từ `was` ở dạng khẳng định $\rightarrow$ dùng **no one** để mang nghĩa phủ định.
+- **Giải thích:** Vế trước cho biết "phòng họp hoàn toàn trống rỗng" (completely empty) → nghĩa vế sau phải là "không có ai ở đó cả". Vì động từ `was` ở dạng khẳng định → dùng **no one** để mang nghĩa phủ định.
 
 **9. A – anything**
 - **Giải thích:** Trong mệnh đề điều kiện với `If` (Nếu...), ta ưu tiên dùng các đại từ bất định bắt đầu bằng `any-` để chỉ tình huống giả định bất kỳ. Chọn **anything** (Nếu có bất kỳ việc gì xảy ra...).
 
 **10. A – somewhere**
-- **Giải thích:** Ta cần một trạng từ/đại từ bất định chỉ nơi chốn đi trước tính từ `quiet` (nơi nào đó yên tĩnh) trong câu khẳng định $\rightarrow$ chọn **somewhere**.
+- **Giải thích:** Ta cần một trạng từ/đại từ bất định chỉ nơi chốn đi trước tính từ `quiet` (nơi nào đó yên tĩnh) trong câu khẳng định → chọn **somewhere**.
 
 ---
 
