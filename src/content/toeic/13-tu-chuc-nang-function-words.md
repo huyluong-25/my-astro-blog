@@ -2,7 +2,7 @@
 title: "Phần 6: Từ Chức Năng (Function Words) – Ý Nghĩa & Vai Trò Trong Định Hình Câu"
 description: "Giải thích cực kỳ dễ hiểu về Function Words (Từ chức năng) trong tiếng Anh, bao gồm mạo từ, giới từ, liên từ, trợ động từ và đại từ dành cho bài thi TOEIC."
 pubDate: 2026-04-19
-order: 13
+order: 14
 ---
 
 ## 1. Từ Chức Năng (Function Words) là gì?

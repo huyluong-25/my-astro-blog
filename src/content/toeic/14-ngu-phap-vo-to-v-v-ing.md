@@ -2,7 +2,7 @@
 title: "Ngữ Pháp: Động từ nguyên thể (Vo), To-V và V-ing"
 description: "Tổng hợp các cấu trúc động từ cơ bản đi với Vo, To-V và V-ing thường gặp nhất trong đề thi TOEIC."
 pubDate: 2026-04-26
-order: 14
+order: 15
 ---
 
 Khi học tiếng Anh và luyện thi TOEIC, một trong những phần ngữ pháp khiến nhiều bạn bối rối nhất là việc xác định xem sau một động từ thì động từ tiếp theo sẽ ở dạng nào: **Nguyên thể (Vo), To-V hay V-ing**. 

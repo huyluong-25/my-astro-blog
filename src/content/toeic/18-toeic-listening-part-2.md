@@ -2,7 +2,7 @@
 title: "Phần 18: TOEIC Listening Part 2 - Hỏi Đáp (Question & Response)"
 description: "Phân tích chi tiết chiến thuật làm bài, cách nhận biết câu hỏi WH- và các bẫy thường gặp trong Part 2."
 pubDate: 2026-05-10
-order: 18
+order: 19
 ---
 
 ## 1. GIỚI THIỆU VỀ PART 2

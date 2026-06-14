@@ -2,7 +2,7 @@
 title: "Phần 5B: Đại Từ Bất Định (Indefinite Pronouns) – Mẹo Làm Bài & Tránh Bẫy"
 description: "Phân tích chi tiết cấu trúc, cách sử dụng, vị trí của đại từ bất định trong câu, các ghi chú viết tay thực chiến và mẹo chọn nhanh đáp án TOEIC."
 pubDate: 2026-06-06
-order: 20
+order: 21
 ---
 
 ## Mục tiêu bài này
@@ -103,16 +103,236 @@ Bài tập trong ảnh:
 
 Khi gặp câu hỏi chứa các đại từ bất định trong đáp án, hãy áp dụng quy trình 4 bước sau để giải quyết trong 3 giây:
 
-```mermaid
-graph TD
-    A[Nhìn sau chỗ trống] --> B{Có Danh từ không?}
-    B -- Có --> C[Loại Đại từ bất định<br>Chọn Từ hạn định: some, any, every...]
-    B -- Không --> D{Nhìn động từ chia ở số ít hay số nhiều?}
-    D -- Số nhiều --> E[Loại Đại từ bất định]
-    D -- Số ít --> F{Xác định ngữ cảnh & loại câu}
-    F --> G[Chọn: -one/-body chỉ người, -thing chỉ vật, -where chỉ nơi chốn]
-    F --> H[Dựa vào câu: + chọn some-, -/? chọn any-, phủ định chọn no-]
-```
+<style>
+.decision-tree-container {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+margin: 2rem 0;
+font-family: inherit;
+}
+.decision-card {
+border-radius: 16px;
+padding: 1.5rem;
+box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.decision-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+}
+.decision-card.card-blue {
+background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
+border: 1.5px solid rgba(2, 132, 199, 0.15);
+}
+.decision-card.card-green {
+background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(5, 150, 105, 0.02) 100%);
+border: 1.5px solid rgba(16, 185, 129, 0.15);
+}
+.decision-card.card-purple {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(124, 58, 237, 0.02) 100%);
+border: 1.5px solid rgba(139, 92, 246, 0.15);
+}
+.decision-title-container {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 1rem;
+}
+.decision-badge {
+color: white;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+font-size: 0.95rem;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.badge-blue { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+.badge-green { background: linear-gradient(135deg, #10b981, #34d399); }
+.badge-purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+.decision-card h4 {
+margin: 0 !important;
+font-size: 1.15rem;
+color: #0f172a;
+font-weight: 800;
+letter-spacing: -0.01em;
+}
+.decision-card .card-intro {
+margin: 0 0 1.2rem 0 !important;
+color: #475569;
+font-size: 0.95rem;
+line-height: 1.5;
+}
+.decision-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1.2rem;
+}
+.sub-card {
+padding: 1.2rem;
+border-radius: 14px;
+transition: all 0.3s ease;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.sub-card-orange {
+background: rgba(245, 158, 11, 0.04);
+border: 1px dashed rgba(245, 158, 11, 0.25);
+}
+.sub-card-green {
+background: rgba(16, 185, 129, 0.04);
+border: 1px dashed rgba(16, 185, 129, 0.25);
+}
+.sub-card-purple {
+background: rgba(139, 92, 246, 0.04);
+border: 1px dashed rgba(139, 92, 246, 0.25);
+}
+.sub-card-pink {
+background: rgba(236, 72, 153, 0.04);
+border: 1px dashed rgba(236, 72, 153, 0.25);
+}
+.sub-card-title {
+display: block;
+font-weight: 800;
+font-size: 0.92rem;
+margin-bottom: 0.6rem;
+text-transform: uppercase;
+letter-spacing: 0.02em;
+}
+.title-orange { color: #d97706; }
+.title-green { color: #059669; }
+.title-purple { color: #7c3aed; }
+.title-pink { color: #db2777; }
+.sub-card-desc {
+margin: 0 !important;
+font-size: 0.88rem !important;
+color: #475569;
+line-height: 1.5;
+}
+.choice-badge {
+display: inline-block;
+margin-top: 1rem;
+color: white;
+padding: 4px 10px;
+border-radius: 8px;
+font-weight: 800;
+font-size: 0.78rem;
+text-transform: uppercase;
+letter-spacing: 0.03em;
+width: fit-content;
+box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.choice-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.choice-green { background: linear-gradient(135deg, #10b981, #059669); }
+.choice-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.choice-pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+[data-theme='dark'] .decision-card.card-blue {
+background: linear-gradient(135deg, rgba(2, 132, 199, 0.12) 0%, rgba(14, 165, 233, 0.03) 100%);
+border-color: rgba(56, 189, 248, 0.35);
+}
+[data-theme='dark'] .decision-card.card-green {
+background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.03) 100%);
+border-color: rgba(52, 211, 153, 0.35);
+}
+[data-theme='dark'] .decision-card.card-purple {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(124, 58, 237, 0.03) 100%);
+border-color: rgba(167, 139, 250, 0.35);
+}
+[data-theme='dark'] .decision-card h4 { color: #f1f5f9; }
+[data-theme='dark'] .decision-card .card-intro { color: #94a3b8; }
+[data-theme='dark'] .sub-card-orange { background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.35); }
+[data-theme='dark'] .sub-card-green { background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.35); }
+[data-theme='dark'] .sub-card-purple { background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.35); }
+[data-theme='dark'] .sub-card-pink { background: rgba(236, 72, 153, 0.08); border-color: rgba(236, 72, 153, 0.35); }
+[data-theme='dark'] .sub-card-desc { color: #cbd5e1; }
+[data-theme='dark'] .title-orange { color: #fbbf24; }
+[data-theme='dark'] .title-green { color: #34d399; }
+[data-theme='dark'] .title-purple { color: #c084fc; }
+[data-theme='dark'] .title-pink { color: #f472b6; }
+@media (max-width: 640px) {
+.decision-grid {
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+}
+</style>
+<div class="decision-tree-container">
+<!-- Path 1: Check Noun -->
+<div class="decision-card card-blue">
+<div class="decision-title-container">
+<span class="decision-badge badge-blue">1</span>
+<h4>BƯỚC 1: Kiểm Tra Danh Từ Sau Chỗ Trống</h4>
+</div>
+<p class="card-intro">Hãy nhìn ngay sau chỗ trống xem có cụm danh từ nào đi kèm trực tiếp không:</p>
+<div class="decision-grid">
+<div class="sub-card sub-card-orange">
+<div>
+<span class="sub-card-title title-orange">✅ CÓ danh từ đi sau</span>
+<p class="sub-card-desc">Bắt buộc phải chọn một <b>Từ hạn định</b> (Determiner như <i>some, any, every, no...</i>) bổ nghĩa cho Noun.</p>
+</div>
+<span class="choice-badge choice-orange">LOẠI Đại từ bất định</span>
+</div>
+<div class="sub-card sub-card-green">
+<div>
+<span class="sub-card-title title-green">❌ KHÔNG CÓ danh từ</span>
+<p class="sub-card-desc">Động từ đứng trực tiếp phía sau hoặc đứng ở vị trí tân ngữ độc lập. Tiếp tục kiểm tra bước 2.</p>
+</div>
+<span class="choice-badge choice-green">TIẾP TỤC BƯỚC 2</span>
+</div>
+</div>
+</div>
+<!-- Path 2: Check Verb Number -->
+<div class="decision-card card-green">
+<div class="decision-title-container">
+<span class="decision-badge badge-green">2</span>
+<h4>BƯỚC 2: Kiểm Tra Số Ít / Số Nhiều Của Động Từ</h4>
+</div>
+<p class="card-intro">Xem xét động từ chính trong mệnh đề đi kèm:</p>
+<div class="decision-grid">
+<div class="sub-card sub-card-purple">
+<div>
+<span class="sub-card-title title-purple">🔢 Động từ Số Nhiều</span>
+<p class="sub-card-desc">Nếu động từ chia ở dạng số nhiều (<i>are, were, have, V nguyên mẫu</i>): Đại từ bất định luôn đi với V số ít.</p>
+</div>
+<span class="choice-badge choice-purple">LOẠI Đại từ bất định</span>
+</div>
+<div class="sub-card sub-card-green">
+<div>
+<span class="sub-card-title title-green">🔂 Động từ Số Ít</span>
+<p class="sub-card-desc">Nếu động từ chia ở số ít (<i>is, was, has, V-s/es</i>): Thỏa mãn điều kiện ngữ pháp của đại từ bất định.</p>
+</div>
+<span class="choice-badge choice-green">TIẾP TỤC BƯỚC 3</span>
+</div>
+</div>
+</div>
+<!-- Path 3: Select Prefix & Suffix -->
+<div class="decision-card card-purple">
+<div class="decision-title-container">
+<span class="decision-badge badge-purple">3</span>
+<h4>BƯỚC 3: Chọn Hậu Tố và Tiền Tố Thích Hợp</h4>
+</div>
+<p class="card-intro">Xác định đối tượng và loại câu để chọn đáp án chính xác:</p>
+<div class="decision-grid">
+<div class="sub-card sub-card-purple">
+<div>
+<span class="sub-card-title title-purple">🧑 Hậu tố (Chỉ đối tượng)</span>
+<p class="sub-card-desc">- Chỉ người: chọn đuôi <b>-one / -body</b>.<br>- Chỉ vật: chọn đuôi <b>-thing</b>.<br>- Chỉ nơi chốn: chọn đuôi <b>-where</b>.</p>
+</div>
+</div>
+<div class="sub-card sub-card-pink">
+<div>
+<span class="sub-card-title title-pink">➕ Tiền tố (Chỉ loại câu)</span>
+<p class="sub-card-desc">- Câu khẳng định (+): dùng <b>some- / every-</b>.<br>- Câu phủ định/nghi vấn (-)/(?): dùng <b>any-</b>.<br>- Câu mang nghĩa phủ định: dùng <b>no-</b>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 ### Chi tiết các mẹo:
 *   **Mẹo 1: Tránh bẫy Từ hạn định (Determiner):** Nếu ngay sau chỗ trống là một danh từ → **Loại ngay** tất cả các đại từ bất định kết thúc bằng `-one, -body, -thing, -where` (vì chúng đứng độc lập thay thế cho danh từ, không đứng trước bổ nghĩa cho danh từ khác).

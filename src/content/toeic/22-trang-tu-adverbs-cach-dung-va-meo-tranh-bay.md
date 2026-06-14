@@ -2,7 +2,7 @@
 title: "Phần 8: Trạng Từ (Adverbs) – Phân Loại, Vị Trí & Chiến Thuật Tránh Bẫy TOEIC Cực Chi Tiết"
 description: "Cẩm nang toàn diện về Trạng từ trong tiếng Anh: 6 nhóm trạng từ hay gặp, 4 vị trí đứng trong câu, các cấu trúc bẫy Part 5 và chiến thuật làm bài 2 giây."
 pubDate: 2026-06-10
-order: 22
+order: 23
 ---
 
 ## 🎯 Mục tiêu bài học
@@ -78,14 +78,227 @@ Bạn cần nhớ kỹ 4 vị trí này vì đây là chìa khóa để giải q
 
 Để tiết kiệm thời gian cho Part 5 & 6, hãy áp dụng quy tắc quét từ mắt (Nhìn trước - Nhìn sau):
 
-*   **Quy tắc 1: Nhìn SAU chỗ trống**
-    *   Nếu phía sau là **Tính từ (Adj)** hoặc **Phân từ (V-ed / V3 / V-ing)** → Chọn ngay **Trạng từ (Adv)** để bổ nghĩa cho nó.
-*   **Quy tắc 2: Nhìn TRƯỚC chỗ trống**
-    *   Nếu phía trước là một **Động từ thường** và câu đã đầy đủ các thành phần chính (đã có chủ ngữ và tân ngữ) → Chọn **Trạng từ (Adv)** để bổ nghĩa cho động từ.
-*   **⚠️ CẢNH BÁO CHÍ MẠNG: Trạng từ KHÔNG bao giờ đứng giữa Động từ thường và Tân ngữ trực tiếp!**
-    *   ❌ *Sai:* He reads **carefully** the letter.
-    *   ✅ *Đúng:* He reads the letter **carefully**. (Trạng từ đứng ở cuối câu sau tân ngữ)
-    *   ✅ *Đúng:* He **carefully** reads the letter. (Trạng từ đứng trước động từ thường)
+<style>
+.decision-tree-container {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+margin: 2rem 0;
+font-family: inherit;
+}
+.decision-card {
+border-radius: 16px;
+padding: 1.5rem;
+box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.decision-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+}
+.decision-card.card-blue {
+background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
+border: 1.5px solid rgba(2, 132, 199, 0.15);
+}
+.decision-card.card-purple {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(124, 58, 237, 0.02) 100%);
+border: 1.5px solid rgba(139, 92, 246, 0.15);
+}
+.decision-card.card-red {
+background: linear-gradient(135deg, rgba(239, 68, 68, 0.06) 0%, rgba(220, 38, 38, 0.02) 100%);
+border: 1.5px solid rgba(239, 68, 68, 0.15);
+}
+.decision-title-container {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 1rem;
+}
+.decision-badge {
+color: white;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+font-size: 0.95rem;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.badge-blue { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+.badge-purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+.badge-red { background: linear-gradient(135deg, #ef4444, #f87171); }
+.decision-card h4 {
+margin: 0 !important;
+font-size: 1.15rem;
+color: #0f172a;
+font-weight: 800;
+letter-spacing: -0.01em;
+}
+.decision-card .card-intro {
+margin: 0 0 1.2rem 0 !important;
+color: #475569;
+font-size: 0.95rem;
+line-height: 1.5;
+}
+.decision-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1.2rem;
+}
+.decision-grid.single-col {
+grid-template-columns: 1fr;
+}
+.sub-card {
+padding: 1.2rem;
+border-radius: 14px;
+transition: all 0.3s ease;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.sub-card-green {
+background: rgba(16, 185, 129, 0.04);
+border: 1px dashed rgba(16, 185, 129, 0.25);
+}
+.sub-card-purple {
+background: rgba(139, 92, 246, 0.04);
+border: 1px dashed rgba(139, 92, 246, 0.25);
+}
+.sub-card-red-border {
+background: rgba(239, 68, 68, 0.04);
+border: 1.5px solid rgba(239, 68, 68, 0.15);
+}
+.sub-card-green-border {
+background: rgba(16, 185, 129, 0.04);
+border: 1.5px solid rgba(16, 185, 129, 0.15);
+}
+.sub-card-title {
+display: block;
+font-weight: 800;
+font-size: 0.92rem;
+margin-bottom: 0.6rem;
+text-transform: uppercase;
+letter-spacing: 0.02em;
+}
+.title-green { color: #059669; }
+.title-purple { color: #7c3aed; }
+.title-red { color: #dc2626; }
+.title-green-text { color: #16a34a; }
+.sub-card-desc {
+margin: 0 !important;
+font-size: 0.88rem !important;
+color: #475569;
+line-height: 1.5;
+}
+.choice-badge {
+display: inline-block;
+margin-top: 1rem;
+color: white;
+padding: 4px 10px;
+border-radius: 8px;
+font-weight: 800;
+font-size: 0.78rem;
+text-transform: uppercase;
+letter-spacing: 0.03em;
+width: fit-content;
+box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.choice-green { background: linear-gradient(135deg, #10b981, #059669); }
+.choice-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.choice-red-flat { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.choice-green-flat { background: linear-gradient(135deg, #10b981, #16a34a); }
+[data-theme='dark'] .decision-card.card-blue {
+background: linear-gradient(135deg, rgba(2, 132, 199, 0.12) 0%, rgba(14, 165, 233, 0.03) 100%);
+border-color: rgba(56, 189, 248, 0.35);
+}
+[data-theme='dark'] .decision-card.card-purple {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(124, 58, 237, 0.03) 100%);
+border-color: rgba(167, 139, 250, 0.35);
+}
+[data-theme='dark'] .decision-card.card-red {
+background: linear-gradient(135deg, rgba(239, 68, 68, 0.12) 0%, rgba(220, 38, 38, 0.03) 100%);
+border-color: rgba(248, 113, 113, 0.35);
+}
+[data-theme='dark'] .decision-card h4 { color: #f1f5f9; }
+[data-theme='dark'] .decision-card .card-intro { color: #94a3b8; }
+[data-theme='dark'] .sub-card-green { background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.35); }
+[data-theme='dark'] .sub-card-purple { background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.35); }
+[data-theme='dark'] .sub-card-red-border { background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.35); }
+[data-theme='dark'] .sub-card-green-border { background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.35); }
+[data-theme='dark'] .sub-card-desc { color: #cbd5e1; }
+[data-theme='dark'] .title-green { color: #34d399; }
+[data-theme='dark'] .title-purple { color: #c084fc; }
+[data-theme='dark'] .title-red { color: #f87171; }
+[data-theme='dark'] .title-green-text { color: #4ade80; }
+@media (max-width: 640px) {
+.decision-grid {
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+}
+</style>
+<div class="decision-tree-container">
+<!-- Rule 1: Nhìn SAU chỗ trống -->
+<div class="decision-card card-blue">
+<div class="decision-title-container">
+<span class="decision-badge badge-blue">1</span>
+<h4>QUY TẮC 1: Nhìn SAU chỗ trống</h4>
+</div>
+<p class="card-intro">Hãy quét mắt nhìn ngay sau khoảng trống cần điền:</p>
+<div class="decision-grid single-col">
+<div class="sub-card sub-card-green">
+<div>
+<span class="sub-card-title title-green">Tính từ (Adj) hoặc Phân từ (V-ed / V3 / V-ing)</span>
+<p class="sub-card-desc">Nếu phía sau là một trong các từ loại này, hãy chọn ngay trạng từ để bổ nghĩa.</p>
+</div>
+<span class="choice-badge choice-green">CHỌN TRẠNG TỪ (ADV)</span>
+</div>
+</div>
+</div>
+<!-- Rule 2: Nhìn TRƯỚC chỗ trống -->
+<div class="decision-card card-purple">
+<div class="decision-title-container">
+<span class="decision-badge badge-purple">2</span>
+<h4>QUY TẮC 2: Nhìn TRƯỚC chỗ trống</h4>
+</div>
+<p class="card-intro">Hãy quét mắt nhìn phía trước khoảng trống cần điền:</p>
+<div class="decision-grid single-col">
+<div class="sub-card sub-card-purple">
+<div>
+<span class="sub-card-title title-purple">Động từ thường (Đã đủ S & O)</span>
+<p class="sub-card-desc">Nếu câu đã có đầy đủ chủ ngữ và tân ngữ, hãy điền trạng từ để bổ nghĩa cho động từ.</p>
+</div>
+<span class="choice-badge choice-purple">CHỌN TRẠNG TỪ (ADV)</span>
+</div>
+</div>
+</div>
+<!-- Danger Card -->
+<div class="decision-card card-red">
+<div class="decision-title-container">
+<span class="decision-badge badge-red">⚠️</span>
+<h4>CẢNH BÁO CHÍ MẠNG: Trạng từ vs Tân ngữ</h4>
+</div>
+<p class="card-intro" style="color: #ef4444; font-weight: bold; margin-bottom: 1rem !important;">Trạng từ KHÔNG bao giờ đứng giữa Động từ thường và Tân ngữ trực tiếp!</p>
+<div class="decision-grid">
+<div class="sub-card sub-card-red-border">
+<div>
+<span class="sub-card-title title-red">❌ SAI</span>
+<p class="sub-card-desc">He reads <b>carefully</b> the letter.</p>
+</div>
+<span class="choice-badge choice-red-flat">XEN GIỮA V VÀ O</span>
+</div>
+<div class="sub-card sub-card-green-border">
+<div>
+<span class="sub-card-title title-green-text">✅ ĐÚNG</span>
+<p class="sub-card-desc">He reads the letter <b>carefully</b>. (Đứng sau tân ngữ)<br>He <b>carefully</b> reads the letter. (Đứng trước động từ)</p>
+</div>
+<span class="choice-badge choice-green-flat">ĐÚNG VỊ TRÍ</span>
+</div>
+</div>
+</div>
+</div>
 
 ---
 

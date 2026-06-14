@@ -2,7 +2,7 @@
 title: "Phần 17: TOEIC Listening Part 1 - Tranh Tả Người và Vật"
 description: "Mẹo nhận biết chi tiết, từ khóa và chiến thuật làm bài Part 1 Mô tả tranh."
 pubDate: 2026-05-10
-order: 17
+order: 18
 ---
 
 ## 1. TRANH 1 NGƯỜI

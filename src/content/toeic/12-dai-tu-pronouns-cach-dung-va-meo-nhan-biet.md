@@ -2,7 +2,7 @@
 title: "Phần 5: Đại Từ (Pronouns) – Cách Sử Dụng & Mẹo Nhận Biết Nhanh Trong TOEIC"
 description: "Tổng hợp đầy đủ các loại đại từ tiếng Anh, công thức, vị trí trong câu, bẫy thường gặp và mẹo nhận biết siêu nhanh cho TOEIC Part 5 & 6."
 pubDate: 2026-04-15
-order: 12
+order: 13
 ---
 
 ## Mục tiêu bài này
@@ -132,25 +132,249 @@ Ví dụ:
 
 Khi gặp câu hỏi đại từ trong TOEIC, làm theo **3 bước** sau:
 
-### Bước 1️⃣: Nhìn vị trí chỗ trống
-
-| Vị trí chỗ trống | Loại đại từ cần chọn |
-| --- | --- |
-| `___ + V` (trước động từ) | Chủ ngữ: I / he / she / we / they |
-| `V + ___` hoặc `giới từ + ___` | Tân ngữ: me / him / her / us / them |
-| `___ + Danh từ` | Sở hữu tính từ: my / his / her / our / their |
-| `___ (không có DT sau)` | Sở hữu đại từ: mine / his / hers / ours / theirs |
-| `S + V + ___ (S = ___)` hoặc `by ___` | Phản thân: myself / himself / herself... |
-
-### Bước 2️⃣: Xác định ngôi (số ít / số nhiều)
-
-- Chủ ngữ là 1 người → số ít (he/she/his/her...)
-- Chủ ngữ là nhiều người → số nhiều (they/their/them...)
-- Chủ ngữ là vật/công ty → **it / its** (số ít) hoặc **they / their** (nếu nhắc nhiều vật)
-
-### Bước 3️⃣: Kiểm tra nghĩa
-
-Đọc lại câu hoàn chỉnh để chắc chắn nghĩa hợp lý trong ngữ cảnh.
+<style>
+.decision-tree-container {
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
+margin: 2rem 0;
+font-family: inherit;
+}
+.decision-card {
+border-radius: 16px;
+padding: 1.5rem;
+box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.decision-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+}
+.decision-card.card-blue {
+background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
+border: 1.5px solid rgba(2, 132, 199, 0.15);
+}
+.decision-card.card-green {
+background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(5, 150, 105, 0.02) 100%);
+border: 1.5px solid rgba(16, 185, 129, 0.15);
+}
+.decision-card.card-purple {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(124, 58, 237, 0.02) 100%);
+border: 1.5px solid rgba(139, 92, 246, 0.15);
+}
+.decision-title-container {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 1rem;
+}
+.decision-badge {
+color: white;
+border-radius: 50%;
+width: 30px;
+height: 30px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-weight: 800;
+font-size: 0.95rem;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.badge-blue { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+.badge-green { background: linear-gradient(135deg, #10b981, #34d399); }
+.badge-purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+.decision-card h4 {
+margin: 0 !important;
+font-size: 1.15rem;
+color: #0f172a;
+font-weight: 800;
+letter-spacing: -0.01em;
+}
+.decision-card .card-intro {
+margin: 0 0 1.2rem 0 !important;
+color: #475569;
+font-size: 0.95rem;
+line-height: 1.5;
+}
+.decision-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1.2rem;
+}
+.sub-card {
+padding: 1.2rem;
+border-radius: 14px;
+transition: all 0.3s ease;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.sub-card-blue {
+background: rgba(2, 132, 199, 0.04);
+border: 1px dashed rgba(2, 132, 199, 0.25);
+}
+.sub-card-green {
+background: rgba(16, 185, 129, 0.04);
+border: 1px dashed rgba(16, 185, 129, 0.25);
+}
+.sub-card-orange {
+background: rgba(245, 158, 11, 0.04);
+border: 1px dashed rgba(245, 158, 11, 0.25);
+}
+.sub-card-purple {
+background: rgba(139, 92, 246, 0.04);
+border: 1px dashed rgba(139, 92, 246, 0.25);
+}
+.sub-card-pink {
+background: rgba(236, 72, 153, 0.04);
+border: 1px dashed rgba(236, 72, 153, 0.25);
+}
+.sub-card-title {
+display: block;
+font-weight: 800;
+font-size: 0.92rem;
+margin-bottom: 0.6rem;
+text-transform: uppercase;
+letter-spacing: 0.02em;
+}
+.title-blue { color: #0284c7; }
+.title-green { color: #059669; }
+.title-orange { color: #d97706; }
+.title-purple { color: #7c3aed; }
+.title-pink { color: #db2777; }
+.sub-card-desc {
+margin: 0 !important;
+font-size: 0.88rem !important;
+color: #475569;
+line-height: 1.5;
+}
+.choice-badge {
+display: inline-block;
+margin-top: 1rem;
+color: white;
+padding: 4px 10px;
+border-radius: 8px;
+font-weight: 800;
+font-size: 0.78rem;
+text-transform: uppercase;
+letter-spacing: 0.03em;
+width: fit-content;
+box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.choice-blue { background: linear-gradient(135deg, #0284c7, #0ea5e9); }
+.choice-green { background: linear-gradient(135deg, #10b981, #059669); }
+.choice-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.choice-purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.choice-pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+[data-theme='dark'] .decision-card.card-blue {
+background: linear-gradient(135deg, rgba(2, 132, 199, 0.12) 0%, rgba(14, 165, 233, 0.03) 100%);
+border-color: rgba(56, 189, 248, 0.35);
+}
+[data-theme='dark'] .decision-card.card-green {
+background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.03) 100%);
+border-color: rgba(52, 211, 153, 0.35);
+}
+[data-theme='dark'] .decision-card.card-purple {
+background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(124, 58, 237, 0.03) 100%);
+border-color: rgba(167, 139, 250, 0.35);
+}
+[data-theme='dark'] .decision-card h4 { color: #f1f5f9; }
+[data-theme='dark'] .decision-card .card-intro { color: #94a3b8; }
+[data-theme='dark'] .sub-card-blue { background: rgba(2, 132, 199, 0.08); border-color: rgba(2, 132, 199, 0.35); }
+[data-theme='dark'] .sub-card-green { background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.35); }
+[data-theme='dark'] .sub-card-orange { background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.35); }
+[data-theme='dark'] .sub-card-purple { background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.35); }
+[data-theme='dark'] .sub-card-pink { background: rgba(236, 72, 153, 0.08); border-color: rgba(236, 72, 153, 0.35); }
+[data-theme='dark'] .sub-card-desc { color: #cbd5e1; }
+[data-theme='dark'] .title-blue { color: #60a5fa; }
+[data-theme='dark'] .title-green { color: #34d399; }
+[data-theme='dark'] .title-orange { color: #fbbf24; }
+[data-theme='dark'] .title-purple { color: #c084fc; }
+[data-theme='dark'] .title-pink { color: #f472b6; }
+@media (max-width: 720px) {
+.decision-grid {
+grid-template-columns: 1fr;
+gap: 1rem;
+}
+}
+</style>
+<div class="decision-tree-container">
+<!-- Path 1: Check position -->
+<div class="decision-card card-blue">
+<div class="decision-title-container">
+<span class="decision-badge badge-blue">1</span>
+<h4>BƯỚC 1: Nhìn Vị Trí Chỗ Trống Trong Câu</h4>
+</div>
+<p class="card-intro">Xác định xem chỗ trống đang nằm ở cấu trúc ngữ pháp nào:</p>
+<div class="decision-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+<div class="sub-card sub-card-blue">
+<div>
+<span class="sub-card-title title-blue">Trước Động Từ `___ + V`</span>
+<p class="sub-card-desc">Cần một đại từ làm vai trò chủ ngữ trong câu.</p>
+</div>
+<span class="choice-badge choice-blue">Chủ Ngữ (I, he, she, we, they...)</span>
+</div>
+<div class="sub-card sub-card-green">
+<div>
+<span class="sub-card-title title-green">Sau Động Từ / Giới Từ `V/Prep + ___`</span>
+<p class="sub-card-desc">Cần một đại từ nhận tác động làm vai trò tân ngữ.</p>
+</div>
+<span class="choice-badge choice-green">Tân Ngữ (me, him, her, us, them...)</span>
+</div>
+<div class="sub-card sub-card-orange">
+<div>
+<span class="sub-card-title title-orange">Trước Danh Từ `___ + Noun`</span>
+<p class="sub-card-desc">Cần một từ hạn định chỉ sự sở hữu của chủ thể.</p>
+</div>
+<span class="choice-badge choice-orange">Sở Hữu Tính Từ (my, his, her, their...)</span>
+</div>
+<div class="sub-card sub-card-purple">
+<div>
+<span class="sub-card-title title-purple">Đứng Một Mình (Không Noun sau)</span>
+<p class="sub-card-desc">Thay thế hoàn toàn cho cụm danh từ đã có tính từ sở hữu.</p>
+</div>
+<span class="choice-badge choice-purple">Sở Hữu Đại Từ (mine, hers, theirs...)</span>
+</div>
+<div class="sub-card sub-card-pink">
+<div>
+<span class="sub-card-title title-pink">Chủ ngữ tự làm `by ___`</span>
+<p class="sub-card-desc">Nhấn mạnh chủ ngữ tự làm hoặc làm một mình.</p>
+</div>
+<span class="choice-badge choice-pink">Phản Thân (myself, himself, herself...)</span>
+</div>
+</div>
+</div>
+<!-- Path 2: Check gender/number -->
+<div class="decision-card card-green">
+<div class="decision-title-container">
+<span class="decision-badge badge-green">2</span>
+<h4>BƯỚC 2: Xác Định Ngôi và Số Lượng</h4>
+</div>
+<p class="card-intro">Căn cứ vào danh từ đứng trước hoặc ngữ cảnh để chọn ngôi phù hợp:</p>
+<div class="decision-grid">
+<div class="sub-card sub-card-blue">
+<div>
+<span class="sub-card-title title-blue">👤 Chỉ Người / Một người</span>
+<p class="sub-card-desc">- Số ít nam: <b>he, him, his, himself</b>.<br>- Số ít nữ: <b>she, her, hers, herself</b>.</p>
+</div>
+</div>
+<div class="sub-card sub-card-green">
+<div>
+<span class="sub-card-title title-green">👥 Chỉ Nhiều người / Vật</span>
+<p class="sub-card-desc">- Số nhiều: <b>we, they, us, them, our, their...</b><br>- Số ít vật/công ty: <b>it, its, itself</b>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Path 3: Double Check Meaning -->
+<div class="decision-card card-purple">
+<div class="decision-title-container">
+<span class="decision-badge badge-purple">3</span>
+<h4>BƯỚC 3: Dịch Nghĩa & Kiểm Tra Sự Phù Hợp</h4>
+</div>
+<p class="card-intro">Đọc lại câu hoàn chỉnh để chắc chắn rằng đại từ được chọn giúp câu trôi chảy và logic trong ngữ cảnh giao tiếp/công sở.</p>
+</div>
+</div>
 
 ---
 
