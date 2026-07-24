@@ -2,9 +2,12 @@
 title: "Phần 18: TOEIC Listening Part 2 - Hỏi Đáp (Question & Response)"
 description: "Phân tích chi tiết chiến thuật làm bài, cách nhận biết câu hỏi WH- và các bẫy thường gặp trong Part 2."
 pubDate: 2026-05-10
-order: 19
+order: 15
+category: "listening"
+categoryLabel: "Listening"
+categoryIcon: "ðŸŽ§"
+categoryColor: "#e11d48"
 ---
-
 ## 1. GIỚI THIỆU VỀ PART 2
 
 - **Cấu trúc:** Part 2 gồm 25 câu (từ câu 7 đến 31). Bạn sẽ nghe 1 câu hỏi/câu nói và 3 ĐÁP ÁN (A, B, C).

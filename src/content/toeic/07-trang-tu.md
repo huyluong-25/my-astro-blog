@@ -2,9 +2,12 @@
 title: "Phần 8: Trạng Từ (Adverbs) – Phân Loại, Vị Trí & Chiến Thuật Tránh Bẫy TOEIC Cực Chi Tiết"
 description: "Cẩm nang toàn diện về Trạng từ trong tiếng Anh: 6 nhóm trạng từ hay gặp, 4 vị trí đứng trong câu, các cấu trúc bẫy Part 5 và chiến thuật làm bài 2 giây."
 pubDate: 2026-06-10
-order: 23
+order: 7
+category: "word-forms"
+categoryLabel: "Tá»« Loáº¡i"
+categoryIcon: "ðŸ"
+categoryColor: "#7c3aed"
 ---
-
 ## 🎯 Mục tiêu bài học
 
 Sau bài học này, bạn sẽ:
@@ -98,15 +101,15 @@ box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
 }
 .decision-card.card-blue {
 background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
-border: 1.5px solid rgba(2, 132, 199, 0.15);
+border: 7.5px solid rgba(2, 132, 199, 0.15);
 }
 .decision-card.card-purple {
 background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(124, 58, 237, 0.02) 100%);
-border: 1.5px solid rgba(139, 92, 246, 0.15);
+border: 7.5px solid rgba(139, 92, 246, 0.15);
 }
 .decision-card.card-red {
 background: linear-gradient(135deg, rgba(239, 68, 68, 0.06) 0%, rgba(220, 38, 38, 0.02) 100%);
-border: 1.5px solid rgba(239, 68, 68, 0.15);
+border: 7.5px solid rgba(239, 68, 68, 0.15);
 }
 .decision-title-container {
 display: flex;
@@ -160,19 +163,19 @@ justify-content: space-between;
 }
 .sub-card-green {
 background: rgba(16, 185, 129, 0.04);
-border: 1px dashed rgba(16, 185, 129, 0.25);
+border: 7px dashed rgba(16, 185, 129, 0.25);
 }
 .sub-card-purple {
 background: rgba(139, 92, 246, 0.04);
-border: 1px dashed rgba(139, 92, 246, 0.25);
+border: 7px dashed rgba(139, 92, 246, 0.25);
 }
 .sub-card-red-border {
 background: rgba(239, 68, 68, 0.04);
-border: 1.5px solid rgba(239, 68, 68, 0.15);
+border: 7.5px solid rgba(239, 68, 68, 0.15);
 }
 .sub-card-green-border {
 background: rgba(16, 185, 129, 0.04);
-border: 1.5px solid rgba(16, 185, 129, 0.15);
+border: 7.5px solid rgba(16, 185, 129, 0.15);
 }
 .sub-card-title {
 display: block;

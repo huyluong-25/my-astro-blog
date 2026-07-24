@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 
 const notes = (await getCollection('toeic')).sort((a, b) => {
@@ -11,277 +10,380 @@ const notes = (await getCollection('toeic')).sort((a, b) => {
   if (ao !== bo) return ao - bo;
   return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 });
+
+const categoryConfig: Record<string, { label: string; icon: string; color: string; bg: string }> = {
+  'foundation': { label: 'Nền Tảng Câu', icon: '🏗️', color: '#2563eb', bg: 'rgba(37, 99, 235, 0.08)' },
+  'tenses': { label: 'Các Thì Tiếng Anh', icon: '⏰', color: '#059669', bg: 'rgba(5, 150, 105, 0.08)' },
+  'word-forms': { label: 'Từ Loại & Cụm Từ', icon: '🔤', color: '#7c3aed', bg: 'rgba(124, 58, 237, 0.08)' },
+  'verb-patterns': { label: 'Cấu Trúc Động Từ', icon: '⚙️', color: '#ea580c', bg: 'rgba(234, 88, 12, 0.08)' },
+  'listening': { label: 'Luyện Listening', icon: '🎧', color: '#e11d48', bg: 'rgba(225, 29, 72, 0.08)' },
+};
 ---
 
 <!doctype html>
 <html lang="vi">
   <head>
-    <BaseHead title="Thư Viện Ngữ Pháp TOEIC" description="Kho bài học TOEIC theo từng chủ đề và từng thì." />
+    <BaseHead title="Lộ Trình Ngữ Pháp TOEIC Bứt Phá Điểm Số" description="Hệ thống bài học ngữ pháp TOEIC trực quan, phong cách E-Learning hiện đại." />
     <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+        --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+        --card-hover-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.15);
+      }
+
       main {
-        width: calc(100% - 2em);
-        max-width: 960px;
+        width: 100%;
+        max-width: 1140px;
         margin: 0 auto;
+        padding: 2rem 1.2rem 5rem;
       }
 
-      /* Hero section */
-      .hero {
-        margin-bottom: 1.5rem;
-        background: linear-gradient(120deg, rgba(2, 132, 199, 0.1), rgba(56, 189, 248, 0.08));
-        border: 1px solid rgba(2, 132, 199, 0.18);
-        border-radius: 18px;
-        padding: 1.4rem 1.5rem;
-        animation: fadeInUp 0.7s ease-out;
+      /* Hero Premium Container */
+      .hero-wrapper {
         position: relative;
+        background: var(--primary-gradient);
+        border-radius: 28px;
+        padding: 3rem 2.5rem;
+        color: #ffffff;
         overflow: hidden;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.4);
       }
 
-      .hero::before {
+      .hero-wrapper::before {
         content: '';
         position: absolute;
         top: -50%;
-        right: -20%;
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(circle, rgba(2, 132, 199, 0.12) 0%, transparent 70%);
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
         border-radius: 50%;
         pointer-events: none;
       }
 
-      .hero h1 {
-        margin: 0 0 0.4rem;
-        font-size: clamp(1.4rem, 3vw, 1.9rem);
-      }
-
-      .hero p {
-        margin: 0;
-        color: #334155;
-      }
-
-      .stats-row {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .stat-chip {
+      .hero-badge {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 5px 14px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(2, 132, 199, 0.15);
-        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 6px 16px;
+        border-radius: 50px;
         font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 900;
+        margin: 0 0 1rem;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin: 0 0 2rem;
+        max-width: 680px;
+        line-height: 1.6;
+      }
+
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 1.2rem;
+        background: rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(12px);
+        padding: 1.2rem 1.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .metric-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .metric-value {
+        font-size: 1.5rem;
+        font-weight: 900;
+      }
+
+      .metric-label {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.8);
         font-weight: 600;
-        color: #0369a1;
-        backdrop-filter: blur(4px);
       }
 
-      /* Lesson list */
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 0.7rem;
-      }
-
-      li {
-        animation: fadeInUp 0.6s ease-out backwards;
-      }
-
-      li a {
-        display: grid;
-        grid-template-columns: 48px 1fr;
-        gap: 1rem;
+      /* Tab Navigation Filter */
+      .filter-nav {
+        display: flex;
         align-items: center;
-        border: 1px solid #dbe5f0;
-        border-radius: 14px;
-        padding: 1rem;
-        background: #fff;
+        gap: 0.6rem;
+        overflow-x: auto;
+        padding: 0.5rem 0.2rem 1.5rem;
+        margin-bottom: 1rem;
+        scrollbar-width: none;
+      }
+      .filter-nav::-webkit-scrollbar { display: none; }
+
+      .tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 50px;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #475569;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.25s ease;
+      }
+
+      .tab-btn:hover, .tab-btn.active {
+        background: #0f172a;
+        color: #ffffff;
+        border-color: #0f172a;
+        box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.3);
+      }
+
+      /* Course Cards Grid */
+      .course-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .course-card {
+        background: #ffffff;
+        border: 1.5px solid #f1f5f9;
+        border-radius: 24px;
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         text-decoration: none;
+        position: relative;
         transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: var(--card-shadow);
       }
 
-      li a:hover {
-        transform: translateY(-4px) scale(1.005);
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(8px);
-        box-shadow:
-          0 16px 32px rgba(0, 0, 0, 0.06),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-        border-color: rgba(2, 132, 199, 0.2);
+      .course-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--card-hover-shadow);
+        border-color: rgba(14, 165, 233, 0.4);
       }
 
-      /* Lesson number badge */
-      .lesson-num {
+      .card-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+      }
+
+      .cat-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 30px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
+
+      .lesson-number-circle {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        color: #0f172a;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 48px;
-        height: 48px;
-        background: linear-gradient(135deg, #0284c7, #38bdf8);
-        border-radius: 12px;
-        color: #fff;
+        font-weight: 900;
+        font-size: 0.9rem;
+      }
+
+      .course-title {
+        font-size: 1.15rem;
         font-weight: 800;
-        font-size: 1.1rem;
-        flex-shrink: 0;
-        transition: transform 0.3s;
-      }
-
-      li a:hover .lesson-num {
-        transform: scale(1.1) rotate(-3deg);
-      }
-
-      .lesson-info {
-        min-width: 0;
-      }
-
-      .title {
-        margin: 0;
         color: #0f172a;
-        font-size: 1.05rem;
-        font-weight: 700;
-        transition: color 0.3s;
+        margin: 0 0 0.6rem;
+        line-height: 1.4;
       }
 
-      .desc {
-        margin: 0.25rem 0;
-        color: #475569;
-        font-size: 0.92rem;
+      .course-desc {
+        font-size: 0.9rem;
+        color: #64748b;
+        margin: 0 0 1.5rem;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        transition: color 0.3s;
       }
 
-      .date {
-        margin: 0;
-        font-size: 0.82rem;
-        color: #94a3b8;
-        transition: color 0.3s;
+      .card-bottom-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1rem;
+        border-top: 1px solid #f1f5f9;
       }
 
-      /* Stagger animation delays */
-      li:nth-child(1) { animation-delay: 0.05s; }
-      li:nth-child(2) { animation-delay: 0.1s; }
-      li:nth-child(3) { animation-delay: 0.15s; }
-      li:nth-child(4) { animation-delay: 0.2s; }
-      li:nth-child(5) { animation-delay: 0.25s; }
-      li:nth-child(6) { animation-delay: 0.3s; }
-      li:nth-child(7) { animation-delay: 0.35s; }
-      li:nth-child(8) { animation-delay: 0.4s; }
-      li:nth-child(9) { animation-delay: 0.45s; }
-      li:nth-child(10) { animation-delay: 0.5s; }
-      li:nth-child(11) { animation-delay: 0.55s; }
-      li:nth-child(12) { animation-delay: 0.6s; }
-      li:nth-child(13) { animation-delay: 0.65s; }
+      .start-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #0ea5e9;
+        transition: gap 0.2s;
+      }
 
-      /* Responsive */
+      .course-card:hover .start-btn {
+        gap: 10px;
+      }
+
+      /* Mobile Layout */
       @media (max-width: 640px) {
-        li a {
-          grid-template-columns: 40px 1fr;
-          gap: 0.75rem;
-          padding: 0.8rem;
-        }
-
-        .lesson-num {
-          width: 40px;
-          height: 40px;
-          font-size: 0.95rem;
-          border-radius: 10px;
-        }
-
-        .title {
-          font-size: 0.98rem;
-        }
-
-        .desc {
-          font-size: 0.85rem;
-        }
-
-        li a:hover {
-          transform: none;
-          box-shadow: none;
-        }
+        main { padding: 1.2rem 0.8rem 3rem; }
+        .hero-wrapper { padding: 2rem 1.4rem; border-radius: 20px; }
+        .hero-metrics { grid-template-columns: 1fr 1fr; }
+        .course-grid { grid-template-columns: 1fr; gap: 1.2rem; }
       }
 
-      /* ======= DARK MODE ======= */
-      [data-theme='dark'] .hero {
-        background: linear-gradient(120deg, rgba(2, 132, 199, 0.2), rgba(56, 189, 248, 0.12));
-        border-color: rgba(56, 189, 248, 0.35);
-      }
-
-      [data-theme='dark'] .hero p {
+      /* Dark Theme */
+      [data-theme='dark'] .tab-btn {
+        background: #1e293b;
+        border-color: #334155;
         color: #cbd5e1;
       }
-
-      [data-theme='dark'] .stat-chip {
-        background: rgba(15, 23, 42, 0.6);
-        border-color: rgba(56, 189, 248, 0.2);
-        color: #7dd3fc;
+      [data-theme='dark'] .tab-btn:hover, [data-theme='dark'] .tab-btn.active {
+        background: #38bdf8;
+        color: #0f172a;
+        border-color: #38bdf8;
       }
-
-      [data-theme='dark'] li a {
-        background: rgba(15, 23, 42, 0.92);
-        border-color: #334155;
+      [data-theme='dark'] .course-card {
+        background: #0f172a;
+        border-color: #1e293b;
+        box-shadow: none;
       }
-
-      [data-theme='dark'] li a:hover {
-        background: rgba(30, 41, 59, 0.95);
-        border-color: rgba(56, 189, 248, 0.25);
-        box-shadow:
-          0 16px 32px rgba(0, 0, 0, 0.3),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+      [data-theme='dark'] .course-card:hover {
+        background: #1e293b;
+        border-color: #38bdf8;
       }
-
-      [data-theme='dark'] .title {
-        color: #f1f5f9;
-      }
-
-      [data-theme='dark'] .desc {
-        color: #94a3b8;
-      }
-
-      [data-theme='dark'] .date {
-        color: #64748b;
-      }
+      [data-theme='dark'] .course-title { color: #f8fafc; }
+      [data-theme='dark'] .course-desc { color: #94a3b8; }
+      [data-theme='dark'] .card-bottom-bar { border-top-color: #1e293b; }
+      [data-theme='dark'] .lesson-number-circle { background: #1e293b; color: #f8fafc; }
     </style>
   </head>
   <body>
     <Header />
     <main>
-      <section class="hero">
-        <h1>Thư Viện Ngữ Pháp TOEIC</h1>
-        <p>
-          Chọn một bài học để ôn tập nhanh. Mỗi bài là một trang riêng để bạn đọc lại và chỉnh sửa nội dung dễ dàng.
+      <!-- Hero Section -->
+      <section class="hero-wrapper">
+        <div class="hero-badge">🚀 Trọn Bộ Kỹ Năng TOEIC 2026</div>
+        <h1 class="hero-title">Lộ Trình Ngữ Pháp TOEIC Thực Chiến</h1>
+        <p class="hero-subtitle">
+          Tổng hợp toàn bộ cấu trúc trọng tâm, bẫy đề thi Part 5 & 6 cùng chiến thuật xử lý câu hỏi nhanh gọn giúp bạn tối ưu hóa điểm số.
         </p>
-        <div class="stats-row">
-          <span class="stat-chip">📚 {notes.length} bài học</span>
-          <span class="stat-chip">🎯 TOEIC Grammar</span>
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <span class="metric-value">{notes.length} Bài</span>
+            <span class="metric-label">Lộ trình chuẩn hoá</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-value">5 Nhóm</span>
+            <span class="metric-label">Chủ đề phân loại</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-value">100%</span>
+            <span class="metric-label">Giải thích chi tiết</span>
+          </div>
         </div>
       </section>
 
-      <ul>
-        {
-          notes.map((note, index) => (
-            <li>
-              <a href={`/toeic/${note.id}/`} data-astro-prefetch="hover">
-                <span class="lesson-num">{index + 1}</span>
-                <div class="lesson-info">
-                  <h3 class="title">{note.data.title}</h3>
-                  <p class="desc">{note.data.description}</p>
-                  <p class="date">
-                    <FormattedDate date={note.data.pubDate} />
-                  </p>
+      <!-- Category Tabs Filter -->
+      <div class="filter-nav">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">✨ Tất Cả ({notes.length})</button>
+        {Object.entries(categoryConfig).map(([key, cfg]) => {
+          const count = notes.filter(n => (n.data.category || 'foundation') === key).length;
+          if (count === 0) return null;
+          return (
+            <button class="tab-btn" onclick={`filterCategory('${key}', this)`}>
+              <span>{cfg.icon}</span>
+              <span>{cfg.label} ({count})</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <!-- Course Cards Container -->
+      <div class="course-grid" id="course-container">
+        {notes.map((note, idx) => {
+          const catKey = note.data.category || 'foundation';
+          const cfg = categoryConfig[catKey] || categoryConfig['foundation'];
+          
+          return (
+            <a 
+              href={`/toeic/${note.id}/`} 
+              class="course-card" 
+              data-category={catKey}
+            >
+              <div>
+                <div class="card-header-row">
+                  <span class="cat-tag" style={`background: ${cfg.bg}; color: ${cfg.color};`}>
+                    {cfg.icon} {cfg.label}
+                  </span>
+                  <span class="lesson-number-circle">
+                    #{note.data.order ?? idx + 1}
+                  </span>
                 </div>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+                
+                <h3 class="course-title">{note.data.title}</h3>
+                <p class="course-desc">{note.data.description}</p>
+              </div>
+
+              <div class="card-bottom-bar">
+                <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 600;">Part 5 & 6 Focus</span>
+                <span class="start-btn" style={`color: ${cfg.color};`}>
+                  Học bài này ➔
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
     </main>
     <Footer />
+
+    <script is:inline>
+      function filterCategory(cat, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cards = document.querySelectorAll('.course-card');
+        cards.forEach(card => {
+          if (cat === 'all' || card.getAttribute('data-category') === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    </script>
   </body>
 </html>

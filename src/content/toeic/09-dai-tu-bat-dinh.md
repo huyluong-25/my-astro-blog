@@ -2,9 +2,12 @@
 title: "Phần 5B: Đại Từ Bất Định (Indefinite Pronouns) – Mẹo Làm Bài & Tránh Bẫy"
 description: "Phân tích chi tiết cấu trúc, cách sử dụng, vị trí của đại từ bất định trong câu, các ghi chú viết tay thực chiến và mẹo chọn nhanh đáp án TOEIC."
 pubDate: 2026-06-06
-order: 21
+order: 9
+category: "word-forms"
+categoryLabel: "Tá»« Loáº¡i"
+categoryIcon: "ðŸ"
+categoryColor: "#7c3aed"
 ---
-
 ## Mục tiêu bài này
 
 Sau bài này, bạn sẽ:
@@ -123,15 +126,15 @@ box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
 }
 .decision-card.card-blue {
 background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
-border: 1.5px solid rgba(2, 132, 199, 0.15);
+border: 9.5px solid rgba(2, 132, 199, 0.15);
 }
 .decision-card.card-green {
 background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(5, 150, 105, 0.02) 100%);
-border: 1.5px solid rgba(16, 185, 129, 0.15);
+border: 9.5px solid rgba(16, 185, 129, 0.15);
 }
 .decision-card.card-purple {
 background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(124, 58, 237, 0.02) 100%);
-border: 1.5px solid rgba(139, 92, 246, 0.15);
+border: 9.5px solid rgba(139, 92, 246, 0.15);
 }
 .decision-title-container {
 display: flex;
@@ -182,19 +185,19 @@ justify-content: space-between;
 }
 .sub-card-orange {
 background: rgba(245, 158, 11, 0.04);
-border: 1px dashed rgba(245, 158, 11, 0.25);
+border: 9px dashed rgba(245, 158, 11, 0.25);
 }
 .sub-card-green {
 background: rgba(16, 185, 129, 0.04);
-border: 1px dashed rgba(16, 185, 129, 0.25);
+border: 9px dashed rgba(16, 185, 129, 0.25);
 }
 .sub-card-purple {
 background: rgba(139, 92, 246, 0.04);
-border: 1px dashed rgba(139, 92, 246, 0.25);
+border: 9px dashed rgba(139, 92, 246, 0.25);
 }
 .sub-card-pink {
 background: rgba(236, 72, 153, 0.04);
-border: 1px dashed rgba(236, 72, 153, 0.25);
+border: 9px dashed rgba(236, 72, 153, 0.25);
 }
 .sub-card-title {
 display: block;

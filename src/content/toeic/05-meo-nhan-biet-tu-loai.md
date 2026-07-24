@@ -2,9 +2,12 @@
 title: "Mẹo nhận biết loại từ (Từ loại) siêu tốc trong TOEIC"
 description: "Tuyệt chiêu nhận biết danh từ, động từ, tính từ, trạng từ dựa vào vị trí và đuôi từ (hậu tố) cực dễ hiểu."
 pubDate: 2026-05-05
-order: 17
+order: 5
+category: "word-forms"
+categoryLabel: "Tá»« Loáº¡i"
+categoryIcon: "ðŸ"
+categoryColor: "#7c3aed"
 ---
-
 Trong bài thi TOEIC (đặc biệt là Part 5), dạng bài tập về **Từ loại (Word Form)** xuất hiện rất nhiều. Để làm tốt, bạn không nhất thiết phải dịch nghĩa cả câu. Dưới đây là 2 "tuyệt chiêu" giúp bạn chọn đúng loại từ chỉ trong vài giây!
 
 ## 💡 TUYỆT CHIÊU 1: NHÌN "HÀNG XÓM" (VỊ TRÍ TRONG CÂU)
@@ -31,19 +34,19 @@ box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
 }
 .decision-card.card-blue {
 background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
-border: 1.5px solid rgba(2, 132, 199, 0.15);
+border: 5.5px solid rgba(2, 132, 199, 0.15);
 }
 .decision-card.card-green {
 background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(5, 150, 105, 0.02) 100%);
-border: 1.5px solid rgba(16, 185, 129, 0.15);
+border: 5.5px solid rgba(16, 185, 129, 0.15);
 }
 .decision-card.card-purple {
 background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(124, 58, 237, 0.02) 100%);
-border: 1.5px solid rgba(139, 92, 246, 0.15);
+border: 5.5px solid rgba(139, 92, 246, 0.15);
 }
 .decision-card.card-orange {
 background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(217, 119, 6, 0.02) 100%);
-border: 1.5px solid rgba(245, 158, 11, 0.15);
+border: 5.5px solid rgba(245, 158, 11, 0.15);
 }
 .decision-title-container {
 display: flex;
@@ -98,19 +101,19 @@ justify-content: space-between;
 }
 .sub-card-green {
 background: rgba(16, 185, 129, 0.04);
-border: 1px dashed rgba(16, 185, 129, 0.25);
+border: 5px dashed rgba(16, 185, 129, 0.25);
 }
 .sub-card-purple {
 background: rgba(139, 92, 246, 0.04);
-border: 1px dashed rgba(139, 92, 246, 0.25);
+border: 5px dashed rgba(139, 92, 246, 0.25);
 }
 .sub-card-orange {
 background: rgba(245, 158, 11, 0.04);
-border: 1px dashed rgba(245, 158, 11, 0.25);
+border: 5px dashed rgba(245, 158, 11, 0.25);
 }
 .sub-card-pink {
 background: rgba(236, 72, 153, 0.04);
-border: 1px dashed rgba(236, 72, 153, 0.25);
+border: 5px dashed rgba(236, 72, 153, 0.25);
 }
 .sub-card-title {
 display: block;

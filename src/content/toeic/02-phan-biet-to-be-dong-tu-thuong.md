@@ -2,9 +2,12 @@
 title: "Phần 3: Phân Biệt To-be và Động Từ Thường (Lỗi Hay Gặp)"
 description: "Nguyên tắc vàng để tránh lỗi ghép sai to-be và động từ thường trong câu đơn TOEIC."
 pubDate: 2026-04-11
-order: 11
+order: 2
+category: "foundation"
+categoryLabel: "Ná»n Táº£ng CÃ¢u"
+categoryIcon: "ðŸ—ï¸"
+categoryColor: "#2563eb"
 ---
-
 ## Nguyên tắc vàng
 
 Trong một câu đơn ở hiện tại, **chỉ có một trong hai**:
@@ -149,7 +152,7 @@ box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
 }
 .decision-card.card-blue {
 background: linear-gradient(135deg, rgba(2, 132, 199, 0.06) 0%, rgba(14, 165, 233, 0.02) 100%);
-border: 1.5px solid rgba(2, 132, 199, 0.15);
+border: 2.5px solid rgba(2, 132, 199, 0.15);
 }
 .decision-title-container {
 display: flex;
@@ -192,23 +195,23 @@ justify-content: space-between;
 }
 .sub-card-blue {
 background: rgba(2, 132, 199, 0.04);
-border: 1px dashed rgba(2, 132, 199, 0.25);
+border: 2px dashed rgba(2, 132, 199, 0.25);
 }
 .sub-card-green {
 background: rgba(16, 185, 129, 0.04);
-border: 1px dashed rgba(16, 185, 129, 0.25);
+border: 2px dashed rgba(16, 185, 129, 0.25);
 }
 .sub-card-orange {
 background: rgba(245, 158, 11, 0.04);
-border: 1px dashed rgba(245, 158, 11, 0.25);
+border: 2px dashed rgba(245, 158, 11, 0.25);
 }
 .sub-card-purple {
 background: rgba(139, 92, 246, 0.04);
-border: 1px dashed rgba(139, 92, 246, 0.25);
+border: 2px dashed rgba(139, 92, 246, 0.25);
 }
 .sub-card-pink {
 background: rgba(236, 72, 153, 0.04);
-border: 1px dashed rgba(236, 72, 153, 0.25);
+border: 2px dashed rgba(236, 72, 153, 0.25);
 }
 .sub-card-title {
 display: block;

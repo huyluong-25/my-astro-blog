@@ -2,9 +2,12 @@
 title: "Phần 17: TOEIC Listening Part 1 - Tranh Tả Người và Vật"
 description: "Mẹo nhận biết chi tiết, từ khóa và chiến thuật làm bài Part 1 Mô tả tranh."
 pubDate: 2026-05-10
-order: 18
+order: 14
+category: "listening"
+categoryLabel: "Listening"
+categoryIcon: "ðŸŽ§"
+categoryColor: "#e11d48"
 ---
-
 ## 1. TRANH 1 NGƯỜI
 
 **Nhận biết:** Chỉ có 1 người chính trong hình.

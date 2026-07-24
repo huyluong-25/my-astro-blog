@@ -2,9 +2,12 @@
 title: "Phần 1: Mệnh Đề (Clauses) và Cấu Trúc S-V-O"
 description: "Nền tảng câu tiếng Anh: phân biệt mệnh đề, Subject, Verb, Object và cách phân tích câu cơ bản."
 pubDate: 2026-04-11
-order: 0
+order: 1
+category: "foundation"
+categoryLabel: "Ná»n Táº£ng CÃ¢u"
+categoryIcon: "ðŸ—ï¸"
+categoryColor: "#2563eb"
 ---
-
 ## 1. Mệnh đề là gì?
 
 Mệnh đề là một nhóm từ có **ít nhất 1 Chủ ngữ (Subject)** và **1 Động từ (Verb)**, tạo thành một ý tương đối trọn vẹn.
