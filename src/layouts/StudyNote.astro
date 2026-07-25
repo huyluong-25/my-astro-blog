@@ -315,7 +315,173 @@ const { title, description, pubDate } = Astro.props;
         }
       }
 
-      /* ======= DARK MODE ======= */
+      /* ======= 21ST.DEV INSPIRED UI COMPONENTS ======= */
+
+      /* 1. Badges (.lt-badge) */
+      .lt-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.8rem;
+        transition: all 0.3s ease;
+      }
+      .lt-badge.blue { background: rgba(37, 99, 235, 0.1); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.2); }
+      .lt-badge.emerald { background: rgba(5, 150, 105, 0.1); color: #059669; border: 1px solid rgba(5, 150, 105, 0.2); }
+      .lt-badge.purple { background: rgba(124, 58, 237, 0.1); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.2); }
+      .lt-badge.amber { background: rgba(217, 119, 6, 0.1); color: #d97706; border: 1px solid rgba(217, 119, 6, 0.2); }
+      .lt-badge.rose { background: rgba(225, 29, 72, 0.1); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.2); }
+      .lt-badge.indigo { background: rgba(79, 70, 229, 0.1); color: #4f46e5; border: 1px solid rgba(79, 70, 229, 0.2); }
+
+      /* 2. Custom Callout / Alert Box (.lt-box) */
+      .lt-box {
+        padding: 1.25rem 1.5rem;
+        border-radius: 14px;
+        margin: 1.5rem 0;
+        position: relative;
+        border-left: 5px solid;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        transition: all 0.3s ease;
+      }
+      .lt-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      }
+      .lt-box.info { background: #f0f9ff; border-color: #0284c7; color: #0c4a6e; }
+      .lt-box.warning { background: #fffbeeb0; border-color: #f59e0b; color: #78350f; }
+      .lt-box.danger { background: #fef2f2; border-color: #ef4444; color: #7f1d1d; }
+      .lt-box.success { background: #f0fdf4; border-color: #10b981; color: #064e3b; }
+      .lt-box.tip { background: #f5f3ff; border-color: #8b5cf6; color: #4c1d95; }
+
+      /* 3. Modern Data Table (.lt-table-wrapper & .lt-table) */
+      .lt-table-wrapper {
+        margin: 1.5rem 0;
+        overflow-x: auto;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        border: 1px solid #e2e8f0;
+      }
+      .lt-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 0.93rem;
+        background: #ffffff;
+      }
+      .lt-table thead th {
+        padding: 14px 18px;
+        font-weight: 800;
+        text-align: left;
+        color: #ffffff;
+        letter-spacing: 0.02em;
+      }
+      .lt-table tbody td {
+        padding: 12px 18px;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: top;
+        line-height: 1.6;
+        color: #334155;
+      }
+      .lt-table tbody tr:last-child td { border-bottom: none; }
+      .lt-table tbody tr:hover { background: rgba(241, 245, 249, 0.7); }
+
+      /* Table Gradients */
+      .lt-table.gradient-blue thead th { background: linear-gradient(135deg, #1e40af, #3b82f6); }
+      .lt-table.gradient-purple thead th { background: linear-gradient(135deg, #6d28d9, #8b5cf6); }
+      .lt-table.gradient-amber thead th { background: linear-gradient(135deg, #b45309, #f59e0b); }
+      .lt-table.gradient-emerald thead th { background: linear-gradient(135deg, #047857, #10b981); }
+
+      /* 4. Strategy Step Cards (.lt-step-card) */
+      .lt-step-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+      }
+      .lt-step-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+        border-color: #3b82f6;
+      }
+      .lt-step-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        font-size: 1.05rem;
+        margin-bottom: 0.6rem;
+        color: #1e293b;
+      }
+      .lt-step-num {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0284c7, #38bdf8);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.9rem;
+      }
+
+      /* 5. Interactive Quiz Box (.lt-quiz) */
+      .lt-quiz {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        margin: 1.2rem 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      }
+      .lt-quiz summary {
+        font-weight: 700;
+        cursor: pointer;
+        color: #0284c7;
+        outline: none;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .lt-quiz summary::-webkit-details-marker {
+        display: none;
+      }
+      .lt-quiz summary::after {
+        content: '👉 Xem đáp án & giải thích';
+        font-size: 0.85rem;
+        font-weight: 600;
+        background: rgba(2, 132, 199, 0.08);
+        padding: 4px 10px;
+        border-radius: 8px;
+        color: #0284c7;
+        transition: all 0.3s ease;
+      }
+      .lt-quiz[open] summary::after {
+        content: '✍️ Ẩn giải thích';
+        background: rgba(239, 68, 68, 0.08);
+        color: #ef4444;
+      }
+      .lt-quiz .lt-quiz-answer {
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px dashed #e2e8f0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #334155;
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      /* ======= DARK MODE OVERRIDES ======= */
       [data-theme='dark'] .breadcrumb a {
         color: #94a3b8;
       }
@@ -394,6 +560,46 @@ const { title, description, pubDate } = Astro.props;
 
       [data-theme='dark'] .prose strong {
         color: #f1f5f9;
+      }
+
+      /* 21st.dev Dark Mode Overrides */
+      [data-theme='dark'] .lt-box.info { background: rgba(2, 132, 199, 0.15); color: #e0f2fe; }
+      [data-theme='dark'] .lt-box.warning { background: rgba(245, 158, 11, 0.15); color: #fef3c7; }
+      [data-theme='dark'] .lt-box.danger { background: rgba(239, 68, 68, 0.15); color: #fee2e2; }
+      [data-theme='dark'] .lt-box.success { background: rgba(16, 185, 129, 0.15); color: #d1fae5; }
+      [data-theme='dark'] .lt-box.tip { background: rgba(139, 92, 246, 0.15); color: #ede9fe; }
+
+      [data-theme='dark'] .lt-table-wrapper { border-color: #334155; }
+      [data-theme='dark'] .lt-table { background: #0f172a; }
+      [data-theme='dark'] .lt-table tbody td { color: #cbd5e1; border-bottom-color: #1e293b; }
+      [data-theme='dark'] .lt-table tbody tr:hover { background: rgba(30, 41, 59, 0.8); }
+
+      [data-theme='dark'] .lt-step-card {
+        background: #0f172a;
+        border-color: #1e293b;
+      }
+      [data-theme='dark'] .lt-step-header {
+        color: #f8fafc;
+      }
+
+      [data-theme='dark'] .lt-quiz {
+        background: #0f172a;
+        border-color: #1e293b;
+      }
+      [data-theme='dark'] .lt-quiz summary {
+        color: #38bdf8;
+      }
+      [data-theme='dark'] .lt-quiz summary::after {
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
+      }
+      [data-theme='dark'] .lt-quiz[open] summary::after {
+        background: rgba(239, 68, 68, 0.2);
+        color: #fca5a5;
+      }
+      [data-theme='dark'] .lt-quiz .lt-quiz-answer {
+        border-top-color: #334155;
+        color: #cbd5e1;
       }
     </style>
   </head>
