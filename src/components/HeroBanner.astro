@@ -1,38 +1,130 @@
 ---
-// HeroBanner.astro – Clean cinematic video hero
+// HeroBanner.astro – Vespera Plasma Hero (1:1 Replica + Live Animated Flame + True Transparent PNG + Seamless Light/Dark Mode)
 interface Slide {
   heading: string;
-  subheading: string;
+  sub: string;
 }
 
 const slides: Slide[] = [
   {
-    heading: 'HuyHandsome',
-    subheading: 'Building reliable systems & passionate about badminton',
+    heading: 'Make the unseen\nimpossible to miss.',
+    sub: 'BUILDING RELIABLE SYSTEMS',
   },
   {
-    heading: 'IT Support',
-    subheading: 'System optimization, automation & troubleshooting at TiniGroup',
+    heading: 'Automate the\nimpossible.',
+    sub: 'SYSTEM OPTIMIZATION & AUTOMATION',
   },
   {
-    heading: 'Explore & Learn',
-    subheading: 'Blog, TOEIC Grammar, English vocabulary & more',
+    heading: 'Learn without\nlimits.',
+    sub: 'ENGLISH · TOEIC · NETWORKING',
   },
+];
+
+const capabilities = [
+  { num: '01', label: 'System Administration' },
+  { num: '02', label: 'Network & Automation' },
+  { num: '03', label: 'English & TOEIC' },
 ];
 ---
 
-<section class="hero-banner" id="heroBanner" aria-label="Hero banner">
-  <video class="hero-video" autoplay muted loop playsinline preload="auto">
-    <source src="/A_cinematic_K_hero_banner_vid.mp4" type="video/mp4" />
-  </video>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    {slides.map((slide, i) => (
-      <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
-        <h1 class="hero-heading">{slide.heading}</h1>
-        <p class="hero-subheading">{slide.subheading}</p>
+<section class="vhero" id="heroBanner" aria-label="Hero banner">
+  <!-- Thin rule below navbar -->
+  <div class="vhero-rule" aria-hidden="true"></div>
+
+  <!-- SVG Turbulence Filter for Live Fluid Flame Hair Motion -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+    <filter id="flameWiggle" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="3" result="noise">
+        <animate attributeName="baseFrequency" values="0.012 0.035;0.022 0.06;0.012 0.035" dur="5s" repeatCount="indefinite" />
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+
+  <!-- Main editorial grid -->
+  <div class="vhero-grid">
+
+    <!-- LEFT COLUMN: Capabilities -->
+    <div class="vhero-caps">
+      <span class="vhero-caps__label">CAPABILITIES / 03</span>
+      <ul class="vhero-caps__list">
+        {capabilities.map((c) => (
+          <li>
+            <span class="cap-n">{c.num}</span>
+            <span class="cap-t">{c.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- CENTER: 1:1 Vespera Mannequin Bust with LIVE FLAME HAIR -->
+    <div class="vhero-figure">
+      <!-- Main Transparent PNG Image -->
+      <img
+        src="/plasma-mannequin.png"
+        alt="Vespera plasma mannequin bust"
+        class="vhero-figure__img"
+        loading="eager"
+        decoding="async"
+      />
+
+      <!-- Animated Flame Sparks drifting upward -->
+      <div class="flame-sparks" aria-hidden="true">
+        <span class="spark s1"></span>
+        <span class="spark s2"></span>
+        <span class="spark s3"></span>
+        <span class="spark s4"></span>
+        <span class="spark s5"></span>
       </div>
-    ))}
+    </div>
+
+    <!-- RIGHT COLUMN: Studio info -->
+    <div class="vhero-info">
+      <span class="vhero-info__label">INDEPENDENT STUDIO / 2026</span>
+      <p class="vhero-info__desc">
+        We engineer visual systems where identity, movement, and atmosphere behave as one coherent signal.
+      </p>
+    </div>
+
+    <!-- BOTTOM LEFT: Headline -->
+    <div class="vhero-headline">
+      {slides.map((slide, i) => (
+        <div class={`vhero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+          <span class="vhero-slide__sub">{slide.sub}</span>
+          <h1 class="vhero-slide__h1" set:html={slide.heading.replace(/\n/g, '<br/>')} />
+        </div>
+      ))}
+    </div>
+
+    <!-- BOTTOM RIGHT: Live Signal panel -->
+    <div class="vhero-signal">
+      <div class="vhero-signal__panel">
+        <div class="vhero-signal__head">
+          <span class="sig-dot"></span>
+          <span class="sig-title">LIVE SIGNAL</span>
+          <svg class="sig-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <line x1="9" y1="9" x2="9" y2="15"/>
+            <line x1="15" y1="9" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <div class="vhero-signal__body">
+          <div class="sig-row">
+            <span class="sig-k">Loop</span>
+            <span class="sig-v" id="loopVal">05.04 sec</span>
+          </div>
+          <div class="sig-row">
+            <span class="sig-k">Spectrum</span>
+            <span class="sig-v">RGB plasma</span>
+          </div>
+          <div class="sig-row">
+            <span class="sig-k">State</span>
+            <span class="sig-v">Always forming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -40,7 +132,8 @@ const slides: Slide[] = [
   document.addEventListener('astro:page-load', () => {
     const banner = document.getElementById('heroBanner');
     if (!banner) return;
-    const slides = banner.querySelectorAll<HTMLElement>('.hero-slide');
+    const slides = banner.querySelectorAll<HTMLElement>('.vhero-slide');
+    if (!slides.length) return;
     let current = 0;
 
     function goTo(i: number) {
@@ -58,107 +151,558 @@ const slides: Slide[] = [
       const d = e.changedTouches[0].clientX - tx;
       if (Math.abs(d) > 50) d > 0 ? goTo(current - 1) : goTo(current + 1);
     }, { passive: true });
+
+    // Loop counter animation
+    const loopEl = document.getElementById('loopVal');
+    if (loopEl) {
+      let t = 0;
+      setInterval(() => {
+        t = (t + 0.04) % 5.04;
+        loopEl.textContent = t.toFixed(2).padStart(5, '0') + ' sec';
+      }, 40);
+    }
   });
 </script>
 
 <style>
-  .hero-banner {
+  /* ===== LIGHT MODE DEFAULT (VESPERA STUDIO THEME) ===== */
+  .vhero {
     position: relative;
     width: 100%;
     height: 100vh;
-    min-height: 500px;
-    max-height: 1000px;
+    min-height: 700px;
+    max-height: 1100px;
     overflow: hidden;
-    background: #000;
+    background: #e8ebf0 !important;
+    color: #111827 !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background 0.4s ease, color 0.4s ease;
   }
 
-  .hero-video {
+  .vhero-rule {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    top: 72px;
+    left: 40px;
+    right: 40px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08) !important;
+    z-index: 5;
+    transition: background 0.4s ease;
   }
 
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: absolute;
-    inset: 0;
+  /* ===== MAIN GRID ===== */
+  .vhero-grid {
+    position: relative;
     z-index: 2;
+    display: grid;
+    grid-template-columns: 260px 1fr 280px;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "caps figure info"
+      "headline headline signal";
+    height: 100%;
+    padding: 92px 44px 44px;
+    gap: 0;
   }
 
-  .hero-slide {
-    position: absolute;
-    inset: 0;
+  /* ===== LEFT: CAPABILITIES ===== */
+  .vhero-caps {
+    grid-area: caps;
+    align-self: start;
+    padding-top: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: vFadeIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+  }
+
+  .vhero-caps__label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(17, 24, 39, 0.5) !important;
+    margin-bottom: 20px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s ease;
+  }
+
+  .vhero-caps__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .vhero-caps__list li {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+    transition: padding-left 0.3s ease, border-color 0.4s ease;
+    cursor: default;
+  }
+
+  .vhero-caps__list li:hover {
+    padding-left: 4px;
+  }
+
+  .cap-n {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(17, 24, 39, 0.35) !important;
+    min-width: 16px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s ease;
+  }
+
+  .cap-t {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #111827 !important;
+    letter-spacing: -0.2px;
+    transition: color 0.4s ease;
+  }
+
+  /* ===== CENTER: MANNEQUIN FIGURE WITH LIVE ANIMATED FLAME HAIR ===== */
+  .vhero-figure {
+    grid-area: figure;
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 0 2rem;
+    z-index: 1;
     opacity: 0;
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(0.95);
+    animation: vScaleIn 1.4s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+  }
+
+  /* TRUE TRANSPARENT PNG IMAGE - FLOATS 100% SEAMLESSLY IN ALL THEMES WITH ZERO BOX OR BLOB */
+  .vhero-figure__img {
+    position: relative;
+    z-index: 2;
+    width: auto;
+    height: 92%;
+    max-height: 680px;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: none;
+    user-select: none;
+    pointer-events: none;
+    filter: url('#flameWiggle') drop-shadow(0 0 25px rgba(59, 130, 246, 0.3)) drop-shadow(0 0 35px rgba(236, 72, 153, 0.25));
+    animation: flamePulse 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes flamePulse {
+    0% {
+      transform: scale(1) translateY(0);
+    }
+    50% {
+      transform: scale(1.015) translateY(-3px);
+    }
+    100% {
+      transform: scale(0.99) translateY(1px);
+    }
+  }
+
+  /* ANIMATED FLAME EMBERS / SPARKS DRIFTING UPWARD */
+  .flame-sparks {
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 320px;
+    z-index: 3;
     pointer-events: none;
   }
 
-  .hero-slide.active {
+  .spark {
+    position: absolute;
+    border-radius: 50%;
+    background: #ec4899;
+    box-shadow: 0 0 10px #3b82f6, 0 0 16px #ec4899;
+    opacity: 0;
+    animation: sparkRise 3.2s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+  }
+
+  .s1 { width: 5px; height: 5px; left: 35%; bottom: 40%; animation-delay: 0s; }
+  .s2 { width: 7px; height: 7px; left: 55%; bottom: 45%; animation-delay: 0.7s; background: #3b82f6; }
+  .s3 { width: 4px; height: 4px; left: 68%; bottom: 35%; animation-delay: 1.4s; }
+  .s4 { width: 6px; height: 6px; left: 45%; bottom: 50%; animation-delay: 2.1s; background: #ffffff; }
+  .s5 { width: 5px; height: 5px; left: 60%; bottom: 30%; animation-delay: 2.8s; }
+
+  @keyframes sparkRise {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 0.95; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-180px) translateX(35px) scale(0.2); opacity: 0; }
+  }
+
+  /* ===== RIGHT: STUDIO INFO ===== */
+  .vhero-info {
+    grid-area: info;
+    align-self: start;
+    padding-top: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: vFadeIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+  }
+
+  .vhero-info__label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(17, 24, 39, 0.5) !important;
+    margin-bottom: 14px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s ease;
+  }
+
+  .vhero-info__desc {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: rgba(17, 24, 39, 0.65) !important;
+    max-width: 250px;
+    margin: 0;
+    letter-spacing: -0.1px;
+    transition: color 0.4s ease;
+  }
+
+  /* ===== BOTTOM LEFT: HEADLINE ===== */
+  .vhero-headline {
+    grid-area: headline;
+    align-self: end;
+    position: relative;
+    min-height: 170px;
+    padding-bottom: 0;
+  }
+
+  .vhero-slide {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .vhero-slide.active {
     opacity: 1;
     pointer-events: auto;
   }
 
-  .hero-heading {
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 900;
-    color: #fff;
-    letter-spacing: 6px;
+  .vhero-slide__sub {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    margin: 0 0 1rem;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    color: rgba(17, 24, 39, 0.5) !important;
+    margin-bottom: 14px;
     opacity: 0;
-    transform: translateY(28px) scale(0.97);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
-                transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    transform: translateY(8px);
+    transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s, color 0.4s ease;
   }
 
-  .hero-slide.active .hero-heading {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-
-  .hero-subheading {
-    font-size: clamp(0.95rem, 2vw, 1.3rem);
-    color: rgba(255,255,255,0.85);
-    max-width: 700px;
-    line-height: 1.7;
-    letter-spacing: 2px;
-    margin: 0;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s,
-                transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
-  }
-
-  .hero-slide.active .hero-subheading {
+  .vhero-slide.active .vhero-slide__sub {
     opacity: 1;
     transform: translateY(0);
   }
 
-  @media (max-width: 768px) {
-    .hero-banner { height: 70vh; min-height: 400px; }
-    .hero-heading { letter-spacing: 3px; }
-    .hero-subheading { letter-spacing: 1px; }
+  .vhero-slide__h1 {
+    font-size: clamp(2.4rem, 4.8vw, 4.2rem);
+    font-weight: 450;
+    letter-spacing: -1.8px;
+    line-height: 1.02;
+    color: #111827 !important;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1) 0.08s,
+                transform 0.9s cubic-bezier(0.16,1,0.3,1) 0.08s,
+                color 0.4s ease;
+  }
+
+  .vhero-slide.active .vhero-slide__h1 {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== BOTTOM RIGHT: SIGNAL PANEL ===== */
+  .vhero-signal {
+    grid-area: signal;
+    align-self: end;
+    justify-self: end;
+    padding-bottom: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: vFadeIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s forwards;
+  }
+
+  .vhero-signal__panel {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    border-radius: 16px;
+    padding: 14px 18px;
+    min-width: 210px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s ease;
+  }
+
+  .vhero-signal__panel:hover {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .vhero-signal__head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    transition: border-color 0.4s ease;
+  }
+
+  .sig-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3b82f6;
+    box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
+    animation: sigPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes sigPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .sig-title {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #111827 !important;
+    flex: 1;
+    transition: color 0.4s ease;
+  }
+
+  .sig-icon {
+    color: rgba(17, 24, 39, 0.3) !important;
+    width: 14px;
+    height: 14px;
+    transition: color 0.4s ease;
+  }
+
+  .vhero-signal__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .sig-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .sig-k {
+    font-size: 0.72rem;
+    color: rgba(17, 24, 39, 0.5) !important;
+    font-weight: 400;
+    transition: color 0.4s ease;
+  }
+
+  .sig-v {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #111827 !important;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.4s ease;
+  }
+
+
+  /* ===== FULL DARK MODE ADAPTATION (PURE DEEP OLED BLACK) ===== */
+  :global([data-theme='dark']) .vhero {
+    background: #000000 !important;
+    color: #f8fafc !important;
+  }
+
+  :global([data-theme='dark']) .vhero-rule {
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  :global([data-theme='dark']) .vhero-caps__label,
+  :global([data-theme='dark']) .vhero-info__label,
+  :global([data-theme='dark']) .vhero-slide__sub {
+    color: rgba(248, 250, 252, 0.5) !important;
+  }
+
+  :global([data-theme='dark']) .vhero-caps__list li {
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  :global([data-theme='dark']) .cap-n {
+    color: rgba(248, 250, 252, 0.35) !important;
+  }
+
+  :global([data-theme='dark']) .cap-t,
+  :global([data-theme='dark']) .vhero-slide__h1 {
+    color: #f8fafc !important;
+  }
+
+  :global([data-theme='dark']) .vhero-info__desc {
+    color: rgba(248, 250, 252, 0.65) !important;
+  }
+
+  :global([data-theme='dark']) .vhero-signal__panel {
+    background: rgba(18, 18, 18, 0.85) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  :global([data-theme='dark']) .vhero-signal__head {
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  :global([data-theme='dark']) .sig-title,
+  :global([data-theme='dark']) .sig-v {
+    color: #f8fafc !important;
+  }
+
+  :global([data-theme='dark']) .sig-icon {
+    color: rgba(248, 250, 252, 0.3) !important;
+  }
+
+  :global([data-theme='dark']) .sig-k {
+    color: rgba(248, 250, 252, 0.5) !important;
+  }
+
+  :global([data-theme='dark']) .vhero-figure__img {
+    filter: url('#flameWiggle') brightness(1.15) contrast(1.1) drop-shadow(0 0 35px rgba(59, 130, 246, 0.45)) drop-shadow(0 0 45px rgba(236, 72, 153, 0.4));
+  }
+
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes vFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes vScaleIn {
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1100px) {
+    .vhero-grid {
+      grid-template-columns: 200px 1fr 220px;
+      padding: 88px 28px 36px;
+    }
+
+    .vhero-slide__h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    .vhero-figure__img {
+      max-height: 500px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .vhero {
+      height: auto;
+      min-height: auto;
+      max-height: none;
+    }
+
+    .vhero-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto auto;
+      grid-template-areas:
+        "figure"
+        "headline"
+        "caps"
+        "signal";
+      padding: 80px 20px 30px;
+      gap: 24px;
+    }
+
+    .vhero-info { display: none; }
+
+    .vhero-rule {
+      left: 20px;
+      right: 20px;
+      top: 68px;
+    }
+
+    .vhero-figure__img {
+      max-height: 400px;
+      height: auto;
+    }
+
+    .vhero-headline {
+      position: relative;
+      min-height: 120px;
+    }
+
+    .vhero-slide {
+      position: relative;
+      display: none;
+    }
+
+    .vhero-slide.active {
+      display: block;
+      position: relative;
+    }
+
+    .vhero-slide__h1 {
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      letter-spacing: -0.8px;
+    }
+
+    .vhero-caps { padding-top: 0; }
+
+    .vhero-signal { justify-self: stretch; }
+    .vhero-signal__panel { min-width: auto; }
   }
 
   @media (max-width: 480px) {
-    .hero-banner { height: 60vh; min-height: 350px; }
+    .vhero-grid {
+      padding: 72px 16px 24px;
+      gap: 20px;
+    }
+
+    .vhero-figure__img {
+      max-height: 320px;
+    }
+
+    .vhero-slide__h1 {
+      font-size: clamp(1.5rem, 8vw, 2.2rem);
+    }
+  }
+
+  /* ===== REDUCE MOTION ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .vhero-figure__img,
+    .sig-dot,
+    .spark {
+      animation: none;
+    }
+
+    .vhero-caps,
+    .vhero-info,
+    .vhero-signal,
+    .vhero-figure {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
   }
 </style>

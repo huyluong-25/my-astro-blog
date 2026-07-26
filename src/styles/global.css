@@ -32,12 +32,12 @@ html {
     --text-secondary: 96, 115, 159;
 }
 
-/* Dark Mode Colors */
+/* Dark Mode Colors - Pure Deep OLED Black */
 [data-theme='dark'] {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: 241, 245, 249;
-    --text-secondary: 203, 213, 225;
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --text-primary: 248, 250, 252;
+    --text-secondary: 163, 163, 163;
     --accent: #38bdf8;
 }
 
@@ -59,8 +59,8 @@ body {
 }
 
 [data-theme='dark'] body {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: rgb(var(--text-primary));
+    background: #000000 !important;
+    color: #f8fafc !important;
 }
 
 /* --- SHARED KEYFRAMES --- */

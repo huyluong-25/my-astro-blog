@@ -37,58 +37,45 @@ import HeaderLink from './HeaderLink.astro';
 </header>
 
 <script is:inline>
-	// Logic kiểm tra và áp dụng theme
-	const theme = (() => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			return 'dark';
-		}
-		return 'light';
-	})();
-
-	if (theme === 'dark') {
-		document.documentElement.setAttribute('data-theme', 'dark');
-	}
-
-	window.localStorage.setItem('theme', theme);
-
-	const handleToggleClick = () => {
-		const element = document.documentElement;
-		const isDark = element.getAttribute('data-theme') === 'dark';
-		const newTheme = isDark ? 'light' : 'dark';
-		
-		if (newTheme === 'dark') {
-			element.setAttribute('data-theme', 'dark');
-		} else {
-			element.removeAttribute('data-theme');
-		}
-		
+	function applyTheme(newTheme) {
+		document.documentElement.setAttribute('data-theme', newTheme);
 		localStorage.setItem('theme', newTheme);
-	};
-
-	document.getElementById('themeToggle').addEventListener('click', handleToggleClick);
-
-	// Mobile hamburger menu toggle
-	const menuToggle = document.getElementById('menuToggle');
-	const navLinks = document.getElementById('navLinks');
-	if (menuToggle && navLinks) {
-		menuToggle.addEventListener('click', () => {
-			navLinks.classList.toggle('nav-open');
-			menuToggle.classList.toggle('is-active');
-		});
-		// Close menu when clicking a link
-		navLinks.querySelectorAll('a').forEach(link => {
-			link.addEventListener('click', () => {
-				navLinks.classList.remove('nav-open');
-				menuToggle.classList.remove('is-active');
-			});
-		});
 	}
 
-	// Hero banner transparent header
-	document.addEventListener('DOMContentLoaded', () => {
+	// Initialize theme on script execution
+	const storedTheme = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+	const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	const currentTheme = storedTheme || systemTheme;
+	applyTheme(currentTheme);
+
+	function setupThemeToggle() {
+		const toggleBtn = document.getElementById('themeToggle');
+		if (!toggleBtn) return;
+		toggleBtn.onclick = () => {
+			const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+			const nextTheme = isDark ? 'light' : 'dark';
+			applyTheme(nextTheme);
+		};
+	}
+
+	function setupMobileMenu() {
+		const menuToggle = document.getElementById('menuToggle');
+		const navLinks = document.getElementById('navLinks');
+		if (menuToggle && navLinks) {
+			menuToggle.onclick = () => {
+				navLinks.classList.toggle('nav-open');
+				menuToggle.classList.toggle('is-active');
+			};
+			navLinks.querySelectorAll('a').forEach(link => {
+				link.onclick = () => {
+					navLinks.classList.remove('nav-open');
+					menuToggle.classList.remove('is-active');
+				};
+			});
+		}
+	}
+
+	function setupHeroHeader() {
 		const heroBanner = document.querySelector('.hero-banner');
 		const header = document.querySelector('.apple-header');
 		if (heroBanner && header) {
@@ -103,7 +90,20 @@ import HeaderLink from './HeaderLink.astro';
 			window.addEventListener('scroll', onScroll, { passive: true });
 			onScroll();
 		}
-	});
+	}
+
+	function initAll() {
+		setupThemeToggle();
+		setupMobileMenu();
+		setupHeroHeader();
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initAll);
+	} else {
+		initAll();
+	}
+	document.addEventListener('astro:page-load', initAll);
 </script>
 
 <style>
@@ -125,7 +125,7 @@ import HeaderLink from './HeaderLink.astro';
 
 	/* Khi ở chế độ Dark Mode */
 	:global([data-theme='dark']) header {
-		background: rgba(15, 23, 42, 0.8);
+		background: rgba(0, 0, 0, 0.85);
 		border-bottom-color: rgba(255, 255, 255, 0.1);
 	}
 
