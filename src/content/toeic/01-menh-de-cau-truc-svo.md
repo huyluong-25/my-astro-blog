@@ -360,13 +360,70 @@ Xác định **S (chủ ngữ)** và **V (động từ)** trong mỗi câu:
 4. S = **the manager** | V = **approved**. "After reviewing the budget" là cụm phân từ.
 5. S = **All applications** | V = **must be submitted** (bị động + modal).
 
-## 9. Mẹo học nhanh
+## 9. Cụm Từ Thường Dùng Theo Vị Trí S-V-O (Học Nhanh)
+
+Bảng dưới liệt kê các cụm từ hay xuất hiện ở mỗi vị trí trong câu TOEIC, giúp bạn nhận biết cấu trúc nhanh hơn:
+
+### Cụm từ thường đứng ở vị trí Chủ Ngữ (S)
+
+| Cụm từ làm Chủ ngữ | Nghĩa | Ví dụ câu |
+| --- | --- | --- |
+| **The management team** | ban quản lý | *The management team approved the new policy.* |
+| **All applicants** | tất cả ứng viên | *All applicants must submit a resume.* |
+| **The new regulation** | quy định mới | *The new regulation takes effect next month.* |
+| **Each department** | mỗi phòng ban | *Each department must submit a monthly report.* |
+| **The attached document** | tài liệu đính kèm | *The attached document contains the details.* |
+| **Our customer service team** | đội ngũ dịch vụ KH | *Our customer service team is available 24/7.* |
+| **The board of directors** | hội đồng quản trị | *The board of directors voted to expand operations.* |
+| **Any employee who...** | bất kỳ nhân viên nào mà... | *Any employee who misses the training must reschedule.* |
+| **The results of the survey** | kết quả của cuộc khảo sát | *The results of the survey showed high satisfaction.* |
+| **Several members of the team** | một vài thành viên nhóm | *Several members of the team attended the conference.* |
+
+### Cụm động từ thường đứng ở vị trí Động Từ (V)
+
+| Cụm động từ | Nghĩa | Ví dụ câu |
+| --- | --- | --- |
+| **is required to** | được yêu cầu phải | *All staff **is required to** attend orientation.* |
+| **is expected to** | được kỳ vọng / dự kiến sẽ | *Revenue **is expected to** increase by 10%.* |
+| **has been approved** | đã được phê duyệt | *The budget **has been approved** by the CFO.* |
+| **will be notified** | sẽ được thông báo | *Applicants **will be notified** within two weeks.* |
+| **is responsible for** | chịu trách nhiệm cho | *The supervisor **is responsible for** team performance.* |
+| **was designed to** | được thiết kế để | *This system **was designed to** streamline operations.* |
+| **must be submitted** | phải được nộp | *The form **must be submitted** before the deadline.* |
+| **are encouraged to** | được khuyến khích | *Employees **are encouraged to** share their ideas.* |
+| **has been scheduled for** | đã được lên lịch vào | *The meeting **has been scheduled for** Thursday.* |
+| **is intended to** | nhằm mục đích / được thiết kế để | *This policy **is intended to** improve workplace safety.* |
+
+### Cụm danh từ thường đứng ở vị trí Tân Ngữ (O)
+
+| Cụm tân ngữ | Nghĩa | Ví dụ câu |
+| --- | --- | --- |
+| **the necessary documents** | tài liệu cần thiết | *Please submit **the necessary documents** by Friday.* |
+| **a formal request** | yêu cầu chính thức | *The client submitted **a formal request** for a refund.* |
+| **the attached form** | mẫu đơn đính kèm | *Please complete **the attached form**.* |
+| **further assistance** | sự hỗ trợ thêm | *Contact us if you need **further assistance**.* |
+| **the proposed changes** | những thay đổi được đề xuất | *Management reviewed **the proposed changes**.* |
+| **an updated schedule** | lịch trình cập nhật | *Please send me **an updated schedule**.* |
+| **a competitive offer** | lời đề nghị cạnh tranh | *The company received **a competitive offer**.* |
+| **the final decision** | quyết định cuối cùng | *The CEO will announce **the final decision** tomorrow.* |
+| **a brief overview** | cái nhìn tổng quan ngắn gọn | *She gave **a brief overview** of the new project.* |
+| **substantial progress** | tiến triển đáng kể | *The team made **substantial progress** last quarter.* |
+
+> 🔑 **Kỹ thuật nhận biết nhanh:**
+> - Thấy **"The/Each/All/Any + Adj + Noun"** → khả năng cao là **Chủ ngữ (S)**
+> - Thấy **"is/are/was/were + V-ed"** hoặc **"will/must/should + be + V-ed"** → đây là **Động từ bị động (V)**
+> - Thấy **"the + Adj + Noun"** sau động từ → đây là **Tân ngữ (O)**
+
+---
+
+## 10. Mẹo học nhanh
 
 - Luôn gạch chân **S, V, O** trước khi chọn đáp án ngữ pháp.
 - Nếu câu dài, cắt cụm giới từ/cụm quan hệ để nhìn ra khung câu chính.
 - Khi bí đáp án, ưu tiên kiểm tra: động từ đã hòa hợp chủ ngữ chưa.
+- Thuộc các **cụm hay đứng ở vị trí S, V, O** ở mục 9 để nhận diện cấu trúc mà không cần dịch từng từ.
 
-## 10. Tổng kết nhanh
+## 11. Tổng kết nhanh
 
 | Nhớ gì? | Chi tiết |
 | --- | --- |
@@ -375,3 +432,6 @@ Xác định **S (chủ ngữ)** và **V (động từ)** trong mỗi câu:
 | Mệnh đề độc lập | Có S + V, đứng 1 mình được |
 | Mệnh đề phụ thuộc | Bắt đầu bằng because/when/if/who... → cần mệnh đề chính |
 | Bẫy TOEIC | Câu dài nhiều cụm phụ → che giấu S + V chính |
+| Cụm hay làm S | The management team / All applicants / The board of directors... |
+| Cụm hay làm V | is required to / has been approved / must be submitted... |
+| Cụm hay làm O | the necessary documents / a formal request / further assistance... |
