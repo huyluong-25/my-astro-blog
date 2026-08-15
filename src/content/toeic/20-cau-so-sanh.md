@@ -464,92 +464,572 @@ Khi gap cau hoi dien vao cho trong lien quan den so sanh, hay nhin **xung quanh 
 
 ---
 
-## Bai Tap Thuc Hanh TOEIC PART 5 (Co Dap An Chi Tiet)
+## TONG HOP CAU TRUC — CACH LAM TUNG DANG TU
 
-Ap dung ngay cac meo vua hoc de giai 6 cau hoi thuc chien duoi day:
+<span class="cs-badge sky">Hoc thuoc = an diem</span>
 
-**Cau 1:** The new accounting software is __________ the old system we used last year.  
-A. efficient  
-B. more efficient than  
-C. the most efficient  
-D. as efficient  
+### 📌 NHOM 1 — TRANG TU NHAN MANH SO SANH HON
 
-**Cau 2:** Of all the candidates interviewed, Ms. Nguyen was considered __________.  
-A. more qualified  
-B. as qualified as  
-C. the most qualified  
-D. qualified than  
+<div class="cs-box purple">
+  Cac tu sau <strong>CHI di voi So sanh Hon</strong> (-er / more + Adj), <strong>KHONG BAO GIO</strong> di voi tinh tu nguyen the hay so sanh nhat.
+</div>
 
-**Cau 3:** The company's quarterly profits were __________ analysts had initially projected.  
-A. significant higher than  
-B. significantly higher than  
-C. the highest than  
-D. more high than  
+<div class="cs-table-wrapper">
+  <table class="cs-table g-violet">
+    <thead>
+      <tr>
+        <th style="width:18%;">Tu</th>
+        <th style="width:14%;">Loai Tu</th>
+        <th style="width:28%;">Cach Dung</th>
+        <th style="width:40%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>far</strong></td>
+        <td>Adverb</td>
+        <td>far + So sanh hon (nhan manh manh)</td>
+        <td>The process is <strong>far more efficient</strong> than the old one.</td>
+      </tr>
+      <tr>
+        <td><strong>much</strong></td>
+        <td>Adverb</td>
+        <td>much + So sanh hon (nhan manh manh)</td>
+        <td>The costs are <strong>much higher</strong> than expected.</td>
+      </tr>
+      <tr>
+        <td><strong>even</strong></td>
+        <td>Adverb</td>
+        <td>even + So sanh hon (= tham chi con)</td>
+        <td>The problem was <strong>even more complex</strong> than it appeared.</td>
+      </tr>
+      <tr>
+        <td><strong>a lot</strong></td>
+        <td>Adverb</td>
+        <td>a lot + So sanh hon (nhan manh manh)</td>
+        <td>The shipping cost is <strong>a lot lower</strong> when ordered in bulk.</td>
+      </tr>
+      <tr>
+        <td><strong>significantly</strong></td>
+        <td>Adverb</td>
+        <td>significantly + So sanh hon (dang ke)</td>
+        <td>Revenue grew <strong>significantly higher</strong> than predicted.</td>
+      </tr>
+      <tr>
+        <td><strong>slightly</strong></td>
+        <td>Adverb</td>
+        <td>slightly + So sanh hon (hoi, mot chut)</td>
+        <td>The early flight was <strong>slightly cheaper</strong> than the noon one.</td>
+      </tr>
+      <tr>
+        <td><strong>a little</strong></td>
+        <td>Adverb</td>
+        <td>a little + So sanh hon (hoi, mot chut)</td>
+        <td>This version is <strong>a little better</strong> than the last.</td>
+      </tr>
+      <tr>
+        <td><strong>considerably</strong></td>
+        <td>Adverb</td>
+        <td>considerably + So sanh hon (dang ke)</td>
+        <td>Turnover is <strong>considerably lower</strong> than 5 years ago.</td>
+      </tr>
+      <tr>
+        <td><strong>substantially</strong></td>
+        <td>Adverb</td>
+        <td>substantially + So sanh hon (dang ke)</td>
+        <td>Profits were <strong>substantially greater</strong> than last year.</td>
+      </tr>
+      <tr>
+        <td><strong>noticeably</strong></td>
+        <td>Adverb</td>
+        <td>noticeably + So sanh hon (ro rang)</td>
+        <td>The design is <strong>noticeably simpler</strong> than before.</td>
+      </tr>
+      <tr>
+        <td><strong>remarkably</strong></td>
+        <td>Adverb</td>
+        <td>remarkably + So sanh hon (dang chu y)</td>
+        <td>Sales were <strong>remarkably higher</strong> than projected.</td>
+      </tr>
+      <tr>
+        <td><strong>increasingly</strong></td>
+        <td>Adverb</td>
+        <td>increasingly + So sanh hon (ngay cang)</td>
+        <td>The market is becoming <strong>increasingly more competitive</strong>.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-**Cau 4:** The production process has become __________ efficient over the past few months.  
-A. much more  
-B. much most  
-C. more most  
-D. as much  
-
-**Cau 5:** Our new delivery service is __________ to what most competitors currently offer in the market.  
-A. better  
-B. superior  
-C. more superior  
-D. more better  
-
-**Cau 6:** The __________ Ms. Park advances in her career, the __________ opportunities she discovers.  
-A. further — many more  
-B. more further — more  
-C. farther — much  
-D. more — more  
+<div class="cs-box danger">
+  <strong>⚠️ BAY:</strong> Cac tu sau KHONG dung nhan manh So sanh Hon:<br/>
+  <span class="pill rose">very</span>
+  <span class="pill rose">so</span>
+  <span class="pill rose">too</span>
+  <span class="pill rose">quite</span>
+  <span class="pill rose">extremely</span>
+  <span class="pill rose">absolutely</span><br/><br/>
+  Cac tu nay chi dung voi <strong>tinh tu nguyen the</strong>: very fast, so good, too expensive...<br/>
+  ❌ <del>very faster</del> — ❌ <del>too more expensive</del> — ❌ <del>so higher than</del>
+</div>
 
 ---
 
-### Dap An Va Giai Thich Chi Tiet
+### 📌 NHOM 2 — TRANG TU NHAN MANH SO SANH NHAT
 
-<div class="cs-box success">
-  <strong>1. Dap an: B (more efficient than)</strong><br/>
-  • <em>Tin hieu:</em> Phia sau cho trong co <code>the old system</code> (cum danh tu) → Day la cau truc <strong>So sanh Hon</strong>.<br/>
-  • "Efficient" la tinh tu 3 van → Dung <strong>more + Adj + than</strong>.<br/>
-  • <em>Dich:</em> Phan mem ke toan moi hieu qua hon he thong cu ma chung toi dung nam ngoai.
+<div class="cs-box info">
+  Cac tu sau <strong>CHI di voi So sanh Nhat</strong> (the -est / the most + Adj).
 </div>
 
-<div class="cs-box success">
-  <strong>2. Dap an: C (the most qualified)</strong><br/>
-  • <em>Tin hieu:</em> Phia truoc co <code>Of all the candidates</code> → Tin hieu 100% cua <strong>So sanh Nhat</strong>.<br/>
-  • "Qualified" la tinh tu dai → Dung <strong>the most + Adj</strong>.<br/>
-  • <em>Dich:</em> Trong so tat ca ung vien duoc phong van, co Nguyen duoc coi la nguoi co nang luc nhat.
+<div class="cs-table-wrapper">
+  <table class="cs-table g-sky">
+    <thead>
+      <tr>
+        <th style="width:18%;">Tu</th>
+        <th style="width:28%;">Cach Dung</th>
+        <th style="width:54%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>by far</strong></td>
+        <td>by far + the + So sanh nhat</td>
+        <td>This model is <strong>by far the most expensive</strong> of all.</td>
+      </tr>
+      <tr>
+        <td><strong>easily</strong></td>
+        <td>easily + the + So sanh nhat</td>
+        <td>She is <strong>easily the best</strong> candidate we interviewed.</td>
+      </tr>
+      <tr>
+        <td><strong>quite</strong></td>
+        <td>quite + the + So sanh nhat (BrE)</td>
+        <td>It was <strong>quite the most difficult</strong> exam I've taken.</td>
+      </tr>
+      <tr>
+        <td><strong>definitely</strong></td>
+        <td>definitely + the + So sanh nhat</td>
+        <td>This is <strong>definitely the fastest</strong> route to the airport.</td>
+      </tr>
+      <tr>
+        <td><strong>undoubtedly</strong></td>
+        <td>undoubtedly + the + So sanh nhat</td>
+        <td>He is <strong>undoubtedly the most talented</strong> employee.</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<div class="cs-box success">
-  <strong>3. Dap an: B (significantly higher than)</strong><br/>
-  • <em>Tin hieu:</em> Co "than" o cuoi → Can <strong>So sanh Hon</strong>. Phia truoc co trang tu "significantly" (nhan manh) → Xac nhan dung <strong>So sanh Hon</strong>.<br/>
-  • A sai vi "significant" (tinh tu) khong the bo nghia cho "higher" — phai dung trang tu <strong>significantly</strong>.<br/>
-  • <em>Dich:</em> Loi nhuan hang quy cua cong ty cao hon dang ke so voi du doan ban dau cua cac nha phan tich.
+<div class="cs-box warn">
+  <strong>Phan biet:</strong><br/>
+  • <strong>far</strong> → nhan manh So sanh <em>Hon</em>: far better, far more efficient<br/>
+  • <strong>by far</strong> → nhan manh So sanh <em>Nhat</em>: by far the best, by far the most efficient
 </div>
 
-<div class="cs-box success">
-  <strong>4. Dap an: A (much more)</strong><br/>
-  • Cau truc can dien: <code>become ___ efficient</code> → Can trang tu nhan manh + so sanh hon.<br/>
-  • <strong>Much more efficient</strong> = hieu qua hon nhieu (much nhan manh so sanh hon).<br/>
-  • B, C sai cau truc; D sai ngu nghia.<br/>
-  • <em>Dich:</em> Quy trinh san xuat da tro nen hieu qua hon nhieu trong vai thang qua.
+---
+
+### 📌 NHOM 3 — CAU TRUC SO SANH HON (Comparative)
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-teal">
+    <thead>
+      <tr>
+        <th style="width:25%;">Cau Truc</th>
+        <th style="width:30%;">Khi Nao Dung</th>
+        <th style="width:45%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Adj-ER + than</strong></td>
+        <td>Tinh tu 1 van (fast, big, cheap...)</td>
+        <td>This laptop is <strong>faster than</strong> that one.</td>
+      </tr>
+      <tr>
+        <td><strong>more + Adj + than</strong></td>
+        <td>Tinh tu 2 van tro len (efficient, important...)</td>
+        <td>The software is <strong>more efficient than</strong> the old system.</td>
+      </tr>
+      <tr>
+        <td><strong>less + Adj + than</strong></td>
+        <td>So sanh hon dang phu dinh (kem hon)</td>
+        <td>The proposal was <strong>less practical than</strong> the first one.</td>
+      </tr>
+      <tr>
+        <td><strong>much more + Adj</strong></td>
+        <td>Nhan manh so sanh hon (tinh tu dai)</td>
+        <td>The process has become <strong>much more efficient</strong>.</td>
+      </tr>
+      <tr>
+        <td><strong>Adj-y → Adj-IER</strong></td>
+        <td>Tinh tu tan cung -y (2 van van xem la ngan)</td>
+        <td>The task was <strong>easier than</strong> expected. (easy → easier)</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<div class="cs-box success">
-  <strong>5. Dap an: B (superior)</strong><br/>
-  • <em>Tin hieu:</em> Phia sau co gioi tu <code>to</code> → Day la dau hieu nhan biet tinh tu goc Latin: <strong>superior to</strong> (khong dung "than").<br/>
-  • C sai vi "superior" da mang nghia so sanh, khong them "more".<br/>
-  • <em>Dich:</em> Dich vu giao hang moi cua chung toi vuot troi hon so voi nhung gi hau het cac doi thu canh tranh hien dang cung cap tren thi truong.
+<div class="cs-box danger">
+  <strong>⚠️ BAY THUONG GAP:</strong><br/>
+  ❌ <del>more fast</del> → ✅ <strong>faster</strong> (1 van chi dung -er)<br/>
+  ❌ <del>more easy</del> → ✅ <strong>easier</strong> (tan cung -y doi thanh -ier)<br/>
+  ❌ <del>more good</del> → ✅ <strong>better</strong> (bat quy tac)<br/>
+  ❌ <del>more bad</del> → ✅ <strong>worse</strong> (bat quy tac)
 </div>
 
-<div class="cs-box success">
-  <strong>6. Dap an: D (more — more)</strong><br/>
-  • Cau truc <strong>"The + So sanh hon..., the + So sanh hon..."</strong> (Cang ... cang ...).<br/>
-  • <code>more ... more opportunities</code> → Ca 2 ve deu can dang <strong>So sanh Hon</strong>.<br/>
-  • A sai vi "many more" khong dung trong cau truc nay; B va C sai dang so sanh.<br/>
-  • <em>Dich:</em> Co Park cang thang tien trong su nghiep, co cang kham pha ra nhieu co hoi hon.
+---
+
+### 📌 NHOM 4 — CAU TRUC SO SANH NHAT (Superlative)
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-rose">
+    <thead>
+      <tr>
+        <th style="width:25%;">Cau Truc</th>
+        <th style="width:25%;">Tin Hieu Nhan Biet</th>
+        <th style="width:50%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>the + Adj-EST</strong></td>
+        <td>Tinh tu 1 van + of all / in + Nhom</td>
+        <td>He is <strong>the fastest</strong> runner in the team.</td>
+      </tr>
+      <tr>
+        <td><strong>the + most + Adj</strong></td>
+        <td>Tinh tu dai + of all / in + Nhom</td>
+        <td>She was <strong>the most qualified</strong> of all candidates.</td>
+      </tr>
+      <tr>
+        <td><strong>the + SS Nhat + S + have ever + V3</strong></td>
+        <td>Co "ever" trong cau</td>
+        <td>This is <strong>the best</strong> presentation we have <strong>ever</strong> prepared.</td>
+      </tr>
+      <tr>
+        <td><strong>the + least + Adj</strong></td>
+        <td>So sanh nhat phu dinh (kem nhat)</td>
+        <td>It is <strong>the least expensive</strong> option available.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cs-box danger">
+  <strong>⚠️ BAY:</strong> So sanh nhat LUON phai co <strong>"the"</strong> phia truoc!<br/>
+  ❌ <del>She is most talented employee.</del><br/>
+  ✅ She is <strong>the most talented</strong> employee.
+</div>
+
+---
+
+### 📌 NHOM 5 — CAU TRUC SO SANH BANG (Equal Comparison)
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-sky">
+    <thead>
+      <tr>
+        <th style="width:30%;">Cau Truc</th>
+        <th style="width:30%;">Y Nghia</th>
+        <th style="width:40%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>as + Adj/Adv + as</strong></td>
+        <td>Bang nhau (khang dinh)</td>
+        <td>This office is <strong>as efficient as</strong> the headquarters.</td>
+      </tr>
+      <tr>
+        <td><strong>not as + Adj + as</strong></td>
+        <td>Khong bang (= less ... than)</td>
+        <td>The new rule is <strong>not as effective as</strong> the old one.</td>
+      </tr>
+      <tr>
+        <td><strong>as + Adj/Adv + as possible</strong></td>
+        <td>Cang ... cang tot</td>
+        <td>Please respond <strong>as soon as possible</strong>. (ASAP)</td>
+      </tr>
+      <tr>
+        <td><strong>nearly / almost / just as ... as</strong></td>
+        <td>Gan nhu bang / dung bang</td>
+        <td>This year's budget is <strong>nearly as large as</strong> last year's.</td>
+      </tr>
+      <tr>
+        <td><strong>twice / three times as ... as</strong></td>
+        <td>Gap doi / gap ba</td>
+        <td>This room is <strong>twice as large as</strong> that one.</td>
+      </tr>
+      <tr>
+        <td><strong>half as ... as</strong></td>
+        <td>Chi bang mot nua</td>
+        <td>The cost is <strong>half as much as</strong> we expected.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+### 📌 NHOM 6 — TINH TU BAT QUY TAC (Irregular)
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-amber">
+    <thead>
+      <tr>
+        <th style="width:20%;">Nguyen The</th>
+        <th style="width:20%;">So Sanh Hon</th>
+        <th style="width:20%;">So Sanh Nhat</th>
+        <th style="width:40%;">Luu Y</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>good / well</strong></td>
+        <td><strong>better</strong></td>
+        <td><strong>the best</strong></td>
+        <td>❌ <del>gooder</del>, ❌ <del>more good</del></td>
+      </tr>
+      <tr>
+        <td><strong>bad / badly</strong></td>
+        <td><strong>worse</strong></td>
+        <td><strong>the worst</strong></td>
+        <td>❌ <del>badder</del>, ❌ <del>more bad</del></td>
+      </tr>
+      <tr>
+        <td><strong>far</strong></td>
+        <td><strong>farther / further</strong></td>
+        <td><strong>the farthest / furthest</strong></td>
+        <td>farther = khoang cach; further = truu tuong</td>
+      </tr>
+      <tr>
+        <td><strong>little</strong></td>
+        <td><strong>less</strong></td>
+        <td><strong>the least</strong></td>
+        <td>❌ <del>littler</del>, ❌ <del>more little</del></td>
+      </tr>
+      <tr>
+        <td><strong>many / much</strong></td>
+        <td><strong>more</strong></td>
+        <td><strong>the most</strong></td>
+        <td>❌ <del>mucher</del>, ❌ <del>more many</del></td>
+      </tr>
+      <tr>
+        <td><strong>old</strong></td>
+        <td><strong>older / elder</strong></td>
+        <td><strong>the oldest / eldest</strong></td>
+        <td>elder chi dung trong gia dinh, KHONG dung voi "than"</td>
+      </tr>
+      <tr>
+        <td><strong>late</strong></td>
+        <td><strong>later / latter</strong></td>
+        <td><strong>the latest / the last</strong></td>
+        <td>later = muon hon; latter = cai sau (trong 2 cai)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cs-box info">
+  <strong>Phan biet Further vs Farther:</strong><br/>
+  • <strong>Farther</strong>: Khoang cach vat ly — <em>The store is <strong>farther</strong> than I thought.</em><br/>
+  • <strong>Further</strong>: Muc do truu tuong / them nua — <em>For <strong>further</strong> information, please contact us.</em><br/>
+  📌 Trong TOEIC: "<strong>further information</strong>" la cum co dinh xuat hien rat nhieu!
+</div>
+
+---
+
+### 📌 NHOM 7 — TINH TU GOC LATIN (Dung "to" thay vi "than")
+
+<div class="cs-box purple">
+  Cac tinh tu goc Latin sau day <strong>KHONG dung "than"</strong>, ma dung gioi tu <strong>"to"</strong>. Cung <strong>KHONG them "more"</strong> vi ban than chung da mang nghia so sanh.
+</div>
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-violet">
+    <thead>
+      <tr>
+        <th style="width:22%;">Tinh Tu</th>
+        <th style="width:18%;">Y Nghia</th>
+        <th style="width:20%;">Cau Truc</th>
+        <th style="width:40%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>superior</strong></td>
+        <td>Vuot troi hon</td>
+        <td>superior <strong>to</strong></td>
+        <td>Our service is <strong>superior to</strong> competitors'. ❌ <del>superior than</del></td>
+      </tr>
+      <tr>
+        <td><strong>inferior</strong></td>
+        <td>Kem hon</td>
+        <td>inferior <strong>to</strong></td>
+        <td>This material is <strong>inferior to</strong> the imported one. ❌ <del>more inferior</del></td>
+      </tr>
+      <tr>
+        <td><strong>senior</strong></td>
+        <td>Tham nien hon</td>
+        <td>senior <strong>to</strong></td>
+        <td>Ms. Tran is <strong>senior to</strong> Mr. Lee. ❌ <del>senior than</del></td>
+      </tr>
+      <tr>
+        <td><strong>junior</strong></td>
+        <td>It tham nien hon</td>
+        <td>junior <strong>to</strong></td>
+        <td>He is <strong>junior to</strong> most of his colleagues. ❌ <del>more junior than</del></td>
+      </tr>
+      <tr>
+        <td><strong>prior</strong></td>
+        <td>Truoc do</td>
+        <td>prior <strong>to</strong></td>
+        <td><strong>Prior to</strong> the meeting, please review the report. ❌ <del>prior than</del></td>
+      </tr>
+      <tr>
+        <td><strong>prefer</strong></td>
+        <td>Thich hon</td>
+        <td>prefer A <strong>to</strong> B</td>
+        <td>I <strong>prefer</strong> tea <strong>to</strong> coffee. ❌ <del>prefer ... than</del></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+---
+
+### 📌 NHOM 8 — CAU TRUC SO SANH DAC BIET
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-teal">
+    <thead>
+      <tr>
+        <th style="width:30%;">Cau Truc</th>
+        <th style="width:25%;">Y Nghia</th>
+        <th style="width:45%;">Vi Du</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>The + SS Hon, the + SS Hon</strong></td>
+        <td>Cang ... cang ...</td>
+        <td><strong>The harder</strong> you work, <strong>the luckier</strong> you get.</td>
+      </tr>
+      <tr>
+        <td><strong>The more + Adj dai, the more + Adj dai</strong></td>
+        <td>Cang ... cang ... (adj dai)</td>
+        <td><strong>The more experienced</strong> she is, <strong>the more confident</strong> she becomes.</td>
+      </tr>
+      <tr>
+        <td><strong>more and more + Adj</strong></td>
+        <td>Ngay cang</td>
+        <td>The market is becoming <strong>more and more competitive</strong>.</td>
+      </tr>
+      <tr>
+        <td><strong>Adj-ER and Adj-ER</strong></td>
+        <td>Ngay cang (adj ngan)</td>
+        <td>The days are getting <strong>shorter and shorter</strong>.</td>
+      </tr>
+      <tr>
+        <td><strong>no + SS Hon + than</strong></td>
+        <td>Khong hon gi</td>
+        <td>The result was <strong>no better than</strong> the previous attempt.</td>
+      </tr>
+      <tr>
+        <td><strong>no sooner ... than</strong></td>
+        <td>Vua moi ... thi ...</td>
+        <td><strong>No sooner</strong> had he arrived <strong>than</strong> the meeting started.</td>
+      </tr>
+      <tr>
+        <td><strong>the same + N + as</strong></td>
+        <td>Giong nhu</td>
+        <td>This has <strong>the same quality as</strong> the original.</td>
+      </tr>
+      <tr>
+        <td><strong>similar to</strong></td>
+        <td>Tuong tu voi</td>
+        <td>Our plan is <strong>similar to</strong> theirs. ❌ <del>similar with</del></td>
+      </tr>
+      <tr>
+        <td><strong>different from</strong></td>
+        <td>Khac voi</td>
+        <td>This version is <strong>different from</strong> the previous one. ❌ <del>different than/with</del></td>
+      </tr>
+      <tr>
+        <td><strong>compared to / with</strong></td>
+        <td>So voi</td>
+        <td><strong>Compared to</strong> last year, profits have increased.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cs-box warn">
+  <strong>LUU Y QUAN TRONG:</strong><br/>
+  • Cau truc "The more... the more...": Ca <strong>2 ve</strong> deu phai la dang So sanh Hon. KHONG dung nguyen the hay So sanh Nhat!<br/>
+  ❌ <del>The hard you work, the lucky you get.</del><br/>
+  ❌ <del>The hardest you work, the luckiest you get.</del><br/>
+  ✅ <strong>The harder</strong> you work, <strong>the luckier</strong> you get.
+</div>
+
+---
+
+### 📌 NHOM 9 — PHAN BIET TINH TU vs TRANG TU TRONG SO SANH
+
+<div class="cs-box info">
+  Trong TOEIC hay cho 4 dap an gom ca <strong>tinh tu</strong> va <strong>trang tu</strong> de bay. Quy tac:<br/><br/>
+  • <strong>Tinh tu</strong> bo nghia cho <strong>danh tu</strong> hoac dung sau <strong>linking verb</strong> (be, become, seem...)<br/>
+  • <strong>Trang tu</strong> bo nghia cho <strong>dong tu, tinh tu khac, hoac trang tu khac</strong>
+</div>
+
+<div class="cs-table-wrapper">
+  <table class="cs-table g-amber">
+    <thead>
+      <tr>
+        <th style="width:22%;">Tinh Tu</th>
+        <th style="width:22%;">Trang Tu</th>
+        <th style="width:56%;">Cach Phan Biet Trong So Sanh</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>significant</td>
+        <td><strong>significantly</strong></td>
+        <td>___ higher than → Can <strong>trang tu</strong> bo nghia cho "higher" → <strong>significantly</strong></td>
+      </tr>
+      <tr>
+        <td>considerable</td>
+        <td><strong>considerably</strong></td>
+        <td>___ lower than → Can <strong>trang tu</strong> → <strong>considerably</strong></td>
+      </tr>
+      <tr>
+        <td>slight</td>
+        <td><strong>slightly</strong></td>
+        <td>___ cheaper than → Can <strong>trang tu</strong> → <strong>slightly</strong></td>
+      </tr>
+      <tr>
+        <td>substantial</td>
+        <td><strong>substantially</strong></td>
+        <td>___ greater than → Can <strong>trang tu</strong> → <strong>substantially</strong></td>
+      </tr>
+      <tr>
+        <td>noticeable</td>
+        <td><strong>noticeably</strong></td>
+        <td>___ better than → Can <strong>trang tu</strong> → <strong>noticeably</strong></td>
+      </tr>
+      <tr>
+        <td>remarkable</td>
+        <td><strong>remarkably</strong></td>
+        <td>___ faster than → Can <strong>trang tu</strong> → <strong>remarkably</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="cs-box danger">
+  <strong>MEO:</strong> Khi thay cho trong dung <strong>truoc tinh tu so sanh</strong> (-er / more + adj), thi 100% can <strong>TRANG TU (duoi -ly)</strong> de bo nghia.<br/>
+  ❌ <del>significant higher</del> (tinh tu + tinh tu = SAI)<br/>
+  ✅ <strong>significantly higher</strong> (trang tu + tinh tu = DUNG)
 </div>
 
 ---
