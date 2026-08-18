@@ -724,3 +724,563 @@ Bảng này tóm tắt toàn bộ sơ đồ ở mục 3, bạn nên **in ra** ho
 | **Mẹo -ing/-ed** | Giới từ sau → -ed · Danh từ sau → -ing |
 | **Mẹo Noun/V-ing** | Có the/a → chọn Noun gốc, không chọn V-ing |
 | **Quy tắc 30 giây** | Kẹt > 30 giây → đánh dấu, bỏ qua, quay lại sau |
+
+---
+
+## 10. Chiến Thuật Làm Bài Câu Hỏi Ngữ Pháp – Chia Động Từ (Chi Tiết)
+
+Trong Part 5, dạng **Ngữ pháp** chiếm ~30% và có 2 nhóm câu hỏi lớn về động từ:
+1. **Chia động từ chính** (đã chia thì)
+2. **Chia động từ phụ** (to V, V-ing, V3/ed...)
+
+Trước hết, bạn cần nắm vững **Cấu trúc câu** và phân biệt **Động từ chính vs Động từ phụ**.
+
+### 10.1 Cấu Trúc Câu (S – V – O)
+
+<div class="p5-container">
+<div class="p5-card card-sky">
+<div class="p5-title-row">
+<span class="p5-badge badge-sky">CẤU TRÚC</span>
+<h4>Sơ đồ cấu trúc câu tiếng Anh</h4>
+</div>
+<p class="p5-intro">Mọi câu tiếng Anh đều xoay quanh 3 thành phần chính: <b>Subject (Chủ ngữ)</b> – <b>Verb (Động từ)</b> – <b>Object (Tân ngữ)</b>.</p>
+<div class="p5-grid col-3">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">🟢 Subject (S) – Chủ ngữ</span>
+<p class="p5-sub-text">Có thể là:<br>
+• <b>Pronoun</b> (đại từ): <i>I, He, She, They...</i><br>
+• <b>Noun</b> (danh từ): <i>The company, Mr. Lee...</i><br>
+• <b>V-ing</b> (danh động từ): <i>Swimming is fun.</i></p>
+</div>
+<div class="p5-sub p5-sub-amber">
+<span class="p5-sub-label label-amber">🟡 Verb (V) – Động từ</span>
+<p class="p5-sub-text">Động từ phải thỏa mãn 3 yếu tố:<br>
+• <b>Chia theo chủ ngữ</b> (số ít/số nhiều)<br>
+• <b>Chủ động / Bị động</b><br>
+• <b>Thì của động từ</b> (hiện tại, quá khứ, tương lai...)</p>
+</div>
+<div class="p5-sub p5-sub-violet">
+<span class="p5-sub-label label-violet">🟣 Object (O) – Tân ngữ</span>
+<p class="p5-sub-text">Có thể là:<br>
+• <b>Pronoun</b> (tân ngữ): <i>me, him, her, them...</i><br>
+• <b>Noun</b> (danh từ): <i>the report, a meeting...</i></p>
+</div>
+</div>
+
+<div class="p5-highlight-box p5-hl-rose" style="margin-top: 1.2rem;">
+<span class="p5-sub-label label-rose">⚠️ LƯU Ý QUAN TRỌNG</span>
+<p class="p5-sub-text">
+• Một câu <b>KHÔNG thể THIẾU ĐỘNG TỪ CHÍNH</b>.<br>
+• Một câu hoặc một mệnh đề chỉ có <b>MỘT ĐỘNG TỪ CHÍNH</b> được chia.<br>
+VD: <i>He wants <b>to buy</b> a new car.</i> → "wants" = ĐT chính (đã chia), "to buy" = ĐT phụ (chưa chia).
+</p>
+</div>
+
+</div>
+</div>
+
+**Ví dụ minh họa quan trọng:**
+
+> **1.** ________ the door.<br>
+> A. Open &emsp; B. Opens &emsp; C. Opening &emsp; D. Opened<br>
+> → Chưa có chủ ngữ → đây là **câu mệnh lệnh** → chọn **A. Open** (nguyên thể)
+>
+> **2.** ________ the door is the easiest way.<br>
+> A. Open &emsp; B. Opens &emsp; C. Opening &emsp; D. Opened<br>
+> → "________ the door" làm **chủ ngữ** (V-ing + N = danh động từ) → chọn **C. Opening**<br>
+> → "is" = động từ chính của câu.
+
+---
+
+### 10.2 Phân Biệt Động Từ Chính vs Động Từ Phụ
+
+<div class="p5-container">
+<div class="p5-card card-emerald">
+<div class="p5-title-row">
+<span class="p5-badge badge-emerald">PHÂN BIỆT</span>
+<h4>Động từ CHÍNH vs Động từ PHỤ</h4>
+</div>
+<p class="p5-intro">Khi gặp câu hỏi chia động từ trong Part 5, việc đầu tiên là xác định: chỗ trống cần <b>động từ chính</b> (đã chia thì) hay <b>động từ phụ</b> (chưa chia).</p>
+<div class="p5-grid">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">✅ ĐỘNG TỪ CHÍNH (đã chia thì)</span>
+<p class="p5-sub-text">
+• <b>V0 / Vs/es</b> (hiện tại đơn)<br>
+• <b>V2/ed</b> (quá khứ đơn)<br>
+• <b>will/can/could/would/must + V0</b><br>
+• <b>have/has/had + V3/ed</b> (hoàn thành)<br>
+• <b>am/is/are/was/were + ...</b> (tiếp diễn / bị động)
+</p>
+<span class="p5-tag tag-emerald">→ ĐÃ CHIA THÌ</span>
+</div>
+<div class="p5-sub p5-sub-rose">
+<span class="p5-sub-label label-rose">❌ ĐỘNG TỪ PHỤ (chưa chia thì)</span>
+<p class="p5-sub-text">
+• <b>V-ing</b> (danh động từ / phân từ hiện tại)<br>
+• <b>to V</b> (động từ nguyên thể có to)<br>
+• <b>V3/ed</b> (phân từ quá khứ – KHÔNG có trợ ĐT)<br>
+• <b>Having V3/ed</b> (phân từ hoàn thành)<br>
+• <b>Being</b> (phân từ bị động)
+</p>
+<span class="p5-tag tag-rose">→ CHƯA CHIA THÌ</span>
+</div>
+</div>
+
+<div class="p5-highlight-box p5-hl-amber" style="margin-top: 1.2rem;">
+<span class="p5-sub-label label-amber">🔑 Cách nhận biết nhanh</span>
+<p class="p5-sub-text">
+• Nếu câu <b>CHƯA CÓ</b> động từ chính nào → chỗ trống = <b>Động từ chính</b> → cần chia thì.<br>
+• Nếu câu <b>ĐÃ CÓ</b> động từ chính rồi → chỗ trống = <b>Động từ phụ</b> → chọn to V / V-ing / V3/ed.
+</p>
+</div>
+
+</div>
+</div>
+
+---
+
+### 10.3 Chiến Thuật Chia Động Từ CHÍNH (3 Bước)
+
+Khi xác định chỗ trống cần **động từ chính**, bạn chia theo **3 bước** tuần tự:
+
+<div class="p5-container">
+<div class="p5-card card-amber">
+<div class="p5-title-row">
+<span class="p5-badge badge-amber">BƯỚC 1</span>
+<h4>Chia theo chủ ngữ: Số ít / Số nhiều</h4>
+</div>
+<p class="p5-intro">Xác định chủ ngữ là <b>số ít</b> hay <b>số nhiều</b> để chia động từ phù hợp.</p>
+<div class="p5-grid">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">S số ít → V số ít</span>
+<p class="p5-sub-text">
+VD: <i><b>The pen</b> is on the table.</i><br>
+VD: <i><b>She</b> works at a bank.</i><br>
+VD: <i><b>Mr. Kim</b> has submitted the report.</i>
+</p>
+</div>
+<div class="p5-sub p5-sub-sky">
+<span class="p5-sub-label label-sky">S số nhiều → V số nhiều</span>
+<p class="p5-sub-text">
+VD: <i><b>The children</b> are playing in the park.</i><br>
+VD: <i><b>They</b> work at a bank.</i><br>
+VD: <i><b>The employees</b> have submitted the report.</i>
+</p>
+</div>
+</div>
+
+<div class="p5-highlight-box p5-hl-violet" style="margin-top: 1.2rem;">
+<span class="p5-sub-label label-violet">⚠️ BẪY TOEIC thường gặp</span>
+<p class="p5-sub-text">
+• Chủ ngữ bị <b>cụm giới từ</b> xen giữa → nhìn nhầm số:<br>
+<i>The <b>list</b> of items <b>is</b> ready.</i> (list = số ít, không phải items!)<br>
+• <b>Each / Every / Everyone / Nobody</b> → luôn <b>số ít</b>.<br>
+• <b>Both / Several / Many / Few</b> → luôn <b>số nhiều</b>.
+</p>
+</div>
+
+</div>
+
+<div class="p5-card card-teal">
+<div class="p5-title-row">
+<span class="p5-badge badge-teal">BƯỚC 2</span>
+<h4>Chia theo thể: Chủ động / Bị động</h4>
+</div>
+<p class="p5-intro">Xác định chủ ngữ <b>tự thực hiện</b> hành động hay <b>bị tác động</b>.</p>
+<div class="p5-grid">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">CHỦ ĐỘNG (Active)</span>
+<p class="p5-sub-text">
+Chủ ngữ <b>tự làm</b> hành động.<br>
+Cấu trúc: <b>S + V + O</b><br>
+VD: <i><b>The princess</b> kisses the frog.</i><br>
+VD: <i><b>The company</b> announced the results.</i>
+</p>
+<span class="p5-tag tag-emerald">S làm → Chủ động</span>
+</div>
+<div class="p5-sub p5-sub-rose">
+<span class="p5-sub-label label-rose">BỊ ĐỘNG (Passive)</span>
+<p class="p5-sub-text">
+Chủ ngữ <b>bị tác động</b> (nhận hành động).<br>
+Cấu trúc: <b>S + to be + V3/ed (+ by...)</b><br>
+VD: <i><b>The frog</b> is kissed (by the princess).</i><br>
+VD: <i><b>The results</b> were announced yesterday.</i>
+</p>
+<span class="p5-tag tag-rose">S bị → to be + V3/ed</span>
+</div>
+</div>
+
+<div class="p5-highlight-box p5-hl-sky" style="margin-top: 1.2rem;">
+<span class="p5-sub-label label-sky">🔑 Mẹo nhận biết Bị động trong TOEIC</span>
+<p class="p5-sub-text">
+• Nếu sau chỗ trống <b>KHÔNG CÓ</b> tân ngữ → thường là <b>Bị động</b>.<br>
+• Có <b>"by + tác nhân"</b> phía sau → chắc chắn <b>Bị động</b>.<br>
+• Các động từ thường gặp dạng bị động trong TOEIC: <i>is required, was submitted, has been completed, will be held, are expected...</i>
+</p>
+</div>
+
+</div>
+
+<div class="p5-card card-violet">
+<div class="p5-title-row">
+<span class="p5-badge badge-violet">BƯỚC 3</span>
+<h4>Chia theo thì của động từ</h4>
+</div>
+<p class="p5-intro">Dựa vào <b>dấu hiệu thời gian</b> trong câu để xác định thì phù hợp. Đây là bước cuối cùng và quan trọng nhất.</p>
+
+<div class="p5-grid col-1">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">🟢 Hiện tại hoàn thành (have/has + V3/ed)</span>
+<p class="p5-sub-text">
+<b>Dấu hiệu:</b> for/since, over/during/in/for, + khoảng thời gian / mốc thời gian, + the past/the last<br>
+VD: <i>The company <b>has earned</b> profits over the last 2 years.</i><br>
+VD: <i>Ms. Park <b>has worked</b> here since 2020.</i>
+</p>
+</div>
+</div>
+
+<div class="p5-grid col-1" style="margin-top: 1rem;">
+<div class="p5-sub p5-sub-amber">
+<span class="p5-sub-label label-amber">🟡 Quá khứ đơn / Hiện tại đơn / Quá khứ hoàn thành / Tương lai hoàn thành</span>
+<p class="p5-sub-text">
+<b>Dấu hiệu:</b> before, by the time, by this time, by<br>
+<b>Quy tắc 2 mệnh đề:</b><br>
+• Mệnh đề 1 chia <b>QKĐ/HTĐ</b> → Mệnh đề 2 chia <b>QKHT/TLHT</b><br><br>
+VD 1: <i>Before I came home yesterday, they <b>had gone</b>.</i><br>
+(came = QKĐ → had gone = QKHT)<br><br>
+VD 2: <i>Before I come home tomorrow, they <b>will have gone</b>.</i><br>
+(come = HTĐ → will have gone = TLHT)
+</p>
+</div>
+</div>
+
+</div>
+</div>
+
+**Bảng tổng hợp dấu hiệu thì quan trọng nhất cho Part 5:**
+
+| Thì | Dấu hiệu nhận biết | Ví dụ |
+| :--- | :--- | :--- |
+| **Hiện tại đơn** | always, usually, every day, generally | *He **works** every day.* |
+| **Hiện tại tiếp diễn** | now, currently, at the moment | *She **is working** now.* |
+| **Hiện tại hoàn thành** | since, for, already, yet, recently, over the past/last | *They **have completed** the project.* |
+| **Quá khứ đơn** | yesterday, last week/month, ago, in 2023 | *The meeting **was held** last Friday.* |
+| **Quá khứ hoàn thành** | before, by the time, after + QKĐ | *She **had left** before I arrived.* |
+| **Tương lai đơn** | tomorrow, next week, soon, in the future | *The event **will take** place next month.* |
+| **Tương lai hoàn thành** | by + thời điểm tương lai, before + HTĐ | *They **will have finished** by Friday.* |
+
+---
+
+### 10.4 Chiến Thuật Chia Động Từ PHỤ
+
+Khi câu **đã có** động từ chính rồi, chỗ trống cần **động từ phụ**. Có 3 dạng phổ biến:
+
+<div class="p5-container">
+<div class="p5-card card-indigo">
+<div class="p5-title-row">
+<span class="p5-badge badge-indigo">PHỤ</span>
+<h4>3 Dạng Động Từ Phụ Thường Gặp</h4>
+</div>
+<div class="p5-grid col-3">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">TO V (Nguyên thể có to)</span>
+<p class="p5-sub-text">
+<b>Khi nào chọn:</b><br>
+• Sau các động từ: <i>want, need, decide, plan, agree, expect, hope, offer, promise, refuse, seem, appear, manage, afford...</i><br>
+• Chỉ <b>mục đích</b>: <i>... <b>to improve</b> efficiency.</i><br>
+• Sau tính từ: <i>ready <b>to start</b>, able <b>to complete</b></i><br><br>
+VD: <i>The company <b>plans to expand</b> its operations.</i>
+</p>
+<span class="p5-tag tag-emerald">→ to V</span>
+</div>
+<div class="p5-sub p5-sub-amber">
+<span class="p5-sub-label label-amber">V-ING (Danh động từ)</span>
+<p class="p5-sub-text">
+<b>Khi nào chọn:</b><br>
+• Sau giới từ (in, on, at, by, of, for, about, without, before, after...): <i>by <b>reducing</b> costs</i><br>
+• Sau các động từ: <i>enjoy, avoid, consider, suggest, recommend, finish, mind, practice, keep, delay, risk, deny, postpone...</i><br><br>
+VD: <i>She avoided <b>making</b> the same mistake.</i><br>
+VD: <i>He is responsible for <b>managing</b> the team.</i>
+</p>
+<span class="p5-tag tag-amber">→ V-ing</span>
+</div>
+<div class="p5-sub p5-sub-violet">
+<span class="p5-sub-label label-violet">V3/ED (Phân từ quá khứ)</span>
+<p class="p5-sub-text">
+<b>Khi nào chọn:</b><br>
+• Rút gọn mệnh đề quan hệ bị động: <i>The report <b>submitted</b> yesterday...</i> (= which was submitted)<br>
+• Sau "have/has/had" trong thì hoàn thành: <i>has <b>been submitted</b></i><br>
+• Là tính từ bổ nghĩa: <i>an <b>updated</b> version</i><br><br>
+VD: <i>Products <b>manufactured</b> in Vietnam are popular.</i>
+</p>
+<span class="p5-tag tag-violet">→ V3/ed</span>
+</div>
+</div>
+
+<div class="p5-highlight-box p5-hl-sky" style="margin-top: 1.2rem;">
+<span class="p5-sub-label label-sky">🔥 Siêu mẹo cho Part 5</span>
+<p class="p5-sub-text">
+• Thấy <b>giới từ + ___</b> (mà cần V) → chọn <b>V-ing</b> (100%!)<br>
+• Thấy <b>to ___</b> → chọn <b>V nguyên thể</b> (không chia!)<br>
+• Câu đã có V chính + thấy danh từ bị tác động phía trước → chọn <b>V3/ed</b> (rút gọn bị động)
+</p>
+</div>
+
+</div>
+</div>
+
+---
+
+## 11. Chiến Thuật Câu Hỏi Ngữ Pháp – Đại Từ (Pronoun)
+
+Dạng câu hỏi đại từ thường cho 4 đáp án là **các dạng khác nhau** của cùng một đại từ (VD: I / me / my / mine). Chiến thuật: **nhìn vị trí trong câu** để chọn.
+
+<div class="p5-container">
+<div class="p5-card card-teal">
+<div class="p5-title-row">
+<span class="p5-badge badge-teal">ĐẠI TỪ</span>
+<h4>Hệ thống Đại từ trong TOEIC Part 5</h4>
+</div>
+<div class="p5-grid col-1">
+<div class="p5-sub p5-sub-teal">
+<span class="p5-sub-label label-teal">Bảng 5 loại đại từ</span>
+<p class="p5-sub-text">
+
+| Chủ ngữ (S) | Tân ngữ (O) | Tính từ SH | Đại từ SH | Phản thân |
+| :---: | :---: | :---: | :---: | :---: |
+| **I** | me | my | mine | myself |
+| **you** | you | your | yours | yourself |
+| **he** | him | his | his | himself |
+| **she** | her | her | hers | herself |
+| **it** | it | its | its | itself |
+| **we** | us | our | ours | ourselves |
+| **they** | them | their | theirs | themselves |
+
+</p>
+</div>
+</div>
+
+<div class="p5-grid" style="margin-top: 1rem;">
+<div class="p5-sub p5-sub-emerald">
+<span class="p5-sub-label label-emerald">① ___ + V → Đại từ Chủ ngữ</span>
+<p class="p5-sub-text">
+Chỗ trống đứng <b>trước động từ</b> → chọn <b>đại từ chủ ngữ</b>.<br>
+VD: <i><b>She</b> submitted the report on time.</i>
+</p>
+<span class="p5-tag tag-emerald">→ I / He / She / We / They</span>
+</div>
+<div class="p5-sub p5-sub-sky">
+<span class="p5-sub-label label-sky">② V + ___ → Đại từ Tân ngữ</span>
+<p class="p5-sub-text">
+Chỗ trống đứng <b>sau động từ</b> hoặc <b>sau giới từ</b> → chọn <b>đại từ tân ngữ</b>.<br>
+VD: <i>Please contact <b>her</b> directly.</i><br>
+VD: <i>The award was given to <b>him</b>.</i>
+</p>
+<span class="p5-tag tag-sky">→ me / him / her / us / them</span>
+</div>
+<div class="p5-sub p5-sub-amber">
+<span class="p5-sub-label label-amber">③ ___ + N → Tính từ Sở hữu</span>
+<p class="p5-sub-text">
+Chỗ trống đứng <b>trước danh từ</b> → chọn <b>tính từ sở hữu</b>.<br>
+VD: <i><b>Their</b> office is on the 5th floor.</i><br>
+VD: <i>Please bring <b>your</b> ID card.</i>
+</p>
+<span class="p5-tag tag-amber">→ my / his / her / our / their</span>
+</div>
+<div class="p5-sub p5-sub-violet">
+<span class="p5-sub-label label-violet">④ Đứng một mình (thay thế N) → Đại từ Sở hữu</span>
+<p class="p5-sub-text">
+Chỗ trống <b>thay thế</b> cho cả cụm "tính từ SH + danh từ" → chọn <b>đại từ sở hữu</b>.<br>
+VD: <i>This laptop is <b>mine</b>.</i> (= my laptop)<br>
+VD: <i>The responsibility is <b>ours</b>.</i>
+</p>
+<span class="p5-tag tag-violet">→ mine / his / hers / ours / theirs</span>
+</div>
+<div class="p5-sub p5-sub-rose">
+<span class="p5-sub-label label-rose">⑤ S + V + ___ (nhấn mạnh / by ___) → Đại từ Phản thân</span>
+<p class="p5-sub-text">
+Dùng khi S và O <b>cùng một người</b>, hoặc <b>nhấn mạnh</b> "tự mình".<br>
+VD: <i>She completed the project <b>herself</b>.</i><br>
+VD: <i>The CEO <b>himself</b> approved the plan.</i><br>
+Cấu trúc hay gặp: <b>by + ĐT phản thân</b> = một mình<br>
+VD: <i>He finished it <b>by himself</b>.</i>
+</p>
+<span class="p5-tag tag-rose">→ myself / himself / herself / themselves</span>
+</div>
+</div>
+
+</div>
+</div>
+
+---
+
+## 12. Chiến Thuật Câu Hỏi Ngữ Pháp – Giới Từ vs Liên Từ
+
+Đây là dạng câu hỏi rất phổ biến trong TOEIC Part 5. Chiến thuật: **nhìn phía SAU chỗ trống** là **cụm danh từ (N)** hay **mệnh đề (S + V)**.
+
+<div class="p5-container">
+<div class="p5-card card-rose">
+<div class="p5-title-row">
+<span class="p5-badge badge-rose">GT vs LT</span>
+<h4>Phân biệt Giới từ và Liên từ</h4>
+</div>
+<div class="p5-grid">
+<div class="p5-sub p5-sub-sky">
+<span class="p5-sub-label label-sky">GIỚI TỪ (Preposition) + CỤM DANH TỪ</span>
+<p class="p5-sub-text">
+Sau giới từ là <b>cụm danh từ (N)</b> hoặc <b>V-ing</b>, <b>KHÔNG</b> phải mệnh đề (S+V).<br><br>
+<b>Giới từ hay gặp trong TOEIC:</b><br>
+• <b>despite / in spite of</b> + N (mặc dù)<br>
+• <b>due to / because of / owing to</b> + N (vì)<br>
+• <b>during</b> + N (trong suốt)<br>
+• <b>prior to / before</b> + N (trước khi)<br>
+• <b>in addition to / besides</b> + N (ngoài ra)<br>
+• <b>instead of</b> + N (thay vì)<br>
+• <b>regarding / concerning</b> + N (liên quan đến)<br><br>
+VD: <i><b>Despite</b> the heavy rain, the event continued.</i><br>
+VD: <i><b>Due to</b> budget constraints, the project was delayed.</i>
+</p>
+<span class="p5-tag tag-sky">Sau → Cụm N / V-ing</span>
+</div>
+<div class="p5-sub p5-sub-amber">
+<span class="p5-sub-label label-amber">LIÊN TỪ (Conjunction) + MỆNH ĐỀ</span>
+<p class="p5-sub-text">
+Sau liên từ là <b>mệnh đề (S + V)</b> – tức là có chủ ngữ và động từ.<br><br>
+<b>Liên từ hay gặp trong TOEIC:</b><br>
+• <b>although / though / even though</b> + S+V (mặc dù)<br>
+• <b>because / since / as</b> + S+V (vì)<br>
+• <b>while / whereas</b> + S+V (trong khi)<br>
+• <b>before / after</b> + S+V (trước/sau khi)<br>
+• <b>unless</b> + S+V (trừ khi)<br>
+• <b>once</b> + S+V (một khi)<br>
+• <b>so that</b> + S+V (để mà)<br><br>
+VD: <i><b>Although</b> the rain was heavy, the event continued.</i><br>
+VD: <i><b>Because</b> the budget was limited, the project was delayed.</i>
+</p>
+<span class="p5-tag tag-amber">Sau → Mệnh đề (S + V)</span>
+</div>
+</div>
+
+<div class="p5-highlight-box p5-hl-violet" style="margin-top: 1.2rem;">
+<span class="p5-sub-label label-violet">⚡ Quy tắc vàng SIÊU NHANH</span>
+<p class="p5-sub-text">
+<b>Nhìn SAU chỗ trống:</b><br>
+• Nếu là <b>cụm danh từ</b> (không có S+V) → chọn <b>GIỚI TỪ</b><br>
+• Nếu là <b>mệnh đề</b> (có S+V) → chọn <b>LIÊN TỪ</b><br><br>
+<b>Cặp hay gặp nhất:</b><br>
+• <b>despite</b> (GT) ↔ <b>although</b> (LT) — cùng nghĩa "mặc dù"<br>
+• <b>because of</b> (GT) ↔ <b>because</b> (LT) — cùng nghĩa "vì"<br>
+• <b>during</b> (GT) ↔ <b>while</b> (LT) — cùng nghĩa "trong khi/suốt"
+</p>
+</div>
+
+</div>
+</div>
+
+---
+
+## 13. Bảng Tổng Hợp Toàn Bộ Chiến Thuật Dạng Ngữ Pháp
+
+| Dạng câu hỏi | Cách nhận biết | Chiến thuật |
+| :--- | :--- | :--- |
+| **Chia ĐT chính** | 4 đáp án = các dạng chia của cùng 1 động từ | **B1:** S số ít/nhiều → **B2:** Chủ/Bị động → **B3:** Thì |
+| **Chia ĐT phụ** | Câu đã có V chính, 4 đáp án = to V / V-ing / V3/ed | Sau giới từ → V-ing · Chỉ mục đích → to V · Rút gọn bị động → V3/ed |
+| **Đại từ** | 4 đáp án = I / me / my / mine (dạng đại từ) | Trước V → chủ ngữ · Sau V/Prep → tân ngữ · Trước N → tính từ SH |
+| **Giới từ vs Liên từ** | 4 đáp án = despite / although / because / because of | Sau là N → Giới từ · Sau là S+V → Liên từ |
+
+---
+
+## 14. Bài Tập Thực Hành Dạng Ngữ Pháp (15 câu)
+
+**1.** The project report ________ submitted by the team leader yesterday.
+<br>A. is &emsp; B. was &emsp; C. has been &emsp; D. are
+
+**2.** All employees ________ to attend the mandatory training session.
+<br>A. requires &emsp; B. is required &emsp; C. are required &emsp; D. requiring
+
+**3.** ________ the bad weather, the outdoor event was held as planned.
+<br>A. Although &emsp; B. Despite &emsp; C. Because &emsp; D. However
+
+**4.** She decided ________ her resignation letter last Friday.
+<br>A. submit &emsp; B. submitting &emsp; C. to submit &emsp; D. submitted
+
+**5.** Mr. Kim is responsible for ________ the new employees.
+<br>A. train &emsp; B. training &emsp; C. to train &emsp; D. trained
+
+**6.** The annual report has ________ reviewed by the board of directors.
+<br>A. be &emsp; B. being &emsp; C. been &emsp; D. was
+
+**7.** Please direct all inquiries to ________ at the front desk.
+<br>A. she &emsp; B. her &emsp; C. hers &emsp; D. herself
+
+**8.** The CEO ________ approved the new marketing strategy.
+<br>A. him &emsp; B. his &emsp; C. he &emsp; D. himself
+
+**9.** ________ the company expanded rapidly, it maintained high quality standards.
+<br>A. Despite &emsp; B. In spite of &emsp; C. Although &emsp; D. Due to
+
+**10.** The new policy will take effect ________ it is approved by the board.
+<br>A. once &emsp; B. during &emsp; C. despite &emsp; D. due to
+
+**11.** Employees must complete ________ training before starting work.
+<br>A. they &emsp; B. them &emsp; C. their &emsp; D. theirs
+
+**12.** The company has ________ profits over the last 2 years.
+<br>A. earn &emsp; B. earning &emsp; C. earned &emsp; D. earns
+
+**13.** Products ________ in our factory meet international standards.
+<br>A. manufacture &emsp; B. manufacturing &emsp; C. manufactured &emsp; D. to manufacture
+
+**14.** ________ budget constraints, several projects were postponed.
+<br>A. Although &emsp; B. Because &emsp; C. Due to &emsp; D. While
+
+**15.** The manager completed the project by ________.
+<br>A. her &emsp; B. she &emsp; C. hers &emsp; D. herself
+
+---
+
+### Đáp Án Chi Tiết – Bài Tập Ngữ Pháp
+
+**1. B – was** → Chủ ngữ "The project report" = số ít + dấu hiệu "yesterday" = QKĐ + bị động (submitted by...) → **was submitted**. ✅
+
+**2. C – are required** → Chủ ngữ "All employees" = số nhiều + bị động (bị yêu cầu) → **are required**. ✅
+
+**3. B – Despite** → Nhìn sau: "the bad weather" = cụm danh từ (không có S+V) → cần **Giới từ** → **Despite**. ✅
+
+**4. C – to submit** → "decided" + ___ → "decide" thuộc nhóm V + to V → **to submit**. ✅
+
+**5. B – training** → "responsible for" → sau giới từ "for" → cần **V-ing** → **training**. ✅
+
+**6. C – been** → "has ________ reviewed" → thì hiện tại hoàn thành bị động: has + **been** + V3 → **been**. ✅
+
+**7. B – her** → Sau giới từ "to" → cần đại từ **tân ngữ** → **her**. ✅
+
+**8. D – himself** → "The CEO" = chủ ngữ, cần nhấn mạnh "chính ông ấy" → đại từ **phản thân** → **himself**. ✅
+
+**9. C – Although** → Nhìn sau: "the company expanded rapidly" = mệnh đề (có S+V) + nghĩa "mặc dù" → cần **Liên từ** → **Although**. ✅
+
+**10. A – once** → Nhìn sau: "it is approved by the board" = mệnh đề (S+V) + nghĩa "một khi" → **once**. ✅
+
+**11. C – their** → ___ + Noun "training" → cần **tính từ sở hữu** trước danh từ → **their**. ✅
+
+**12. C – earned** → "has ________ profits" → thì hiện tại hoàn thành: has + **V3/ed** + O → **earned**. Dấu hiệu: "over the last 2 years". ✅
+
+**13. C – manufactured** → Câu đã có V chính "meet" → chỗ trống = ĐT phụ. "Products ________ in our factory" = rút gọn mệnh đề quan hệ bị động (= which are manufactured) → **manufactured**. ✅
+
+**14. C – Due to** → Nhìn sau: "budget constraints" = cụm danh từ → cần **Giới từ** + nghĩa "vì" → **Due to**. ✅
+
+**15. D – herself** → "by ________" + chủ ngữ "The manager" (nữ) → **by herself** = tự mình → đại từ **phản thân** → **herself**. ✅
+
+---
+
+## 15. Bảng Tổng Kết TOÀN BỘ Chiến Thuật Part 5
+
+| Bước | Hành động | Thời gian |
+| :---: | :--- | :---: |
+| **1** | **Nhìn 4 đáp án** → Xác định dạng (Từ loại / Ngữ pháp / Từ vựng) | 2 giây |
+| **2a** | **Dạng Từ loại:** Nhìn TRƯỚC + SAU chỗ trống → chọn N/V/Adj/Adv | 5–10 giây |
+| **2b** | **Dạng Ngữ pháp:** Nhìn cấu trúc câu → chia V / chọn đại từ / GT-LT | 10–15 giây |
+| **2c** | **Dạng Từ vựng:** Đọc hiểu nghĩa câu → chọn từ phù hợp nhất | 15–25 giây |
+| **3** | Kẹt > 30 giây → **đánh dấu, bỏ qua**, quay lại sau! | — |
+
+> 🎯 **Tổng kết:** Part 5 không khó, chỉ cần bạn **thuộc sơ đồ**, **nắm chiến thuật**, và **luyện tập đều đặn**. Mục tiêu: 30 câu trong 10 phút, chính xác 85%+ là đạt mục tiêu 600+ TOEIC!
